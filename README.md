@@ -1,6 +1,6 @@
 # vue-new
 
-> A Vue.js project
+> A Wordpress theme by Vuejs and Vuex
 
 ## Build Setup
 
