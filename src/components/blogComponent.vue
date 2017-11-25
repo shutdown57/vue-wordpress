@@ -1,6 +1,7 @@
 <template>
     <div class="direction-rtl">
         <h1>{{ msg }}</h1>
+        <router-view></router-view>
         <div class="row">
             <div class="col-xs-12" v-for="article in articleList">
                 <div class="media">
@@ -11,6 +12,7 @@
                         <h2 class="media-heading">{{ article.title.rendered }}</h2>
                         <p v-html="article.content.rendered"></p>
                         <p>{{article.id}}</p>
+                        <p>{{api}}</p>
                         <router-link :to="{name: 'blogSingle', params:{id: article.id}}" exact class="btn btn-success">ادامه مطلب</router-link>
                     </div>
                 </div>
@@ -41,12 +43,17 @@
 /**
  * @component: Blog
 */
+import blogSingle from './blog/blogSingle.vue';
 import {mapActions, mapState} from 'vuex';
 
 export default {
     name: 'blog',
+    components:{
+        'blog-single': blogSingle
+    },
     data() {
         return {
+            api: API_ROOT,
             msg: 'اخبار ایرانیان مگنت'
         };
     },
