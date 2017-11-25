@@ -10,17 +10,15 @@ const state = {
 const actions = {
     getPostDetails({commit}, id) {
         api.getPostsId(id).then((res) => {
-            //
-            console.log(res);
             if (res.ok) {
                 console.log(res);
                 const post = res.body;
+                commit(ARTICLE_DETAIL, {
+                    postDetails: {...post}
+                });
             }
-            commit(ARTICLE_DETAIL, {
-                postDetails: {...post}
-            });
         }, (rej) => {
-            //
+            console.log(rej);
         });
     }
     // getPostsBlog({commit}) {
