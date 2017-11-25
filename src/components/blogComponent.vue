@@ -65,6 +65,7 @@ export default {
     },
 
     created() {
+        window.document.title = "اخبار";
         if (this.articleList.length < 1) {
         this.getPostsBlog();
         }

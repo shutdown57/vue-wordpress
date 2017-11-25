@@ -12,6 +12,9 @@ export default {
         return {
             msg: 'Contact'
         };
+    },
+    created() {
+        window.document.title = "تماس با ما";
     }
 }
 </script>

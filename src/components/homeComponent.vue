@@ -12,6 +12,9 @@ export default {
         return {
             msg: 'Home'
         };
+    },
+    created() {
+        window.document.title = "ایرانیان مگنت";
     }
 }
 </script>

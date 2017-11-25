@@ -14,8 +14,8 @@
  * @component: App
  * Root component
 */
-import navComponent from './components/navComponent.vue';
-import footerComponent from './components/footerComponent.vue';
+import navComponent from './components/layouts/navComponent.vue';
+import footerComponent from './components/layouts/footerComponent.vue';
 
 // import {store} from './store/index';
 import {mapState, mapActions} from 'vuex';
@@ -24,7 +24,7 @@ import {mapState, mapActions} from 'vuex';
 export default {
   // store,
   name: 'app',
-  
+
   components: {
     'app-nav': navComponent,
     'app-footer': footerComponent

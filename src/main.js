@@ -14,6 +14,14 @@ const router = new VueRouter({
   mode: 'history'
 });
 
+router.beforeEach((to, from , next) => {
+    if (!to.matched.length) {
+        next('/404');
+    } else {
+        next();
+    }
+});
+
 new Vue({
   store: store,
   el: '#app',

@@ -8,7 +8,10 @@
 */
 
 export default {
-    name: 'notFound'
+    name: 'notFound',
+    created() {
+        window.document.title = "404";
+    }
 }
 </script>
 

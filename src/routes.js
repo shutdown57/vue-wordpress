@@ -15,5 +15,5 @@ export default [
     {path: '/contact', component: ContactComponent, name: 'contact'},
     {path: '/blog', component: BlogComponent, name: 'blog'},
     {path: '/blog/:id', comments: BlogSingleComponent, name: 'blogSingle'},
-    {path: '/*', component: NotFoundComponent, name: 'notFound'}
+    {path: '/404', component: NotFoundComponent, name: 'notFound'}
 ]

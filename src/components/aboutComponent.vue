@@ -13,6 +13,9 @@ export default {
         return {
             msg: 'About'
         };
+    },
+    created() {
+        window.document.title = "درباره ما";
     }
 }
 </script>
