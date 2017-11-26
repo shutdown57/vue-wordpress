@@ -12,7 +12,7 @@ const actions = {
         api.getPostsId(id).then((res) => {
             if (res.ok) {
                 // console.log(res);
-                const post = res.body;
+                const post = res;
                 // const post =
                 // console.log(post);
                 commit(ARTICLE_DETAIL, {
@@ -28,8 +28,8 @@ const actions = {
 const mutations = {
     [ARTICLE_DETAIL](state, action) {
         state.item = {...action.postDetails};
-        // FIXME This shit doesn't wor
-        console.log(state.item);
+        // FIXME This shit doesn't work
+        console.log({...action.postDetails});
     }
 };
 

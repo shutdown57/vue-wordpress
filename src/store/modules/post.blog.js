@@ -19,7 +19,7 @@ const actions = {
             }
             // console.log(res);
 
-            // Fetch image info from server
+            // Fetch image info from the server
             res.body.map((cur_main, i_main, val_main) => {
                 // Thumbnail Handling
                 api.getMediaId(cur_main.featured_media).then(res =>{
