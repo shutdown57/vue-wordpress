@@ -12,8 +12,8 @@ import blogAll from './blog/blogAllComponent.vue';
 export default {
     name: 'blog',
     components:{
-        // 'blog-single': blogSingle,
-        'blog-all': blogAll
+        'blog-all': blogAll,
+        'blog-single': blogSingle
     },
     data() {
         return {

@@ -57,7 +57,6 @@ const actions = {
                         });
                         // console.log(res);
                     }, (rej) => {
-                        //
                         // console.error(rej);
                     });
                 });

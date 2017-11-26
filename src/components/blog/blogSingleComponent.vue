@@ -1,6 +1,7 @@
 <template>
     <div>
         <h1>Single Blog</h1>
+        {{print()}}
         {{postDetails}}
     </div>
 </template>
@@ -16,8 +17,8 @@ export default {
 
     computed: {
         ...mapState({
-            postDetails: ({postDetails}) => postDetails,
-            pid: ({route}) => route.params.id
+            pid: ({route}) => route.params.pid,
+            postDetails: ({postDetails}) => postDetails
         })
     },
 
@@ -29,14 +30,23 @@ export default {
         ...mapActions([
             'getPostDetails'
         ]),
-        initParam() {
-            const pid = this.$route.params.pid;
-            this.getPostDetails(pid);
+        // initParam() {
+        //     const pid = this.$route.params.pid;
+        //     this.getPostDetails(pid);
+        // },
+        print() {
+            console.log(this.postDetails);
         }
     },
 
     created() {
-        this.initParam();
+        // this.initParam();
+        const pid = this.$route.params.pid;
+        this.getPostDetails(pid);
+    },
+
+    updated() {
+        window.document.title = this.postDetails.slug
     }
 }
 </script>
