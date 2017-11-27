@@ -1,7 +1,9 @@
-<template></template>
-    <div>
+<template>
+    <div class="direction-rtl">
         <h1>این صفحه وجود ندارد</h1>
     </div>
+</template>
+
 <script>
 /**
 *   @comment: NotFound
@@ -15,6 +17,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.direction-rtl {
+    direction: rtl;
+}
 </style>
