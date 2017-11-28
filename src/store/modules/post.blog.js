@@ -7,7 +7,7 @@ import {
 
 const state = {
     items: [],
-    isFetching: true,
+    isFetching: false,
     isMore: false
 };
 

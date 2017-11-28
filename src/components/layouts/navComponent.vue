@@ -18,6 +18,7 @@
         <li><router-link :to="{name: 'about'}" exact>درباره ما<span class="sr-only">(current)</span></router-link></li>
         <li><router-link :to="{name: 'contact'}" exact>تماس با ما<span class="sr-only">(current)</span></router-link></li>
         <li><router-link :to="{name: 'blog'}" exact>بلاگ<span class="sr-only">(current)</span></router-link></li>
+        <li><router-link :to="{name: 'products'}" exact>محصولات<span class="sr-only">(current)</span></router-link></li>
       </ul>
     </div>
 
