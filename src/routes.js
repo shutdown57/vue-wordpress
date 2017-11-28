@@ -4,9 +4,13 @@
 import HomeComponent from './components/homeComponent.vue';
 import AboutComponent from './components/aboutComponent.vue';
 import ContactComponent from './components/contactComponent.vue';
+
+
+
 import BlogComponent from './components/blogComponent.vue';
 import BlogSingleComponent from './components/blog/blogSingleComponent.vue';
 import BlogAllComponent from './components/blog/blogAllComponent.vue';
+
 import NotFoundComponent from './components/notFoundComponent.vue';
 
 
