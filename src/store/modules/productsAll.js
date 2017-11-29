@@ -1,8 +1,10 @@
 import api from '../../api';
 import {
-    GET_PRODUCT_LIST_FAILURE, PRODUCT_LIST,
-    PRODUCT_CATEGORIES_IN, PRODUCT_CATEGORIES_OUT
+    GET_PRODUCT_LIST_FAILURE, PRODUCT_LIST
 } from '../types';
+import {
+    PRODUCT_CATEGORIES_IN, PRODUCT_CATEGORIES_OUT
+} from '../staticsCategories';
 
 const state = {
     items: []
@@ -28,6 +30,7 @@ const actions = {
 const mutations = {
     [PRODUCT_LIST](state, action) {
         state.items = action.productList;
+        // console.log(state.items);
     },
     [GET_PRODUCT_LIST_FAILURE]() {
         state.items = 'مشکلی در ارتباط وجود دارد.';

@@ -50,6 +50,8 @@ import api from '../../api';
 import {API_ROUTES} from '../../config';
 import {mapActions, mapState} from 'vuex';
 
+
+// TODO use store module instead of this mess
 export default {
     name: 'blogSingle',
 
@@ -93,7 +95,7 @@ export default {
                 res.body.img_info = [];
                 api.getMediaId(res.body.featured_media)
                     .then((resolve) => {
-                        console.log(resolve.body);
+                        // console.log(resolve.body);
                         res.body.img_info.push({
                             url: resolve.body.source_url,
                             title: resolve.body.title.rendered

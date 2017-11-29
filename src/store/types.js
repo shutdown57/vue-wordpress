@@ -22,8 +22,6 @@ export const GET_TAG_LIST_FAILURE = 'GET_TAG_LIST_FAILURE';
 export const CHANGE_OPTIONS = 'CHANGE_OPTIONS';
 
 export const PRODUCT_LIST = 'PRODUCT_LIST';
-export const PRODUCT_CATEGORIES_IN = [7, 6, 5]; // All products categories
-export const PRODUCT_CATEGORIES_OUT = [1, 2]; // All unproducts categories
 export const PRODUCT_WHITEBOURD = 'PRODUCT_WHITEBOURD';
 export const PRODUCT_CALENDAR = 'PRODUCT_CALENDAR';
 export const PRODUCT_CURRICULUM = 'PRODUCT_CURRICULUM';
