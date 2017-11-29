@@ -49,7 +49,7 @@ export default {
                 if (!res.ok) {
                     this.msg = 'مشکل در ارتباط با سرور';
                 }
-                console.log(res);
+                // console.log(res);
                 
                 // Handling Thumbnail
                 res.body.map((cur_img, i_img, arr_img) => {

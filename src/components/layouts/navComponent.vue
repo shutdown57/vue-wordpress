@@ -20,10 +20,12 @@
         <li><router-link :to="{name: 'blog'}" exact>بلاگ<span class="sr-only">(current)</span></router-link></li>
         <!-- <li><router-link :to="{name: 'products'}" exact>محصولات<span class="sr-only">(current)</span></router-link></li> -->
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" dir="rtl" aria-haspopup="true" aria-expanded="false">دسته بندی محصولات <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" dir="rtl" aria-haspopup="true" aria-expanded="false">دسته بندی محصولات<span class="caret"></span></a>
           <ul class="dropdown-menu dropdown-menu-right">
             <li><router-link :to="{name: 'curriculum'}" exact class="text-right">برنامه درسی مگنتی<span class="sr-only">(current)</span></router-link></li>
-            <li><a href="#" class="text-right">Another action</a></li>
+            <li><router-link :to="{name: 'whiteBoard'}" exact class="text-right">وایت برد مگنتی<span class="sr-only">(current)</span></router-link></li>
+            <li><router-link :to="{name: 'calendar'}" exact class="text-right">تقویم مگنتی<span class="sr-only">(current)</span></router-link></li>
+            <!-- <li><a href="#" class="text-right">Another action</a></li> -->
             <li><a href="#" class="text-right">Something else here</a></li>
             <li role="separator" class="divider"></li>
             <li><router-link :to="{name: 'products'}" exact class="text-right">تمامی محصولاث<span class="sr-only">(current)</span></router-link></li>

@@ -74,9 +74,6 @@ export default {
             const pid = this.$route.params.pid;
             // this.getPostDetails(pid);
             return pid;
-        },
-        print() {
-            console.log(this.postDetails);
         }
     },
 

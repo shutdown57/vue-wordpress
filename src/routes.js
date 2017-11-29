@@ -7,6 +7,8 @@ import ContactComponent from './components/contactComponent.vue';
 
 import ProductsComponent from './components/productsComponent.vue';
 import ProductsCurriculumComponent from './components/magnet/curriculumComponent.vue';
+import ProductsCalendarComponent from './components/magnet/calendarComponent.vue';
+import ProductsWhiteBoardComponent from './components/magnet/whiteBoardComponent.vue';
 
 import BlogComponent from './components/blogComponent.vue';
 import BlogSingleComponent from './components/blog/blogSingleComponent.vue';
@@ -23,7 +25,9 @@ export default [
     { path: '/blog', component: BlogAllComponent, name: 'blog' },
     { path: '/blog/:pid', component: BlogSingleComponent, name: 'blogSingle' },
     
-    { path: '/products/curriculum', comment: ProductsCurriculumComponent, name: 'curriculum' },
+    { path: '/products/curriculum', component: ProductsCurriculumComponent, name: 'curriculum' },
+    { path: '/products/calendar', component: ProductsCalendarComponent, name: 'calendar' },
+    { path: '/products/white-board', component: ProductsWhiteBoardComponent, name: 'whiteBoard' },
     { path: '/products', component: ProductsComponent, name: 'products' },
     
     { path: '/404', component: NotFoundComponent, name: 'notFound' }

@@ -30,7 +30,6 @@ const actions = {
 const mutations = {
     [PRODUCT_LIST](state, action) {
         state.items = action.productList;
-        // console.log(state.items);
     },
     [GET_PRODUCT_LIST_FAILURE]() {
         state.items = 'مشکلی در ارتباط وجود دارد.';
