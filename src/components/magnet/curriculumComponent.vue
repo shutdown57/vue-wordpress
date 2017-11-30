@@ -1,7 +1,39 @@
 <template>
-  <div class="direction-rtl">
-      <h1>{{msg}}</h1>
-  </div>
+<div class="direction-rtl">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{msg}}</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div v-for="product in productCurriculum" class="col-xs-6 col-md-3">
+                    <a href="#" class="thumbnail" data-toggle="modal" data-target="#myModal">
+                    <img :src="product.img_info[0].url" :alt="product.img_info[0].title" v-model="img_info=product.img_info[0]">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" dir="rtl" id="myModalLabel">{{img_info.title}}</h4>
+        </div>
+        <div class="modal-body text-center">
+            <img class="img-responsive" :src="img_info.url" :alt="img_info.title">
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">بستن</button>
+        </div>
+        </div>
+    </div>
+    </div>
+        
+</div>
 </template>
 
 <script>
@@ -49,4 +81,5 @@ export default {
 
 <style>
 .direction-rtl { direction: rtl; }
+img { width: 100% !important;}
 </style>
