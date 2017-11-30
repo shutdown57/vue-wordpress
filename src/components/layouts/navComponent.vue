@@ -25,6 +25,13 @@
             <li><router-link :to="{name: 'curriculum'}" exact class="text-right">برنامه درسی مگنتی<span class="sr-only">(current)</span></router-link></li>
             <li><router-link :to="{name: 'whiteBoard'}" exact class="text-right">وایت برد مگنتی<span class="sr-only">(current)</span></router-link></li>
             <li><router-link :to="{name: 'calendar'}" exact class="text-right">تقویم مگنتی<span class="sr-only">(current)</span></router-link></li>
+            <li><router-link :to="{name: 'different'}" exact class="text-right">انواع مختلف مگنت<span class="sr-only">(current)</span></router-link></li>
+            <li><router-link :to="{name: 'marker'}" exact class="text-right">ماژیک مگنتی<span class="sr-only">(current)</span></router-link></li>
+            <li><router-link :to="{name: 'onCar'}" exact class="text-right">مگنت روی بدنه خودرو<span class="sr-only">(current)</span></router-link></li>
+            <li><router-link :to="{name: 'pictureFrame'}" exact class="text-right">قاب عکس مگنتی<span class="sr-only">(current)</span></router-link></li>
+            <li><router-link :to="{name: 'religion'}" exact class="text-right">مگنت مذهبی<span class="sr-only">(current)</span></router-link></li>
+            <li><router-link :to="{name: 'subscribCard'}" exact class="text-right">کارت اشتراک مگنتی<span class="sr-only">(current)</span></router-link></li>
+            <li><router-link :to="{name: 'visitCard'}" exact class="text-right">کارت ویزیت مگنتی<span class="sr-only">(current)</span></router-link></li>
             <!-- <li><a href="#" class="text-right">Another action</a></li> -->
             <li><a href="#" class="text-right">Something else here</a></li>
             <li role="separator" class="divider"></li>
