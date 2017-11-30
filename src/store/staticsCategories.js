@@ -1,7 +1,7 @@
 
 export const PRODUCT_CATEGORIES_IN = [7, 6, 5]; // All products categories
 export const PRODUCT_CATEGORIES_OUT = [1, 2]; // All unproducts categories
-export const PRODUCT_WHITEBOURD = [];
+export const PRODUCT_WHITEBOURD = [6];
 export const PRODUCT_CALENDAR = [7];
 export const PRODUCT_CURRICULUM = [5];
 export const PRODUCT_RELIGION = [];
