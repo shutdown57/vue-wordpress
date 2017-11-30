@@ -70,7 +70,7 @@ export default {
                                 url: resolve.body.source_url,
                                 title: resolve.body.title.rendered
                             });
-                        }, reject => { /*console.error(rej);*/ });
+                        }, reject => { /*console.error(reject);*/ });
                 });
                 this.productCalendar = res.body;
             }, rej => {
