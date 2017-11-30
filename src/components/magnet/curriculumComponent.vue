@@ -70,10 +70,10 @@ export default {
                                 url: resolve.body.source_url,
                                 title: resolve.body.title.rendered
                             });
-                        }, reject => {});
+                        }, reject => { /*console.error(rej);*/ });
                 });
                 this.productCurriculum = res.body;
-                console.log(this.productCurriculum);
+                // console.log(this.productCurriculum);
             }, rej => { console.log(rej); });
     }
 }
