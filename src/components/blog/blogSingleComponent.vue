@@ -103,13 +103,11 @@ export default {
 
                 // Handling Categories
                 res.body.cats = [];
-                api.getCategoriesId(res.body.catgories)
+                api.getCategoriesId(res.body.categories)
                     .then(resolve => {
-                        resolve.body.map((cur_cat, i_cat, arr_cat) => {
-                            res.body.cats.push({
-                                name: cur_cat.name,
-                                link: cur_cat.link
-                            });
+                        res.body.cats.push({
+                            name: resolve.body.name,
+                            link: resolve.body.link
                         });
                     }, reject => {
                         //
