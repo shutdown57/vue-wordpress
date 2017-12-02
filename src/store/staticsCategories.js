@@ -11,3 +11,5 @@ export const PRODUCT_MARKER = [14];
 export const PRODUCT_PICTURE_FRAME = [10];
 export const PRODUCT_CARD_SUBSCRIBE = [12];
 export const PRODUCT_CARD_VISIT = [13];
+
+export const BLOG_CATEGORY = [17];
