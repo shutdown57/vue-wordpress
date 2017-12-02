@@ -3,7 +3,7 @@ import {
     ARTICLE_LIST, GET_ARTICLE_LIST_FAILURE,
     REQUEST_ARTICLE_LIST
 } from '../types';
-
+import {BLOG_CATEGORY} from '../staticsCategories';
 
 const state = {
     items: [],
@@ -13,7 +13,8 @@ const state = {
 
 const actions = {
     getPostsBlog({commit}) {
-        api.getPostsAll(1, 0).then(res => {
+        let CATEGORIES_OUT = [7, 6, 5, 11, 16, 15, 14, 10, 12, 13, 1, 2];
+        api.getPostsAll(BLOG_CATEGORY, CATEGORIES_OUT).then(res => {
             if ( !res.ok ) {
                 return commit(GET_ARTICLE_LIST_FAILURE);
             }
@@ -22,27 +23,26 @@ const actions = {
             // Fetch image info from the server
             res.body.map((cur_main, i_main, val_main) => {
                 // Thumbnail Handling
-                api.getMediaId(cur_main.featured_media).then(res =>{
+                api.getMediaId(cur_main.featured_media).then(resolve =>{
                     // Thumbnail url
-                    cur_main.img_url = res.body.source_url;
+                    cur_main.img_url = resolve.body.source_url;
                     // Thumbnail title
-                    cur_main.img_title = res.body.title.rendered;
+                    cur_main.img_title = resolve.body.title.rendered;
                     // console.log(res.body);
-                }, (rej) => {
+                }, (reject) => {
                     cur_main.featured_media = cur_main.featured_media;
                 });
 
                 // Categories Handling
                 cur_main.cats = [];
-                api.getCategoriesId(cur_main.catgories).then((res) => {
-                    res.body.map((cur_cat, i_cat, val_cat) => {
-                        cur_main.cats.push({
-                            name: cur_cat.name,
-                            link: cur_cat.link
-                        });
+                api.getCategoriesId(cur_main.categories).then((resolve) => {
+                    console.log(resolve);
+                    cur_main.cats.push({
+                        name: resolve.body.name,
+                        link: resolve.body.link
                     });
-                    // console.log(res);
-                }, (rej) => {
+                    // console.log(resolve);
+                }, (reject) => {
                     // console.log(rej);
                 });
 
@@ -50,18 +50,19 @@ const actions = {
                 cur_main.post_tags = [];
                 cur_main.tags.map((cur_tag, i_tag, val_tag) => {
                     // console.log(cur_tag);
-                    api.getTagsId(cur_tag).then((res) => {
+                    api.getTagsId(cur_tag).then((resolve) => {
                         cur_main.post_tags.push({
-                            name: res.body.name,
-                            link: res.body.link
+                            name: resolve.body.name,
+                            link: resolve.body.link
                         });
                         // console.log(res);
-                    }, (rej) => {
+                    }, (reject) => {
                         // console.error(rej);
                     });
                 });
 
             });
+            console.log(res.body);
             const json = res.body;
             // const isMore = !(json.data.length < );
             commit(ARTICLE_LIST, {
