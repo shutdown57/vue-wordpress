@@ -5,6 +5,10 @@ import HomeComponent from './components/homeComponent.vue';
 import AboutComponent from './components/aboutComponent.vue';
 import ContactComponent from './components/contactComponent.vue';
 import NotFoundComponent from './components/notFoundComponent.vue';
+
+import CategoriesComponent from './components/sundries/categoriesComponent.vue';
+import CategorySingleComponent from './components/sundries/categorySingleComponent.vue';
+
 import TagsComponent from './components/sundries/tagsComponent.vue';
 import TagSingleComponent from './components/sundries/tagSingleComponent.vue';
 
@@ -29,6 +33,10 @@ export default [
     { path: '/', component: HomeComponent , name: 'home' },
     { path: '/about', component: AboutComponent, name: 'about' },
     { path: '/contact', component: ContactComponent, name: 'contact' },
+
+    { path: '/categories/:cid', component: CategorySingleComponent, name: 'categorySingle' },
+    { path: '/categories', component: CategoriesComponent, name: 'categories' },
+
     { path: '/tags/:tid', component: TagSingleComponent, name: 'tagSingle' },
     { path: '/tags', component: TagsComponent, name: 'tags' },
 
