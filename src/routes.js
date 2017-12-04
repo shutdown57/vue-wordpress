@@ -4,6 +4,9 @@
 import HomeComponent from './components/homeComponent.vue';
 import AboutComponent from './components/aboutComponent.vue';
 import ContactComponent from './components/contactComponent.vue';
+import NotFoundComponent from './components/notFoundComponent.vue';
+import TagsComponent from './components/sundries/tagsComponent.vue';
+import TagSingleComponent from './components/sundries/tagSingleComponent.vue';
 
 import ProductsComponent from './components/productsComponent.vue';
 import ProductsCurriculumComponent from './components/magnet/curriculumComponent.vue';
@@ -21,13 +24,13 @@ import BlogComponent from './components/blogComponent.vue';
 import BlogSingleComponent from './components/blog/blogSingleComponent.vue';
 import BlogAllComponent from './components/blog/blogAllComponent.vue';
 
-import NotFoundComponent from './components/notFoundComponent.vue';
-
 
 export default [
     { path: '/', component: HomeComponent , name: 'home' },
     { path: '/about', component: AboutComponent, name: 'about' },
     { path: '/contact', component: ContactComponent, name: 'contact' },
+    { path: '/tags/:tid', component: TagSingleComponent, name: 'tagSingle' },
+    { path: '/tags', component: TagsComponent, name: 'tags' },
 
     { path: '/blog', component: BlogAllComponent, name: 'blog' },
     { path: '/blog/:pid', component: BlogSingleComponent, name: 'blogSingle' },
