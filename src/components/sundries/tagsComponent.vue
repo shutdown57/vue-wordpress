@@ -37,6 +37,7 @@ export default {
     },
 
     created() {
+        window.document.title = 'برچسبها';
         api.getTagsAll()
             .then(res => {
                 // console.log(res);
