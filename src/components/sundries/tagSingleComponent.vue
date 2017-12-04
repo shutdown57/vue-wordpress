@@ -73,6 +73,7 @@ export default {
     },
 
     created() {
+        window.document.title = '';
         let id = this.initParam();
         api.getTagsId(id)
             .then(res => {
@@ -82,6 +83,7 @@ export default {
                 api.getPostsByTagId(id)
                     .then(resolve => {
                         this.posts = resolve.body;
+                        window.document.title = 'برچسب ' + this.tag.name;
 
                         // Get Informations for every single post
                         resolve.body.map((cur_post, i_post, arr_post) => {
