@@ -9,10 +9,14 @@ import {
     TaxonomiesAllResource, TaxonomiesIdResource,
     TypesAllResource, TypesIdResource,
     UsersAllResource, UsersIdResource,
-    UsersMeResource, SettingsAllResource
+    UsersMeResource, SettingsAllResource,
+    PostsByTagsResource
 } from './resources';
 
 export default {
+    getPostsByTagId: function(tag_id) {
+        return PostsByTagsResource.get({id: tag_id});
+    },
     getMediaId: function (id) {
         return MediaIdResource.get({id: id});
     },
