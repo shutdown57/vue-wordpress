@@ -67,10 +67,6 @@ export default {
             }, rej => {
                 console.error(rej);
             });
-    },
-
-    methods: {
-        //
     }
 }
 </script>
