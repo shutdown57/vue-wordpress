@@ -10,10 +10,13 @@ import {
     TypesAllResource, TypesIdResource,
     UsersAllResource, UsersIdResource,
     UsersMeResource, SettingsAllResource,
-    PostsByTagsResource
+    PostsByTagsResource, PostsByCategoryResource
 } from './resources';
 
 export default {
+    getPostsByCategory: function (cat_id) {
+        return PostsByCategoryResource.get({id: cat_id});
+    },
     getPostsByTagId: function(tag_id) {
         return PostsByTagsResource.get({id: tag_id});
     },
