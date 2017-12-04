@@ -17,6 +17,7 @@
                                 </div>
                                 <div v-else>
                                     <a href="#" class="btn btn-block btn-info" data-toggle="modal" data-target="#myModal" v-model="img_info = post.img_info">مشاهده محصول</a>
+                                    
                                     <!-- Modal -->
                                     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                     <div class="modal-dialog" role="document">
@@ -73,7 +74,7 @@ export default {
     },
 
     created() {
-        window.document.title = '';
+        window.document.title = 'برچسب';
         let id = this.initParam();
         api.getTagsId(id)
             .then(res => {
