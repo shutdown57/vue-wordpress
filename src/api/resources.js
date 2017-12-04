@@ -37,6 +37,7 @@ export const PagesRevisionsAllResource = Vue.resource(API_ROUTES + 'pages{/paren
 export const PagesRevisionsIdResource = Vue.resource(API_ROUTES + 'pages{/parent}/revisions{/id}');
 
 export const PostsAllResource = Vue.resource(API_ROUTES + 'posts?categories={categories}&categories_exclude={ex_categories}');
+export const PostsByTagsResource = Vue.resource(API_ROUTES + 'posts?tags={id}');
 export const PostsIdResource = Vue.resource(API_ROUTES + 'posts/{id}');
 export const PostsRevisionsAllResource = Vue.resource(API_ROUTES + 'posts{/parent}/revisions');
 export const PostsRevisionsIdResource = Vue.resource(API_ROUTES + 'posts{/parent}/revisions{/id}');
