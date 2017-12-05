@@ -13,6 +13,7 @@ import TagsComponent from './components/sundries/tagsComponent.vue';
 import TagSingleComponent from './components/sundries/tagSingleComponent.vue';
 
 import ProductsComponent from './components/productsComponent.vue';
+import ProductSingleComponent from './components/magnet/productSingleComponent.vue';
 import ProductsCurriculumComponent from './components/magnet/curriculumComponent.vue';
 import ProductsCalendarComponent from './components/magnet/calendarComponent.vue';
 import ProductsWhiteBoardComponent from './components/magnet/whiteBoardComponent.vue';
@@ -53,6 +54,7 @@ export default [
     { path: '/products/religion', component: ProductsReligionComponent, name: 'religion' },
     { path: '/products/subscrib-card', component: ProductsSubscribCardComponent, name: 'subscribCard' },
     { path: '/products/visit-card', component: ProductsVisitCardComponent, name: 'visitCard' },
+    { path: '/products/:id', component: ProductSingleComponent, name: 'productSingle' },
     { path: '/products', component: ProductsComponent, name: 'products' },
     
     { path: '/404', component: NotFoundComponent, name: 'notFound' }
