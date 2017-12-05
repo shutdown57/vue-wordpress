@@ -43,7 +43,7 @@ export default {
         api.getCategoriesAll()
             .then(res => {
                 this.categories = res.body;
-                console.log(res);
+                // console.log(res);
             }, rej => { console.error(rej); });
     }
 }
