@@ -23,12 +23,17 @@ const actions = {
             // Fetch image info from the server
             res.body.map((cur_main, i_main, val_main) => {
                 // Thumbnail Handling
+                cur_main.img_info = [];
                 api.getMediaId(cur_main.featured_media).then(resolve =>{
                     // Thumbnail url
-                    cur_main.img_url = resolve.body.source_url;
+                    // cur_main.img_url = resolve.body.source_url;
                     // Thumbnail title
-                    cur_main.img_title = resolve.body.title.rendered;
+                    // cur_main.img_title = resolve.body.title.rendered;
                     // console.log(res.body);
+                    cur_main.img_info.push({
+                        img_url: resolve.body.source_url,
+                        img_title: resolve.body.title.rendered
+                    });
                 }, (reject) => {
                     cur_main.featured_media = cur_main.featured_media;
                 });
@@ -36,7 +41,6 @@ const actions = {
                 // Categories Handling
                 cur_main.cats = [];
                 api.getCategoriesId(cur_main.categories).then((resolve) => {
-                    console.log(resolve);
                     cur_main.cats.push({
                         name: resolve.body.name,
                         link: resolve.body.link
@@ -49,7 +53,6 @@ const actions = {
                 // Tags Handling
                 cur_main.post_tags = [];
                 cur_main.tags.map((cur_tag, i_tag, val_tag) => {
-                    // console.log(cur_tag);
                     api.getTagsId(cur_tag).then((resolve) => {
                         cur_main.post_tags.push({
                             name: resolve.body.name,
@@ -62,7 +65,7 @@ const actions = {
                 });
 
             });
-            console.log(res.body);
+            // console.log(res.body);
             const json = res.body;
             // const isMore = !(json.data.length < );
             commit(ARTICLE_LIST, {
