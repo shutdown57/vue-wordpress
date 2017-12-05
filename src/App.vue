@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="bg-main">
     <app-nav></app-nav>
     <div class="container">
       <router-view></router-view>
@@ -54,5 +54,8 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
+.bg-main {
+  background-color: #e7dfdd;
+}
 </style>
