@@ -2,7 +2,7 @@
     <div>
         <h1>{{ msg }}</h1>
         <div class="row">
-            <div class="col-xs-12" v-for="article in articleList">
+            <div class="col-xs-12 col-md-6" v-for="article in articleList">
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div class="media" dir="rtl">
