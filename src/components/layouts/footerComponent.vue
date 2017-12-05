@@ -46,7 +46,7 @@ export default {
 
 <style scoped>
 footer {
-    /* position: fixed; */
+    /* position: absolute !important; */
     left: 0;
     color: #e7dfdd;
     bottom: 0;
