@@ -1,40 +1,25 @@
 <template>
-    <div class="direction-rtl">
+    <div>
         <h1>{{ msg }}</h1>
         <div class="row">
             <div class="col-xs-12" v-for="article in articleList">
-                <div class="media">
-                    <div class="media-right">
-                        <img :src="article.img_url" :alt="article.img_title" class="media-object">
-                    </div>
-                    <div class="media-body">
-                        <h2 class="media-heading">{{ article.title.rendered }}</h2>
-                        <p v-html="article.content.rendered"></p>
-                        <p>{{article.id}}</p>
-                        <p>{{api}}</p>
-                        <router-link :to="{name: 'blogSingle', params:{pid: article.id}}" class="btn btn-success">ادامه مطلب</router-link>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="media" dir="rtl">
+                            <div class="media-right">
+                                <router-link :to="{name: 'blogSingle', params:{pid: article.id}}">
+                                    <image-loader width="150" height="170" center-type="cover" :blur-preview="true" :src="article.img_info[0].img_url" class="media-object img-responsive img-rounded"></image-loader>
+                                </router-link>
+                            </div>
+                            <div class="media-body">
+                                <h2 class="media-heading text-info">{{ article.title.rendered }}</h2>
+                                <p v-html="article.content.rendered"></p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-xs-12" v-for="article in articleList">
-                <h2>{{ article.title.rendered }}</h2>
-                <img :src="article.img_url" :alt="article.img_title">
-                <div v-html="article.content.rendered"></div>
-                <div>
-                    <h5>Categories:</h5>
-                    <span v-for="cat in article.cats">
-                        <a :href="cat.link"> {{cat.name}} </a>
-                    </span>
-                </div>
-                <div>
-                    <h5>Tags:</h5>
-                    <span v-for="tag in article.post_tags">
-                        <a :href="tag.link"> {{tag.name}} </a>
-                    </span>
-                </div>
-                <hr>
-            </div>
-        </div>
+        </div> <!-- .row -->
     </div>
 </template>
 
@@ -43,9 +28,15 @@
 *   @component: BlogAll
 */
 import {mapState, mapActions} from 'vuex';
+import VueImageLoader from 'vue-img-loader';
 
 export default {
     name: 'blogAll',
+
+    components: {
+        'image-loader': VueImageLoader
+    },
+
     data() {
         return {
             msg: 'اخبار ایرانیان مگنت'
@@ -78,8 +69,8 @@ export default {
     direction: rtl;
 }
 
-img {
+/* img {
     width: 128px;
     height: 128px;
-}
+} */
 </style>
