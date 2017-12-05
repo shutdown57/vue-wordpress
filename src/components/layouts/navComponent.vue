@@ -1,5 +1,29 @@
 <template>
 <nav class="navbar nav-bg navbar-static-top">
+  <div class="container-fluid com-info">
+    <div class="row" dir="rtl">
+      <div class="col-md-4 text-center">
+        <address>
+          <strong><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span></strong><br>
+          <abbr title="Phone" dir="ltr">۰۲۱-۷۷۶۸۱۴۰۰-۱</abbr>
+          <abbr title="Phone" dir="ltr">۰۲۱-۷۵۸۵۴</abbr>
+        </address>
+      </div>
+      <div class="col-md-4 text-center">
+        <address>
+          <strong><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></strong><br>
+          <abbr title="Address">تهران, میدان امام حسین, خیابان مازندران, پلاک ۶۵, طبقه اول, واحد ۵</abbr>
+        </address>
+      </div>
+      <div class="col-md-4 text-center">
+        <image-loader :src="logo_small"
+                      width="80"
+                      height="80"
+                      class="img-responsive"
+                      :blur-preview="true"></image-loader>
+      </div>
+    </div>
+  </div>
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header navbar-right" dir="rtl">
@@ -44,12 +68,39 @@
 /**
  * @component: Nav
 */
+import VueImageLoader from 'vue-img-loader';
+import {ASSETS_PATH} from '../../config';
+
 export default {
-    name: 'nav'
+    name: 'nav',
+
+    data() {
+      return {
+        logo_small: ASSETS_PATH + '/favicon.png'
+      };
+    },
+
+    components: {
+      'image-loader': VueImageLoader
+    }
 }
 </script>
 
 <style scoped>
+address {
+  font-size: 1.5em;
+}
+.com-info {
+  background-color: #2d4a4e;
+  color:#0e0b16;
+  padding-top: 1em;
+  padding-bottom: 0px;
+}
+/* #2d4a4e -> medium-dark 
+ * #1e3235 -> dark
+ * #1c8a9b -> meduim
+ * #00dsff -> low
+*/
 .nav-bg {
   background-color: #0e0b16 !important;
   color: #e7dfdd !important;
