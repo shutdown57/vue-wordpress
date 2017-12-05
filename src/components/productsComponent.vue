@@ -9,10 +9,8 @@
                     <div class="thumbnail">
                         <img :src="product.img_info[0].url" :alt="product.img_info[0].title">
                         <div class="caption">
-                            <h3>{{product.title.rendered}}</h3>
-                            <button class="btn btn-block btn-success">
-                                <router-link :to="{name: 'products', param: {id: product.categories}}">{{product.title.rendered}}</router-link>
-                            </button>
+                            <h3>{{product.title.rendered}}{{product.categories}}</h3>
+                            <router-link class="btn btn-block btn-success" :to="{name: 'products', param: {id: product.categories}}">{{product.title.rendered}}</router-link>
                         </div>
                     </div>
                 </div>
@@ -49,7 +47,6 @@ export default {
                 if (!res.ok) {
                     this.msg = 'مشکل در ارتباط با سرور';
                 }
-                // console.log(res);
                 
                 // Handling Thumbnail
                 res.body.map((cur_img, i_img, arr_img) => {
@@ -61,9 +58,12 @@ export default {
                                 title: resolve.body.title.rendered,
                                 url: resolve.body.source_url
                             });
+                            // cur_img.img_info.title = resolve.body.title.rendered;
+                            // cur_img.img_info.url = resolve.body.source_url
                         }, reject => { /*console.error(reject);*/ });
                 });
                 this.productList = res.body;
+                // console.log(this.productList);
             }, rej => {
                 console.error(rej);
             });
