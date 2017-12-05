@@ -10,7 +10,7 @@
                         <img :src="product.img_info[0].url" :alt="product.img_info[0].title">
                         <div class="caption">
                             <h3>{{product.title.rendered}}{{product.categories}}</h3>
-                            <router-link class="btn btn-block btn-success" :to="{name: 'products', param: {id: product.categories}}">{{product.title.rendered}}</router-link>
+                            <router-link class="btn btn-block btn-success" :to="{name: 'productSingle', params: {id: product.categories[0]}}">{{product.title.rendered}}</router-link>
                         </div>
                     </div>
                 </div>
