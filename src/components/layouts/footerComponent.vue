@@ -53,7 +53,8 @@ footer {
     width: 100%;
 }
 .btn-link{
-  background-color: #a239ca !important;
+  /* background-color: #a239ca !important; */
+  background-color: #1c8a9b !important;
   color: #e7dfdd !important;
 }
 .btn-link > a.router-link-active,
@@ -66,7 +67,8 @@ footer {
   background-color: #0e0b16 !important;
 }
 .blacky {
-  background-color: #4717f6;
+  /* background-color: #4717f6; */
+  background-color: #1e3235;
   color: #e7dfdd;
   text-align: center;
   padding-top: 10px;
