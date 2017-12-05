@@ -2,7 +2,7 @@
   <div class="bg-main">
     <app-nav></app-nav>
     <div class="container">
-      <router-view></router-view>
+      <router-view id="main-content"></router-view>
     </div>
     <app-footer></app-footer>
     <!-- {{site_info()}} -->
