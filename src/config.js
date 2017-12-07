@@ -8,3 +8,10 @@ export const NONCE = nonce;
 export const CookieDomain = 'wordpress.app';
 
 export const APP_PASS = 'Lnru goL1 8wTD Bgrd m6UB k25W';
+
+export const GMAPS_OPT = {
+    load: {
+        key: '', // GOOGLE API KEY
+        v: ''    // GOOGLE API VERSION
+    }
+};
