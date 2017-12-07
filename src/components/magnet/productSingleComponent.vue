@@ -87,7 +87,8 @@ export default {
         // console.log(id);
         api.getPostsAll(id, allCategories)
             .then(res => {
-                console.log(res);
+                // console.log(res);
+                
                 // Handling Thumbnail
                 res.body.map((cur_post, i_post, arr_post) => {
                     cur_post.img_info = [];
