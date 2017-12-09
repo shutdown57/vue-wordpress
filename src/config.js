@@ -11,7 +11,7 @@ export const APP_PASS = 'Lnru goL1 8wTD Bgrd m6UB k25W';
 
 export const GMAPS_OPT = {
     load: {
-        key: '', // GOOGLE API KEY
-        v: ''    // GOOGLE API VERSION
+        key: 'AIzaSyA7A9AFSDRwdFPj7OC_pImF7zpeOu3D6mw', // GOOGLE API KEY
+        v: '3.29'    // GOOGLE API VERSION
     }
 };
