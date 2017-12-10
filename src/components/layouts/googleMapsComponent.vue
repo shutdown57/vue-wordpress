@@ -1,13 +1,12 @@
 <template>
     <div>
-        <gmap-map
+        <gmap-map v-if="mapLoaded"
                 ref="map"
                 :center="position"
                 :zoom="17"
                 map-type-id="terrain"
                 style="width: 500px; height: 300px"
                 >
-            <vue-component v-if="mapLoaded"></vue-component>
         </gmap-map>
     </div>
 </template>
