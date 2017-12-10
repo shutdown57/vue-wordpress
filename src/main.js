@@ -17,6 +17,9 @@ const router = new VueRouter({
   mode: 'history'
 });
 
+// console.log(ajaxPaths);
+// export const serverPaths = {...ajaxPaths};
+
 router.beforeEach((to, from , next) => {
     if (!to.matched.length) {
         next('/404');
