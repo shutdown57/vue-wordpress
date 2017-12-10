@@ -36,10 +36,6 @@
 
     <!-- Latest compiled and minified JavaScript Bootstrap -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    
-    <!-- Google map API -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7A9AFSDRwdFPj7OC_pImF7zpeOu3D6mw"
-    async defer></script>
 
     <!-- Javascript file -->
     <script src="<?php print get_template_directory_uri() . '/dist/build.js'; ?>"></script>
