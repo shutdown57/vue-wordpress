@@ -1,12 +1,19 @@
 <template>
     <div>
-        <gmap-map v-if="mapLoaded"
-                ref="map"
+        <gmap-map ref="map"
                 :center="position"
-                :zoom="17"
-                map-type-id="terrain"
-                style="width: 500px; height: 300px"
+                @center_changed="updateCenter"
+                v-show="mapLoaded"
+                :zoom="16"
+                map-type-id="roadmap"
+                style="width: 100%; height: 200px"
                 >
+            <gmap-marker
+                    :position="position_"
+                    :clickable="false"
+                    :draggable="false"
+                    :title="'شرکت ایرانیان مگنت'"
+                    ></gmap-marker>
         </gmap-map>
     </div>
 </template>
@@ -23,7 +30,8 @@ export default {
 
     data() {
         return {
-            position: { lat: 35.7012382, lng: 51.4432159 },
+            position: { lat: 35.7012317, lng: 51.4443317 },
+            position_: { lat: 35.7012361, lng: 51.4443103 },
             map: null,
             mapName: 'map',
             bounds: null,
@@ -31,31 +39,33 @@ export default {
         };
     },
 
-    mounted() {
-        // this.initMap();
-        this.map = this.$refs.map.$mapObject;
-        this.$refs.map.$mapCreated.then(() => this.mapLoaded = true );
+    methods: {
+        updateCenter(center) {
+            this.position = { lat: center.lat, lng: center.lng };
+        }
+        // loadMap() {
+        //     // this.mapLoaded = true;
+        //     this.map.$mapCreated.then(res => {
+        //         // console.log(res);
+        //         this.mapLoaded = true;
+        //     }, rej => { console.log(rej); });
+        // }
     },
 
-    // methods: {
-    //     initMap() {
-    //         this.bounds = new google.maps.LatLngBounds();
-    //         const element = document.getElementById(this.mapName);
-    //         const mapCenter = {...this.position};
-    //         const options = {
-    //             center: new google.maps.LatLng(mapCenter.lat, mapCenter.lng)
-    //         };
-    //         this.map = new google.maps.Map(element, options);
-    //         const position_ = new google.maps.LatLng(this.position.lat, this.position.lng);
+    mounted() {
+        setTimeout(() => {
+            this.$refs.map.$mapCreated.then(res => {
+                // console.log(res);
+                this.mapLoaded = true;
+            }, rej => { console.log(rej); });
+        }, 5000);
+        
+        // console.log(this.$refs.map.resizePreserveCenter());
+    },
 
-    //         const marker = new google.maps.Marker({
-    //             position_,
-    //             map: this.map
-    //         });
-
-    //         this.map.fitBounds(this.bounds.extends(position_));
-    //     }
-    // }
+    updated() {
+        this.$refs.map.resizePreserveCenter(this.position);
+    }
 }
 </script>
 
