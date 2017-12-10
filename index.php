@@ -1,7 +1,6 @@
-<?php //require get_template_directory() . '/dist/index.html';
+<?php
 /**
- *
- *
+ * Index File
 */
 ?>
 <!DOCTYPE html>
@@ -15,16 +14,18 @@
     <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
     <link rel="shortcut icon" type="image/png" href="<?php print get_template_directory_uri() . '/img/favicon.png'?>">
     <title>Vue</title>
+    
+    <!-- Script to get nonce and root url from server -->
     <script type="text/javascript">
         var root = "<?php print esc_url_raw( rest_url() ); ?>";
         var nonce = "<?php print wp_create_nonce( home_url( '/' ) ); ?>";
     </script>
     
     <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 </head>
 <body>
     <div id="app"></div>
