@@ -15,6 +15,7 @@
                     :title="'شرکت ایرانیان مگنت'"
                     ></gmap-marker>
         </gmap-map>
+        <!-- <div id="map"></div> -->
     </div>
 </template>
 
@@ -22,7 +23,6 @@
 /**
  * @component: Google Maps
  */
-import {GMAPS_OPT} from '../../config';
 
 
 export default {
@@ -35,7 +35,7 @@ export default {
             map: null,
             mapName: 'map',
             bounds: null,
-            mapLoaded: false
+            mapLoaded: true
         };
     },
 
@@ -43,35 +43,76 @@ export default {
         updateCenter(center) {
             this.position = { lat: center.lat, lng: center.lng };
         }
-        // loadMap() {
-        //     // this.mapLoaded = true;
-        //     this.map.$mapCreated.then(res => {
-        //         // console.log(res);
-        //         this.mapLoaded = true;
-        //     }, rej => { console.log(rej); });
+        // initMap() {
+        //     this.map = new google.maps.Map(document.getElementById('map'), {
+        //         center: { lat: 35.7012317, lng: 51.4443317 },
+        //         zoom: 16,
+        //         disableDefaultUI: true
+        //     });
         // }
     },
 
     mounted() {
-        setTimeout(() => {
-            this.$refs.map.$mapCreated.then(res => {
-                // console.log(res);
-                this.mapLoaded = true;
-            }, rej => { console.log(rej); });
-        }, 5000);
-        
-        // console.log(this.$refs.map.resizePreserveCenter());
+        // setTimeout(() => {
+        //     this.$refs.map.$mapCreated.then(res => {
+        //         // console.log(res);
+        //         this.mapLoaded = true;
+        //     }, rej => { console.log(rej); });
+        // }, 5000);
+        // this.initMap();
+        // this.$refs.map.$mapCreated.then(res => {
+        //     // console.log(res);
+        //     this.mapLoaded = true;
+        // }, rej => { console.log(rej); });
+        this.$refs.map.$mapCreated.then(res => {
+            console.log(this.$refs.map);
+            this.mapLoaded = true;
+            // google.maps.event.addListenerOnce(this.$refs.map, 'idle', function(){
+            //     google.maps.event.trigger(this.$refs.map, 'resize');
+            //     this.$refs.map.checkResize();
+            //     this.$refs.map.setCenter(this.position);
+            //     this.$refs.map.setZoom( this.$refs.map.getZoom() );
+            //     console.log("OK");
+            // });
+            google.maps.event.trigger(this.$refs.map, 'resize');
+            // this.$refs.map.checkResize();
+            // this.$refs.map.setCenter(this.position);
+            // this.$refs.map.setZoom( this.$refs.map.getZoom() );
+            this.$refs.map.resize();
+            this.$refs.map.resizePreserveCenter();
+        }, rej => { console.log(rej); });
     },
 
     updated() {
-        this.$refs.map.resizePreserveCenter(this.position);
+        // setInterval(() => {
+        //     this.$refs.map.$mapCreated.then(res => {
+        //         // console.log(res);
+        //         this.mapLoaded = true;
+        //         google.maps.event.addListenerOnce(this.$refs.map, 'idle', function(){
+        //             google.maps.event.trigger(this.$refs.map, 'resize');
+        //             this.$refs.map.checkResize();
+        //             this.$refs.map.setCenter(this.position);
+        //             this.$refs.map.setZoom( this.$refs.map.getZoom() );
+        //             console.log("OK");
+        //         });
+        //     }, rej => { console.log(rej); });
+        // }, 2000);
+        // setTimeout(() => {
+        //     // this.$refs.map.resizePreserveCenter(this.position);
+        //     google.maps.event.addListenerOnce(this.$refs.map, 'idle', function(){
+        //         google.maps.event.trigger(this.$refs.map, 'resize');
+        //         this.$refs.map.checkResize();
+        //         // this.$refs.map.setCenter(this.position);
+        //         this.$refs.map.setZoom( this.$refs.map.getZoom() );
+        //     });
+        // }, 2000);
     }
 }
 </script>
 
 <style>
 #map {
-    width: 200px;
-    height: 200px;
+    width: 100%;
+    height: 300px;
 }
 </style>
