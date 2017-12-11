@@ -20,7 +20,7 @@ Vue.http.options.credentials = true;
 //     // continue to next interceptor
 //     next();
 // });
-
+// TODO Fix this file to be like "../components/blog/blogAllComponent.vue" for request to categories
 export const CategoriesAllResource = Vue.resource(API_ROUTES + 'categories');
 export const CategoriesIdResource = Vue.resource(API_ROUTES + 'categories/{id}');
 
