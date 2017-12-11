@@ -15,7 +15,44 @@
             </div>
           </div>
           <div class="col-sm-12 col-md-4 text-center">
-            <h2>Social network</h2>
+            <h2>شبکه‌های اجتماعی</h2>
+            <social-sharing
+                title="مگنت ایرانیان"
+                description="تولید کننده انواع مگنت در سایزها و قالبهای مختلف"
+                quote="ایرانیان مگنت اولین و بزرگترین تولید کننده مگنت در ایران"
+                hashtags="مگنت, مگنت تبلیغاتی, ایراینان مگنت, آهیربای رویخچالی, کارت ویزیت, وایت بورد"
+                twitter-user="iranianmagent"
+                inline-template>
+              <div>
+                <network network="email">
+                  <span class="glyphicon glyphicon-envelope"></span>
+                </network>
+                <network network="facebook">
+                  <span class="glyphicon glyphicon-envelope"></span>
+                </network>
+                <network network="googleplus">
+                  <span class="glyphicon glyphicon-envelope"></span>
+                </network>
+                <network network="linkedin">
+                  <span class="glyphicon glyphicon-envelope"></span>
+                </network>
+                <network network="pinterest">
+                  <span class="glyphicon glyphicon-envelope"></span>
+                </network>
+                <network network="reddit">
+                  <span class="glyphicon glyphicon-envelope"></span>
+                </network>
+                <network network="skype">
+                  <span class="glyphicon glyphicon-envelope"></span>
+                </network>
+                <network network="telegram">
+                  <span class="glyphicon glyphicon-envelope"></span>
+                </network>
+                <network network="twitter">
+                  <span class="glyphicon glyphicon-envelope"></span>
+                </network>
+              </div>
+            </social-sharing>
           </div>
           <div class="col-sm-12 col-md-4 text-center">
             <h2>Enamad</h2>
