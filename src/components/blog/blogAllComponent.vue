@@ -63,20 +63,6 @@ export default {
     },
 
     methods: {
-        // removeArray(arr, el) {
-        //     // return arr.filter(e => e !== el);
-        //     let index = arr.indexOf(el);
-        //     if (index != -1) {
-        //         arr.splice(index, 1);
-        //     }
-        // },
-
-        // addArray(el) {
-        //     let arr = [];
-        //     arr.push(el);
-        //     return arr;
-        // },
-
         infiniteHandler($state) {
             let id = [...BLOG_CATEGORY];
             // Convert id to number and push it to an array
