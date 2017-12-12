@@ -58,4 +58,5 @@ export default {
 .bg-main {
   background-color: #e7dfdd;
 }
+body { padding-top: 50px; }
 </style>
