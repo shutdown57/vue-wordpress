@@ -104,7 +104,6 @@ export default {
                 }
             }).then(res => {
                 if (res.body.length){
-                    console.log("First");
                     // console.log(res);
                     // Fetch image info from the server
                     res.body.map((cur_main, i_main, val_main) => {
@@ -157,7 +156,10 @@ export default {
                 } else {
                     $state.complete();
                 }
-            }, rej => { /*console.log(rej);*/ $state.complete(); });
+            }, rej => {
+                /*console.log(rej);*/
+                $state.complete();
+            });
         }
     }
 }
