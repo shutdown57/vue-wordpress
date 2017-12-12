@@ -67,6 +67,10 @@ export default {
         };
     },
 
+    created() {
+        window.document.title = 'تقویم مگنتی';
+    },
+
     methods: {
         infiniteHandler($state) {
             let CATEGORIES_OUT = [1, 2, 5, 6];
