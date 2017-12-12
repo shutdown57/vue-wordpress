@@ -55,31 +55,6 @@ export default {
 
     created() {
         window.document.title = 'محصولات';
-        // api.getPostsAll(PRODUCT_CATEGORIES_IN, PRODUCT_CATEGORIES_OUT)
-        //     .then(res => {
-        //         if (!res.ok) {
-        //             this.msg = 'مشکل در ارتباط با سرور';
-        //         }
-                
-        //         // Handling Thumbnail
-        //         res.body.map((cur_img, i_img, arr_img) => {
-        //             cur_img.img_info = [];
-        //             api.getMediaId(cur_img.featured_media)
-        //                 .then(resolve => {
-        //                     // console.log(resolve);
-        //                     cur_img.img_info.push({
-        //                         title: resolve.body.title.rendered,
-        //                         url: resolve.body.source_url
-        //                     });
-        //                     // cur_img.img_info.title = resolve.body.title.rendered;
-        //                     // cur_img.img_info.url = resolve.body.source_url
-        //                 }, reject => { /*console.error(reject);*/ });
-        //         });
-        //         this.productList = res.body;
-        //         // console.log(this.productList);
-        //     }, rej => {
-        //         console.error(rej);
-        //     });
     },
 
     methods: {
@@ -103,13 +78,9 @@ export default {
                                     title: resolve.body.title.rendered,
                                     url: resolve.body.source_url
                                 });
-                                // cur_img.img_info.title = resolve.body.title.rendered;
-                                // cur_img.img_info.url = resolve.body.source_url
                             }, reject => { /*console.error(reject);*/ });
                     });
                     this.productList = this.productList.concat(res.body);
-                    console.log(this.productList);
-                    console.log(res.body)
                     $state.loaded();
                     if (this.productList.length % 10 === 0) {
                         $state.complete();
