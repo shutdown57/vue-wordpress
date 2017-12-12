@@ -96,146 +96,68 @@ export default {
             let allCategories = [...PRODUCT_CATEGORIES_IN, ...[1, 2, 17]];
             // Remove id from allCategories array
             this.removeArray(allCategories, id[0]);
-            this.$http.get("http://wordpress.app/wp-json/wp/v2/posts",{
+            this.$http.get("http://wordpress.app/wp-json/wp/v2/posts", {
                 params: {
-                    page: 1
+                    categories: id,
+                    categories_exclude: allCategories,
+                    page: this.list.length / 10 + 1
                 }
-            }).then(res => {console.log(res)});
-            if (this.list.length === 0) {
-                // TODO Fix urls below to be an variable
-                this.$http.get("http://wordpress.app/wp-json/wp/v2/posts", {
-                    params: {
-                        categories: id,
-                        categories_exclude: allCategories,
-                        page: this.list.length / 10 + 1
-                    }
-                }).then(res => {
-                    if (res.body.length){
-                        console.log("First");
-                        // console.log(res);
-                        // Fetch image info from the server
-                        res.body.map((cur_main, i_main, val_main) => {
-                            // Thumbnail Handling
-                            cur_main.img_info = [];
-                            api.getMediaId(cur_main.featured_media).then(resolve =>{
-                                // Thumbnail url
-                                // cur_main.img_url = resolve.body.source_url;
-                                // Thumbnail title
-                                // cur_main.img_title = resolve.body.title.rendered;
-                                // console.log(res.body);
-                                cur_main.img_info.push({
-                                    img_url: resolve.body.source_url,
-                                    img_title: resolve.body.title.rendered
-                                });
-                            }, (reject) => {
-                                cur_main.featured_media = cur_main.featured_media;
-                            });
-
-                            // Categories Handling
-                            cur_main.cats = [];
-                            api.getCategoriesId(cur_main.categories).then((resolve) => {
-                                cur_main.cats.push({
-                                    name: resolve.body.name,
-                                    link: resolve.body.link
-                                });
-                                // console.log(resolve);
-                            }, (reject) => {
-                                // console.log(rej);
-                            });
-
-                            // Tags Handling
-                            cur_main.post_tags = [];
-                            cur_main.tags.map((cur_tag, i_tag, val_tag) => {
-                                api.getTagsId(cur_tag).then((resolve) => {
-                                    cur_main.post_tags.push({
-                                        name: resolve.body.name,
-                                        link: resolve.body.link
-                                    });
-                                    // console.log(res);
-                                }, (reject) => {
-                                    // console.error(rej);
-                                });
-                            });
-
-                        });
-                        // console.log(res.body);
-                        this.list = this.list.concat(res.body);
-                        $state.loaded();
-                        if (!(this.list.length % 10 === 0)) {
-                            $state.complete();
-                        }
-                    } else {
-                        $state.complete();
-                    }
-                }, rej => { /*console.log(rej);*/ $state.complete(); });
-            } else {
-                this.$http.get("http://wordpress.app/wp-json/wp/v2/posts", {
-                    params: {
-                        offset: this.list.length,
-                        categories: id,
-                        categories_exclude: allCategories
-                    }
-                }).then(res => {
+            }).then(res => {
+                if (res.body.length){
+                    console.log("First");
                     // console.log(res);
-                    console.log("second");
-                    if (res.body.length) {
-                        // console.log(res);
-                        // Fetch image info from the server
-                        res.body.map((cur_main, i_main, val_main) => {
-                            // Thumbnail Handling
-                            cur_main.img_info = [];
-                            api.getMediaId(cur_main.featured_media).then(resolve =>{
-                                // Thumbnail url
-                                // cur_main.img_url = resolve.body.source_url;
-                                // Thumbnail title
-                                // cur_main.img_title = resolve.body.title.rendered;
-                                // console.log(res.body);
-                                cur_main.img_info.push({
-                                    img_url: resolve.body.source_url,
-                                    img_title: resolve.body.title.rendered
-                                });
-                            }, (reject) => {
-                                cur_main.featured_media = cur_main.featured_media;
+                    // Fetch image info from the server
+                    res.body.map((cur_main, i_main, val_main) => {
+                        // Thumbnail Handling
+                        cur_main.img_info = [];
+                        api.getMediaId(cur_main.featured_media).then(resolve =>{
+                            // console.log(res.body);
+                            // Thumbnail url and title
+                            cur_main.img_info.push({
+                                img_url: resolve.body.source_url,
+                                img_title: resolve.body.title.rendered
                             });
+                        }, (reject) => {
+                            cur_main.featured_media = cur_main.featured_media;
+                        });
 
-                            // Categories Handling
-                            cur_main.cats = [];
-                            api.getCategoriesId(cur_main.categories).then((resolve) => {
-                                cur_main.cats.push({
+                        // Categories Handling
+                        cur_main.cats = [];
+                        api.getCategoriesId(cur_main.categories).then((resolve) => {
+                            cur_main.cats.push({
+                                name: resolve.body.name,
+                                link: resolve.body.link
+                            });
+                            // console.log(resolve);
+                        }, (reject) => {
+                            // console.log(rej);
+                        });
+
+                        // Tags Handling
+                        cur_main.post_tags = [];
+                        cur_main.tags.map((cur_tag, i_tag, val_tag) => {
+                            api.getTagsId(cur_tag).then((resolve) => {
+                                cur_main.post_tags.push({
                                     name: resolve.body.name,
                                     link: resolve.body.link
                                 });
-                                // console.log(resolve);
+                                // console.log(res);
                             }, (reject) => {
-                                // console.log(rej);
+                                // console.error(rej);
                             });
-
-                            // Tags Handling
-                            cur_main.post_tags = [];
-                            cur_main.tags.map((cur_tag, i_tag, val_tag) => {
-                                api.getTagsId(cur_tag).then((resolve) => {
-                                    cur_main.post_tags.push({
-                                        name: resolve.body.name,
-                                        link: resolve.body.link
-                                    });
-                                    // console.log(res);
-                                }, (reject) => {
-                                    // console.error(rej);
-                                });
-                            });
-
                         });
-                        // console.log(res.body);
-                        this.list = this.list.concat(res.body);
-                        $state.loaded();
-                        if (!(this.list.length % 10 === 0)) {
-                            $state.complete();
-                        }
-                    } else {
+
+                    });
+                    // console.log(res.body);
+                    this.list = this.list.concat(res.body);
+                    $state.loaded();
+                    if (!(this.list.length % 10 === 0)) {
                         $state.complete();
                     }
-                }, rej => { /*console.log(rej);*/ $state.complete(); });
-            }
+                } else {
+                    $state.complete();
+                }
+            }, rej => { /*console.log(rej);*/ $state.complete(); });
         }
     }
 }
