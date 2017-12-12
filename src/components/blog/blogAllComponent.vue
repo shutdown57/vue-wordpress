@@ -41,6 +41,7 @@ import {
     BLOG_CATEGORY,
     PRODUCT_CATEGORIES_IN
 } from '../../store/staticsCategories';
+import {removeArray, addArray} from '../../mixins/utils';
 
 export default {
     name: 'blogAll',
@@ -62,27 +63,27 @@ export default {
     },
 
     methods: {
-        removeArray(arr, el) {
-            // return arr.filter(e => e !== el);
-            let index = arr.indexOf(el);
-            if (index != -1) {
-                arr.splice(index, 1);
-            }
-        },
+        // removeArray(arr, el) {
+        //     // return arr.filter(e => e !== el);
+        //     let index = arr.indexOf(el);
+        //     if (index != -1) {
+        //         arr.splice(index, 1);
+        //     }
+        // },
 
-        addArray(el) {
-            let arr = [];
-            arr.push(el);
-            return arr;
-        },
+        // addArray(el) {
+        //     let arr = [];
+        //     arr.push(el);
+        //     return arr;
+        // },
 
         infiniteHandler($state) {
             let id = [...BLOG_CATEGORY];
             // Convert id to number and push it to an array
-            id = this.addArray(parseInt(id));
+            id = addArray(parseInt(id));
             let allCategories = [...PRODUCT_CATEGORIES_IN, ...[1, 2, 17]];
             // Remove id from allCategories array
-            this.removeArray(allCategories, id[0]);
+            removeArray(allCategories, id[0]);
             this.$http.get("http://wordpress.app/wp-json/wp/v2/posts", {
                 params: {
                     categories: id,
