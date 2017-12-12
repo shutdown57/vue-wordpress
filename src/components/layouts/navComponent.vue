@@ -1,6 +1,6 @@
 <template>
-<nav class="navbar nav-bg navbar-static-top">
-  <div class="container-fluid com-info">
+<nav class="navbar nav-bg navbar-static-top navbar-fixed-top">
+  <!-- <div class="container-fluid com-info">
     <div class="row" dir="rtl">
       <div class="col-md-4 text-center">
         <address>
@@ -23,7 +23,7 @@
                       :blur-preview="true"></image-loader>
       </div>
     </div>
-  </div>
+  </div> -->
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header navbar-right" dir="rtl">
