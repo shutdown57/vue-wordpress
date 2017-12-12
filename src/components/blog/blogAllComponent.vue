@@ -106,7 +106,8 @@ export default {
                 this.$http.get("http://wordpress.app/wp-json/wp/v2/posts", {
                     params: {
                         categories: id,
-                        categories_exclude: allCategories
+                        categories_exclude: allCategories,
+                        page: this.list.length / 10 + 1
                     }
                 }).then(res => {
                     if (res.body.length){
