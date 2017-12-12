@@ -55,19 +55,7 @@ export default {
         initParam() {
             const pid = this.$route.params.id;
             return pid;
-        },
-        // removeArray(arr, el) {
-        //     // return arr.filter(e => e !== el);
-        //     let index = arr.indexOf(el);
-        //     if (index != -1) {
-        //         arr.splice(index, 1);
-        //     }
-        // },
-        // addArray(el) {
-        //     let arr = [];
-        //     arr.push(el);
-        //     return arr;
-        // }
+        }
     },
     
     data() {
