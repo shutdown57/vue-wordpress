@@ -98,7 +98,6 @@ export default {
                             }, reject => { /*console.error(reject);*/ });
                     });
                     this.productCurriculum = this.productCurriculum.concat(res.body);
-                    console.log(this.productCurriculum);
                     $state.loaded();
                     if (this.productCurriculum.length % 10 === 0) {
                         $state.complete();
