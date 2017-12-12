@@ -42,6 +42,7 @@
  */
 import api from '../../api';
 import {PRODUCT_CATEGORIES_IN} from '../../store/staticsCategories';
+import {removeArray, addArray} from '../../mixins/utils';
 
 export default {
     name: 'productSingle',
@@ -55,18 +56,18 @@ export default {
             const pid = this.$route.params.id;
             return pid;
         },
-        removeArray(arr, el) {
-            // return arr.filter(e => e !== el);
-            let index = arr.indexOf(el);
-            if (index != -1) {
-                arr.splice(index, 1);
-            }
-        },
-        addArray(el) {
-            let arr = [];
-            arr.push(el);
-            return arr;
-        }
+        // removeArray(arr, el) {
+        //     // return arr.filter(e => e !== el);
+        //     let index = arr.indexOf(el);
+        //     if (index != -1) {
+        //         arr.splice(index, 1);
+        //     }
+        // },
+        // addArray(el) {
+        //     let arr = [];
+        //     arr.push(el);
+        //     return arr;
+        // }
     },
     
     data() {
@@ -79,10 +80,10 @@ export default {
     created() {
         let id = this.initParam();
         // Convert id to number and push it to an array
-        id = this.addArray(parseInt(id));
+        id = addArray(parseInt(id));
         let allCategories = [...PRODUCT_CATEGORIES_IN, ...[1, 2, 17]];
         // Remove id from allCategories array
-        this.removeArray(allCategories, id[0]);
+        removeArray(allCategories, id[0]);
         // console.log(allCategories);
         // console.log(id);
         api.getPostsAll(id, allCategories)
