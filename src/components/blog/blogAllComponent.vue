@@ -22,7 +22,10 @@
         </div> <!-- .row -->
         <infinite-loading @infinite="infiniteHandler">
             <span slot="no-more">
-                دیگه نداریم که
+                <div class="alert alert-warning alert-dismissible" role="alert" dir="rtl">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <strong>توجه!</strong> پست دیگری وجود ندارد.
+                </div>
             </span>
         </infinite-loading>
     </div>
