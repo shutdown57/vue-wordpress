@@ -20,6 +20,7 @@ Vue.http.options.credentials = true;
 //     // continue to next interceptor
 //     next();
 // });
+
 // TODO Fix this file to be like "../components/blog/blogAllComponent.vue" for request to categories
 export const CategoriesAllResource = Vue.resource(API_ROUTES + 'categories');
 export const CategoriesIdResource = Vue.resource(API_ROUTES + 'categories/{id}');
@@ -60,3 +61,30 @@ export const TypesIdResource = Vue.resource(API_ROUTES + 'types{/id}');
 export const UsersAllResource = Vue.resource(API_ROUTES + 'users');
 export const UsersIdResource = Vue.resource(API_ROUTES + 'users{/id}');
 export const UsersMeResource = Vue.resource(API_ROUTES + 'users/me');
+
+
+/**
+ * New 
+ */
+// Better to make file like this part -> in future ;)
+// start =>
+const Actions = {
+    
+    getAllPosts: {
+        method: 'GET',
+        url: API_ROUTES + 'posts?categories={categories}&categories_exclude={ex_categories}&page={current_page}' 
+    },
+    
+    getOnePost: {
+        method: 'GET',
+        url: API_ROUTES + 'posts/{id}'
+    },
+
+    getPostsByTags: {
+        method: 'GET',
+        url: API_ROUTES + 'posts?tags={id}'
+    }
+};
+
+export const postResources = Vue.resource('url', {}, Actions);
+// end
