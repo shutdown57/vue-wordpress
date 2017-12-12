@@ -57,24 +57,11 @@ export default {
         };
     },
 
-    // computed: {
-    //     ...mapState({
-    //         articleList: ({articleList}) => articleList.items
-    //     })
-    // },
-
     created() {
         window.document.title = "اخبار";
-        // if (this.articleList.length < 1) {
-        // this.getPostsBlog();
-        // }
     },
 
     methods: {
-        // ...mapActions([
-        // 'getPostsBlog'
-        // ]),
-
         removeArray(arr, el) {
             // return arr.filter(e => e !== el);
             let index = arr.indexOf(el);
@@ -129,7 +116,7 @@ export default {
                             });
                             // console.log(resolve);
                         }, (reject) => {
-                            // console.log(rej);
+                            // console.log(reject);
                         });
 
                         // Tags Handling
@@ -140,9 +127,9 @@ export default {
                                     name: resolve.body.name,
                                     link: resolve.body.link
                                 });
-                                // console.log(res);
+                                // console.log(resolve);
                             }, (reject) => {
-                                // console.error(rej);
+                                // console.error(reject);
                             });
                         });
 
@@ -169,9 +156,4 @@ export default {
 .direction-rtl{
     direction: rtl;
 }
-
-/* img {
-    width: 128px;
-    height: 128px;
-} */
 </style>
