@@ -32,7 +32,16 @@
         </div>
     </div>
     </div>
-        
+
+    <!-- Infinite Loading -->
+    <infinite-loading @infinite="infiniteHandler">
+        <span slot="no-more">
+            <div class="alert alert-warning alert-dismissible" role="alert" dir="rtl">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>توجه!</strong> پست دیگری وجود ندارد.
+            </div>
+        </span>
+    </infinite-loading>
 </div>
 </template>
 
@@ -40,11 +49,18 @@
 /**
  * @component: White Board
  */
+import InfiniteLoading from 'vue-infinite-loading';
+
 import api from '../../api';
 import {PRODUCT_WHITEBOURD} from '../../store/staticsCategories';
 
 export default {
-    name: 'whiteBoard',
+    name: 'different',
+
+    components: {
+        InfiniteLoading
+    },
+
     data() {
         return {
             productDifferent: [],
@@ -54,27 +70,46 @@ export default {
 
     created() {
         window.document.title = 'انواع مگنتهای مختلف';
+    },
 
-        let CATEGORIES_OUT = [1, 2, 7, 5, 11, 15, 14, 10, 12, 13];
-        api.getPostsAll(PRODUCT_WHITEBOURD, CATEGORIES_OUT)
-            .then(res => {
-                if (!res.ok) {
-                    this.msg = 'مشکل در ارتباط با سرور';
+    methods: {
+        infiniteHandler($state) {
+            let CATEGORIES_OUT = [1, 2, 7, 5, 11, 15, 14, 10, 12, 13];
+            this.$http.get("http://wordpress.app/wp-json/wp/v2/posts", {
+                params: {
+                    categories: PRODUCT_WHITEBOURD,
+                    categories_exclude: CATEGORIES_OUT,
+                    page: this.productDifferent.length / 10 + 1,
+                    per_page: 6
                 }
-
-                // Handling Thumbnail
-                res.body.map((cur_img, i_img, arr_img) => {
-                    cur_img.img_info = [];
-                    api.getMediaId(cur_img.featured_media)
-                        .then(resolve => {
-                            cur_img.img_info.push({
-                                url: resolve.body.source_url,
-                                title: resolve.body.title.rendered
-                            });
-                        }, reject => { /*console.error(reject);*/ });
-                });
-                this.productDifferent = res.body;
-            }, rej => { /*console.error(reject);*/ });
+            }).then(res => {
+                if (res.body.length) {
+                    // Handling Thumbnail
+                    res.body.map((cur_img, i_img, arr_img) => {
+                        cur_img.img_info = [];
+                        api.getMediaId(cur_img.featured_media)
+                            .then(resolve => {
+                                // console.log(resolve);
+                                cur_img.img_info.push({
+                                    title: resolve.body.title.rendered,
+                                    url: resolve.body.source_url
+                                });
+                            }, reject => { /*console.error(reject);*/ });
+                    });
+                    this.productDifferent = this.productDifferent.concat(res.body);
+                    console.log(this.productDifferent);
+                    $state.loaded();
+                    if (this.productDifferent.length % 10 === 0) {
+                        $state.complete();
+                    }
+                } else {
+                    $state.complete();
+                }
+            }, rej => {
+                // console.log(rej);
+                $state.complete();
+            });
+        }
     }
 }
 </script>
