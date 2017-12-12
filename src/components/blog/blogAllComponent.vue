@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>{{ msg }}</h1>
+        <h1 dir="rtl">{{ msg }}</h1>
         <div class="row">
             <div class="col-xs-12 col-md-6" v-for="article in list">
                 <div class="panel panel-default">
