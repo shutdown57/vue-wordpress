@@ -32,6 +32,8 @@
         </div>
     </div>
     </div>
+    
+    <!-- Infinite Loading -->
     <infinite-loading @infinite="infiniteHandler">
         <span slot="no-more">
             <div class="alert alert-warning alert-dismissible" role="alert" dir="rtl">
