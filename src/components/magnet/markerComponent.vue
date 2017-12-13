@@ -16,7 +16,7 @@
     </div>
         
     <!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" v-if="img_info">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
         <div class="modal-header">
@@ -32,7 +32,16 @@
         </div>
     </div>
     </div>
-        
+    
+    <!-- Infinite Loading -->
+    <infinite-loading @infinite="infiniteHandler">
+        <span slot="no-more">
+            <div class="alert alert-warning alert-dismissible" role="alert" dir="rtl">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>توجه!</strong> پست دیگری وجود ندارد.
+            </div>
+        </span>
+    </infinite-loading>
 </div>
 </template>
 
@@ -40,41 +49,68 @@
 /**
  * @component: White Board
  */
+import InfiniteLoading from 'vue-infinite-loading';
+
 import api from '../../api';
 import {PRODUCT_WHITEBOURD} from '../../store/staticsCategories';
 
 export default {
     name: 'whiteBoard',
+
+    components: {
+        InfiniteLoading
+    },
+
     data() {
         return {
+            img_info: {},
             productMarker: [],
             msg: 'نمونه کار‌های ماژیک'
         }
     },
 
+    methods: {
+        infiniteHandler($state) {
+            let CATEGORIES_OUT = [1, 2, 7, 5, 11, 16, 15, 10, 12, 13];
+            this.$http.get("http://wordpress.app/wp-json/wp/v2/posts", {
+                params: {
+                    categories: PRODUCT_CALENDAR,
+                    categories_exclude: CATEGORIES_OUT,
+                    page: this.productMarker.length / 10 + 1,
+                    per_page: 6
+                }
+            }).then(res => {
+                if (res.body.length) {
+                    // Handling Thumbnail
+                    res.body.map((cur_img, i_img, arr_img) => {
+                        cur_img.img_info = [];
+                        api.getMediaId(cur_img.featured_media)
+                            .then(resolve => {
+                                // console.log(resolve);
+                                cur_img.img_info.push({
+                                    title: resolve.body.title.rendered,
+                                    url: resolve.body.source_url
+                                });
+                            }, reject => { /*console.error(reject);*/ });
+                    });
+                    this.productMarker = this.productMarker.concat(res.body);
+                    console.log(this.productMarker);
+                    $state.loaded();
+                    if (this.productMarker.length % 10 === 0) {
+                        $state.complete();
+                    }
+                } else {
+                    $state.complete();
+                }
+            }, rej => {
+                // console.log(rej);
+                $state.complete();
+            });
+        }
+    },
+
     created() {
         window.document.title = 'انواع ماژیک مگنتی';
-
-        let CATEGORIES_OUT = [1, 2, 7, 5, 11, 16, 15, 10, 12, 13];
-        api.getPostsAll(PRODUCT_WHITEBOURD, CATEGORIES_OUT)
-            .then(res => {
-                if (!res.ok) {
-                    this.msg = 'مشکل در ارتباط با سرور';
-                }
-
-                // Handling Thumbnail
-                res.body.map((cur_img, i_img, arr_img) => {
-                    cur_img.img_info = [];
-                    api.getMediaId(cur_img.featured_media)
-                        .then(resolve => {
-                            cur_img.img_info.push({
-                                url: resolve.body.source_url,
-                                title: resolve.body.title.rendered
-                            });
-                        }, reject => { /*console.error(reject);*/ });
-                });
-                this.productMarker = res.body;
-            }, rej => { /*console.error(reject);*/ });
     }
 }
 </script>
