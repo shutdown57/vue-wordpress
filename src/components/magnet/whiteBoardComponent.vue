@@ -60,6 +60,7 @@ export default {
     components: {
         InfiniteLoading
     },
+    
     data() {
         return {
             img_info: {},
