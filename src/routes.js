@@ -6,6 +6,8 @@ import AboutComponent from './components/aboutComponent.vue';
 import ContactComponent from './components/contactComponent.vue';
 import NotFoundComponent from './components/notFoundComponent.vue';
 
+import RegisterComponent from './components/auth/registerComponent.vue';
+
 import CategoriesComponent from './components/sundries/categoriesComponent.vue';
 import CategorySingleComponent from './components/sundries/categorySingleComponent.vue';
 
@@ -34,6 +36,8 @@ export default [
     { path: '/', component: HomeComponent , name: 'home' },
     { path: '/about', component: AboutComponent, name: 'about' },
     { path: '/contact', component: ContactComponent, name: 'contact' },
+
+    { path: '/register', component: RegisterComponent, name: 'register'},
 
     { path: '/categories/:cid', component: CategorySingleComponent, name: 'categorySingle' },
     { path: '/categories', component: CategoriesComponent, name: 'categories' },
