@@ -1,58 +1,59 @@
 <template>
-    <div class="bg-color">
-        <div dir="rtl">
-            <h1>ثبت نام</h1>
-            <hr>
+    <div>
+        <div class="row centered-form">
+            <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">فرم ثبت نام<small> ثبت نام رایگان میباشد</small></h3>
+                    </div>
+                    <div class="panel-body">
+                        <form dir="rtl">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <input dir="rtl" type="text" id="first_name" class="form-controller" name="first_name" placeholder="نام">
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <input dir="rtl" type="text" id="last_name" class="form-controller" name="last_name" placeholder="نام خانوادگی">
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <input dir="rtl" type="email" id="email" class="form-controller" name="email" placeholder="ایمیل">
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <input dir="rtl" type="password" id="password_c" class="form-controller" name="password_c" placeholder="تکرار رمزعبور">
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <input dir="rtl" type="password" id="password" class="form-controller" name="password" placeholder="رمزعبور">
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <input dir="rtl" type="text" id="description" class="form-controller" name="description" placeholder="توضیحات">
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <input dir="rtl" type="text" id="username" class="form-controller" name="username" placeholder="نام کاربری">
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <input dir="rtl" type="text" id="name" class="form-controller" name="name" placeholder="نام تجاری">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-success btn-block">ثبت نام</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-        <form dir="rtl">
-            <div>
-                لطفا اطلاعات را با دقت وارد نمایید
-            </div>
-            <br>
-            <div class="row">
-                <div class="col-sm-12 col-md-6">
-                    <div class="form-group">
-                        <label for="first_name">نام</label>
-                        <input type="text" id="first_name" class="form-controller" name="first_name">
-                    </div>
-                    <div class="form-group">
-                        <label for="last_name">نام خانوادگی</label>
-                        <input type="text" id="last_name" class="form-controller" name="last_name">
-                    </div>
-                    <div class="form-group">
-                        <label for="description">توضیحات</label>
-                        <input type="text" id="description" class="form-controller" name="description">
-                    </div>
-                    <div class="form-group">
-                        <label for="name">نام تجاری</label>
-                        <input type="text" id="name" class="form-controller" name="name">
-                    </div>
-                </div>
-                <div class="col-sm-12 col-md-6">
-                    <div class="form-group">
-                        <label for="username">نام کاربری</label>
-                        <input type="text" id="username" class="form-controller" name="username">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">ایمیل</label>
-                        <input type="email" id="email" class="form-controller" name="email">
-                    </div>
-                    <div class="form-group">
-                        <label for="password">رمزعبور</label>
-                        <input type="password" id="password" class="form-controller" name="password">
-                    </div>
-                    <div class="form-group">
-                        <label for="password_c">تکرار رمزعبور</label>
-                        <input type="password" id="password_c" class="form-controller" name="password_c">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-6 col-md-2 col-md-offset-5">
-                    <button type="submit" class="btn btn-success btn-block">ثبت نام</button>
-                </div>
-            </div>
-        </form>
     </div>
 </template>
 
@@ -70,12 +71,9 @@ export default {
 }
 </script>
 
-<style>
-.bg-color{
-    background-color: #525252;
-}
+<style scoped>
 .centered-form{
-	margin-top: 60px;
+	margin-top: 40px;
 }
 
 .centered-form .panel{
