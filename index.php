@@ -18,7 +18,7 @@
     <!-- Script to get nonce and root url from server -->
     <script type="text/javascript">
         var root = "<?php print esc_url_raw( rest_url() ); ?>";
-        var nonce = "<?php print wp_create_nonce( home_url( '/' ) ); ?>";
+        var nonce = "<?php print wp_create_nonce( 'wp_rest' ); ?>";
     </script>
     
     <!-- Latest compiled and minified CSS -->
