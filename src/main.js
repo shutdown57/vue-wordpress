@@ -18,16 +18,16 @@ const router = new VueRouter({
   routes: Routes,
   mode: 'history'
 });
-
+// console.log(ajax_object);
 // console.log(ajaxPaths);
 // export const serverPaths = {...ajaxPaths};
 
 router.beforeEach((to, from , next) => {
     if (!to.matched.length) {
         next('/404');
-    } else {
-        next();
     }
+    
+    next();
 });
 
 new Vue({
