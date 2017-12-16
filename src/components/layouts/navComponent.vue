@@ -37,6 +37,9 @@
     </div>
 
     <div class="collapse navbar-collapse" id="bs-navbar-collapse-menu">
+      <ul class="nav navbar-nav" dir="rtl">
+        <li><router-link :to="{name: 'register'}" exact>ثبت نام<span class="sr-only">(current)</span></router-link></li>
+      </ul>
       <ul class="nav navbar-nav navbar-right" dir="rtl">
         <li><router-link :to="{name: 'about'}" exact>درباره ما<span class="sr-only">(current)</span></router-link></li>
         <li><router-link :to="{name: 'contact'}" exact>تماس با ما<span class="sr-only">(current)</span></router-link></li>
