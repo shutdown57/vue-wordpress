@@ -60,8 +60,8 @@ export default {
       // }, rej => { console.error(rej); });
       
       // Create user
-      // this.$http.delete('http://wordpress.app/wp-json/wp/v2/users', { }, {
-      //   method: 'DELETE',
+      // this.$http.post('http://wordpress.app/wp-json/wp/v2/users', { }, {
+      //   method: 'POST',
       //   params: { username: 'test', password: '1234', email: 'test@test.com' },
       //   before: (request) => {
       //     request.headers.set('X-WP-Nonce', NONCE);
