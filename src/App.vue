@@ -5,7 +5,7 @@
       <router-view id="main-content"></router-view>
     </div>
     <app-footer></app-footer>
-    <!-- {{site_info()}} -->
+    {{site_info()}}
   </div>
 </template>
 
@@ -16,10 +16,11 @@
 */
 import navComponent from './components/layouts/navComponent.vue';
 import footerComponent from './components/layouts/footerComponent.vue';
+import {Base64} from './mixins/utils';
 
 // import {store} from './store/index';
 import {mapState, mapActions} from 'vuex';
-
+import {NONCE} from './config';
 
 export default {
   // store,
@@ -36,19 +37,41 @@ export default {
     // ]),
     // To use endpoints => wp/v2/posts?categories=1&id=1
     site_info() {
-      this.$http.get('http://wordpress.app/wp-json/' + 'wp/v2')
+      // console.log();
+      this.$http.get('http://wordpress.app/?rest_route=/')
         .then((resp) => {
           console.log(resp);
-          // this.test = resp.
         }).catch((err) => {
           console.error(err);
         });
-      // api.getPostsAll([1, 2, 3], 0).then((rej => {
-      //   console.log(rej);
-      // }, (res) => {
-      //   console.log(res.body);
-      // }));
-      // console.log(api.getPostsAll(1, 0));
+      
+      // Edit user
+      // this.$http.patch('http://wordpress.app/wp-json/wp/v2/users/me', { }, {
+      //   method: 'PATCH',
+      //   params: { description: 'test 3' },
+      //   before: (request) => {
+      //     request.headers.set('X-WP-Nonce', NONCE);
+      //     request.headers.set('Content-Type', 'application/x-www-form-urlencoded');
+      //     request.headers.set('Authorization', 'Basic' + Base64.encode('sam:1234'));
+      //     console.log(request);
+      //   }
+      // }).then(res => {
+      //   console.log(res);
+      // }, rej => { console.error(rej); });
+      
+      // Create user
+      // this.$http.delete('http://wordpress.app/wp-json/wp/v2/users', { }, {
+      //   method: 'DELETE',
+      //   params: { username: 'test', password: '1234', email: 'test@test.com' },
+      //   before: (request) => {
+      //     request.headers.set('X-WP-Nonce', NONCE);
+      //     request.headers.set('Content-Type', 'application/x-www-form-urlencoded');
+      //     // request.headers.set('Authorization', 'Basic' + Base64.encode('sam:1234'));
+      //     console.log(request);
+      //   }
+      // }).then(res => {
+      //   console.log(res);
+      // }, rej => { console.error(rej); });
     }
   }
 }
