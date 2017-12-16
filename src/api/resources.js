@@ -7,15 +7,16 @@ Vue.use(VueResource);
 
 Vue.http.options.crossOrigin = true;
 Vue.http.options.credentials = true;
+Vue.http.options.emulateHTTP = true;
 
-// Vue.http.interceptors.push(function(request, next) {
+// Vue.http.interceptors.push((request, next) => {
 
 //     // modify method
-//     // request.method = 'POST';
+//     request.method = 'POST';
 
 //     // modify headers
-//     request.headers.set('X-WP-Nonce', nonce);
-//     // request.headers.set('Authorization', 'Bearer TOKEN');
+//     // request.headers.set('X-WP-Nonce', nonce);
+//     request.headers.set('content-type', 'application/x-www-form-urlencoded');
 
 //     // continue to next interceptor
 //     next();
