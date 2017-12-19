@@ -38,13 +38,13 @@ export default {
     // To use endpoints => wp/v2/posts?categories=1&id=1
     site_info() {
       // console.log();
-      this.$http.get('http://wordpress.app/?rest_route=/')
-        .then((resp) => {
-          console.log(resp);
-        }).catch((err) => {
-          console.error(err);
-        });
-      
+      // this.$http.get('http://wordpress.app/?rest_route=/')
+      //   .then((resp) => {
+      //     console.log(resp);
+      //   }).catch((err) => {
+      //     console.error(err);
+      //   });
+
       // Edit user
       // this.$http.patch('http://wordpress.app/wp-json/wp/v2/users/me', { }, {
       //   method: 'PATCH',
@@ -58,7 +58,7 @@ export default {
       // }).then(res => {
       //   console.log(res);
       // }, rej => { console.error(rej); });
-      
+
       // Create user
       // this.$http.post('http://wordpress.app/wp-json/wp/v2/users', { }, {
       //   method: 'POST',
