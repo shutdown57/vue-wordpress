@@ -49,7 +49,7 @@ export default [
 
     { path: '/blog', component: BlogAllComponent, name: 'blog' },
     { path: '/blog/:pid', component: BlogSingleComponent, name: 'blogSingle' },
-    
+
     { path: '/products/curriculum', component: ProductsCurriculumComponent, name: 'curriculum' },
     { path: '/products/calendar', component: ProductsCalendarComponent, name: 'calendar' },
     { path: '/products/white-board', component: ProductsWhiteBoardComponent, name: 'whiteBoard' },
@@ -62,6 +62,6 @@ export default [
     { path: '/products/visit-card', component: ProductsVisitCardComponent, name: 'visitCard' },
     { path: '/products/:id', component: ProductSingleComponent, name: 'productSingle' },
     { path: '/products', component: ProductsComponent, name: 'products' },
-    
+
     { path: '/404', component: NotFoundComponent, name: 'notFound' }
 ];
