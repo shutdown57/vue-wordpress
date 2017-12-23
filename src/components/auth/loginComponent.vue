@@ -11,7 +11,7 @@
                             <!-- Username -->
                             <div class="col-xs-12">
                                 <div class="form-group">
-                                    <input v-validate="{required: true, regex: validation.USERNAME}" :class="{'input': true, 'is-danger': errors.has('username')}"
+                                    <input v-validate="{required: true}" :class="{'input': true, 'is-danger': errors.has('username')}"
                                             dir="ltr" type="text" id="username" class="form-control" name="username" placeholder="نام کاربری"
                                             data-vv-delay="500" v-model="user.username">
                                     <br>
@@ -21,7 +21,7 @@
                             <!-- Password -->
                             <div class="col-xs-12">
                                 <div class="form-group">
-                                    <input v-validate="{required: true, regex: validation.PASSWORD}" :class="{'input': true, 'is-danger': errors.has('password')}"
+                                    <input v-validate="{required: true}" :class="{'input': true, 'is-danger': errors.has('password')}"
                                             dir="ltr" type="password" id="password" class="form-control" name="password" placeholder="رمزعبور"
                                             data-vv-delay="500" v-model="user.password">
                                     <br>
@@ -45,6 +45,7 @@
  * component: Login
  */
 import {VALIDATIONS} from '../../config';
+import {Base64} from '../../mixins/utils';
 
 export default {
     name: 'login',
@@ -62,7 +63,18 @@ export default {
 
     methods: {
         getData(user) {
-            console.log(user);
+            this.$http.get('http://wordpress.app/wp-json/wp/v2/users', { }, {
+                method: 'GET',
+                params: { username: this.username, password: this.password },
+                before: (request) => {
+                    request.headers.set('X-WP-Nonce', NONCE);
+                    request.headers.set('Content-Type', 'application/x-www-form-urlencoded');
+                    request.headers.set('Authorization', 'Basic ' + Base64.encode(this.username + ':' + this.password));
+                    }
+                }).then(res => {
+                    console.log(res);
+                }, rej => { console.error(rej); });
+            
         }
     }
 }
