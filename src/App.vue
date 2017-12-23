@@ -59,6 +59,19 @@ export default {
       //   console.log(res);
       // }, rej => { console.error(rej); });
 
+      // Login user
+      // this.$http.get('http://wordpress.app/wp-json', { }, {
+      //   method: 'GET',
+      //   params: { username: 'sam', password: '1234' },
+      //   before: (request) => {
+      //     request.headers.set('X-WP-Nonce', NONCE);
+      //     request.headers.set('Content-Type', 'application/x-www-form-urlencoded');
+      //     request.headers.set('Authorization', 'Basic ' + Base64.encode('sam:1234'));
+      //   }
+      // }).then(res => {
+      //   console.log(res);
+      // }, rej => { console.error(rej); });
+
       // Create user
       // this.$http.post('http://wordpress.app/wp-json/wp/v2/users', { }, {
       //   method: 'POST',
