@@ -4,7 +4,7 @@
             <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
                 <div class="panel panel-default">
                     <div class="panel-heading" dir="rtl">
-                        <h3 class="panel-title text-center">فرم ثبت نام<small> ثبت نام رایگان میباشد</small></h3>
+                        <h3 class="panel-title text-center">{{msg}}</h3>
                     </div>
                     <div class="panel-body">
                         <form dir="rtl" action="#">
