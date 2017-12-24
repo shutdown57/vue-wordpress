@@ -46,6 +46,8 @@
  */
 import {VALIDATIONS} from '../../config';
 import {Base64} from '../../mixins/utils';
+import User from '../../mixins/user';
+import {NONCE} from '../../config';
 
 export default {
     name: 'login',
@@ -63,18 +65,29 @@ export default {
 
     methods: {
         getData(user) {
-            this.$http.get('http://wordpress.app/wp-json/wp/v2/users', { }, {
-                method: 'GET',
-                params: { username: this.username, password: this.password },
+            this.$http.post('http://wordpress.app/wp-json/jwt-auth/v1/token', {},
+            {
+                params: {
+                    username: user.username,
+                    password: user.password
+                },
                 before: (request) => {
                     request.headers.set('X-WP-Nonce', NONCE);
                     request.headers.set('Content-Type', 'application/x-www-form-urlencoded');
-                    request.headers.set('Authorization', 'Basic ' + Base64.encode(this.username + ':' + this.password));
-                    }
-                }).then(res => {
-                    console.log(res);
-                }, rej => { console.error(rej); });
-            
+                }
+            })
+              .then((resp) => {
+                // console.log(resp.body);
+                User.setUserInfo(
+                    resp.body.user_display_name,
+                    resp.body.user_nicename,
+                    resp.body.token,
+                    resp.body.user_email
+                );
+                console.log(User.getToken());
+              }).catch((err) => {
+                console.error(err);
+              });
         }
     }
 }
