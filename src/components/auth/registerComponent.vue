@@ -1,5 +1,8 @@
 <template>
     <div>
+        <div v-if="alert_msg" class="alert alert-danger" role="alert">
+            {{ alert_msg }}
+        </div>
         <div class="row centered-form">
             <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
                 <div class="panel panel-default">
@@ -119,8 +122,10 @@
 /**
  * @component: Register
 */
-import fa from 'vee-validate/dist/locale/fa'
+import fa from 'vee-validate/dist/locale/fa';
 import {VALIDATIONS} from '../../config';
+import User from '../../mixins/user';
+import {NONCE} from '../../config';
 
 export default {
     name: 'register',
@@ -129,6 +134,7 @@ export default {
         return {
             msg: 'ایجاد حساب کاربری',
             validation: {...VALIDATIONS},
+            alert_msg: '',
             user: {
                 first_name: '',
                 last_name: '',
@@ -149,7 +155,39 @@ export default {
 
     methods: {
         getData(user) {
-            console.log(user);
+            User.setUserInfo(
+                user.first_name + ' ' + user.last_name,
+                user.username, '', user.email
+            );
+
+            if (user.password === user.password_c){
+                this.$http.post('http://wordpress.app/wp-json/wp/v2/users', { }, {
+                method: 'POST',
+                params: {
+                    username: user.username,
+                    password: user.password,
+                    email: user.email,
+                    description: '',
+                    first_name: user.first_name,
+                    last_name: user.last_name,
+                    meta: {
+                        phone: user.phone,
+                        mobile: user.mobile,
+                        bussiness: user.bussiness
+                    }
+                },
+                before: (request) => {
+                    request.headers.set('X-WP-Nonce', NONCE);
+                    request.headers.set('Content-Type', 'application/x-www-form-urlencoded');
+                }
+                }).then(res => {
+                console.log(res);
+                }, rej => { console.error(rej); });
+                // Redirect to main page or ...
+                // this.$route.push('home');
+            } else {
+                this.alert_msg = 'فیلد رمزعبور را باز بینی کنید.';
+            }
         }
     }
 }
