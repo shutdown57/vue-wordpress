@@ -27,7 +27,6 @@ function my_update_cookie( $logged_in_cookie ){
 }
 add_action( 'set_logged_in_cookie', 'my_update_cookie' );
 
-
 add_filter( 'rest_pre_dispatch', 'prefix_return_current_user' );
 
 function prefix_return_current_user( $result ) {
