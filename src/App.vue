@@ -38,7 +38,7 @@ export default {
     // To use endpoints => wp/v2/posts?categories=1&id=1
     site_info() {
       // console.log();
-      // this.$http.get('http://wordpress.app/wp-json/wp/v2/users')
+      // this.$http.get('http://wordpress.app/wp-json/wp/v2/')
       //   .then((resp) => {
       //     console.log(resp);
       //   }).catch((err) => {
