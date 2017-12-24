@@ -38,7 +38,7 @@ export default {
     // To use endpoints => wp/v2/posts?categories=1&id=1
     site_info() {
       // console.log();
-      // this.$http.get('http://wordpress.app/?rest_route=/')
+      // this.$http.get('http://wordpress.app/wp-json/wp/v2/users')
       //   .then((resp) => {
       //     console.log(resp);
       //   }).catch((err) => {
@@ -80,6 +80,43 @@ export default {
       //     request.headers.set('X-WP-Nonce', NONCE);
       //     request.headers.set('Content-Type', 'application/x-www-form-urlencoded');
       //     // request.headers.set('Authorization', 'Basic' + Base64.encode('sam:1234'));
+      //     console.log(request);
+      //   }
+      // }).then(res => {
+      //   console.log(res);
+      // }, rej => { console.error(rej); });
+
+      // JWT
+      // Do stuff (Create post ...)
+      // this.$http.post('http://wordpress.app/wp-json/jwt-auth/v1/token', {}, {
+      //   before: (request) => {
+      //     request.headers.set('Authorization', 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC93b3JkcHJlc3MuYXBwIiwiaWF0IjoxNTE0MDM1MDQyLCJuYmYiOjE1MTQwMzUwNDIsImV4cCI6MTUxNDYzOTg0MiwiZGF0YSI6eyJ1c2VyIjp7ImlkIjoiMSJ9fX0.v__jZnjZWxjytmD0-UBcBXDHNj_JOxhR3rK_i1ctzL0')
+      //   }
+      // })
+      //   .then((resp) => {
+      //     console.log(resp.body.token);
+      //   }).catch((err) => {
+      //     console.error(err);
+      //   });
+
+      // Login
+      // this.$http.get('http://wordpress.app/wp-json/jwt-auth/v1/', {
+      //   username: 'sam',
+      //   password: '1234'
+      // })
+      //   .then((resp) => {
+      //     console.log(resp);
+      //   }).catch((err) => {
+      //     console.error(err);
+      //   });
+
+      // Create user
+      // this.$http.post('http://wordpress.app/wp-json/wp/v2/users', { }, {
+      //   method: 'POST',
+      //   params: { username: 'test2', password: '1234', email: 'test2@test.com' },
+      //   before: (request) => {
+      //     request.headers.set('X-WP-Nonce', NONCE);
+      //     request.headers.set('Content-Type', 'application/x-www-form-urlencoded');
       //     console.log(request);
       //   }
       // }).then(res => {
