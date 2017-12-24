@@ -22,7 +22,7 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from , next) => {
-   console.log(to);
+  //  console.log(to);
     // if ((to.path === '/wp-login.php') && ())
     if (!to.matched.length) {
       next('/404');
