@@ -8,6 +8,7 @@ import NotFoundComponent from './components/notFoundComponent.vue';
 
 import RegisterComponent from './components/auth/registerComponent.vue';
 import LoginComponent from './components/auth/loginComponent.vue';
+import LogoutComponent from './components/auth/logoutComponent.vue';
 
 import CategoriesComponent from './components/sundries/categoriesComponent.vue';
 import CategorySingleComponent from './components/sundries/categorySingleComponent.vue';
@@ -40,6 +41,7 @@ export default [
 
     { path: '/register', component: RegisterComponent, name: 'register'},
     { path: '/login', component: LoginComponent, name:'login' },
+    { path: '/logout', component: LogoutComponent, name: 'logout' },
 
     { path: '/categories/:cid', component: CategorySingleComponent, name: 'categorySingle' },
     { path: '/categories', component: CategoriesComponent, name: 'categories' },
