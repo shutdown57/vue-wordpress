@@ -1,5 +1,8 @@
 <template>
         <div>
+            <div v-if="alert_msg" class="alert alert-danger text-center" role="alert">
+                {{ alert_msg }}
+            </div>
         <div class="row centered-form">
             <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
                 <div class="panel panel-default">
@@ -59,7 +62,8 @@ export default {
             user: {
                 username: '',
                 password: ''
-            }
+            },
+            alert_msg: ''
         };
     },
 
@@ -84,9 +88,10 @@ export default {
                     resp.body.token,
                     resp.body.user_email
                 );
-                console.log(User.getToken());
+                this.$router.push({name: 'home'});
               }).catch((err) => {
-                console.error(err);
+                /* console.error(err); */
+                this.alert_msg = 'نام کاربری یا رمزعبور اشتباه است'
               });
         }
     }
