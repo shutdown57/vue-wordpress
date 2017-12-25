@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-if="alert_msg" class="alert alert-danger" role="alert">
+        <div v-if="alert_msg" class="alert alert-danger text-center" role="alert">
             {{ alert_msg }}
         </div>
         <div class="row centered-form">
@@ -184,7 +184,7 @@ export default {
                 console.log(res);
                 }, rej => { console.error(rej); });
                 // Redirect to main page or ...
-                // this.$route.push('home');
+                this.$router.push({name: 'login'});
             } else {
                 this.alert_msg = 'فیلد رمزعبور را باز بینی کنید.';
             }
