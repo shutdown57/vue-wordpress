@@ -25,5 +25,13 @@ export default {
 
     getUsername() {
         return this.__username;
+    },
+
+    clearData() {
+        this.__email = '';
+        this.__name = '';
+        this.__token = '';
+        this.__username = '';
+        return true;
     }
 };
