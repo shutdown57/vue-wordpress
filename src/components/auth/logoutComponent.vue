@@ -1,7 +1,12 @@
 <template>
     <div>
-        <div v-if="alert_msg" class="alert alert-danger text-center" role="alert">
+        <div v-if="alert_msg" class="alert alert-warning text-center" role="alert">
             {{ alert_msg }}
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <h1 class="msg-font text-center">{{ alert_msg }}</h1>
+            </div>
         </div>
     </div>
 </template>
@@ -49,3 +54,9 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.msg-font {
+    font-size: 5em;
+}
+</style>
