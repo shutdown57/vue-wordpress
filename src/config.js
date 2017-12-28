@@ -17,6 +17,10 @@ export const GMAPS_OPT = {
     }
 };
 
+export const LOCALSTORAGE_OPT = {
+    namespace: 'vuejs__'
+};
+
 /**
  * REGEX
  */
