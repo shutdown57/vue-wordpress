@@ -71,17 +71,17 @@ export default {
     methods: {
         getData(user) {
             this.$http.post('http://wordpress.app/wp-json/jwt-auth/v1/token', {},
-            {
-                params: {
-                    username: user.username,
-                    password: user.password
-                },
-                before: (request) => {
-                    request.headers.set('X-WP-Nonce', NONCE);
-                    request.headers.set('Content-Type', 'application/x-www-form-urlencoded');
-                }
-            })
-              .then((resp) => {
+                {
+                    params: {
+                        username: user.username,
+                        password: user.password
+                    },
+                    before: (request) => {
+                        request.headers.set('X-WP-Nonce', NONCE);
+                        request.headers.set('Content-Type', 'application/x-www-form-urlencoded');
+                    }
+                })
+            .then((resp) => {
                 // console.log(resp.body);
                 User.setUserInfo(
                     resp.body.user_display_name,
@@ -95,11 +95,12 @@ export default {
                 setTimeout(() => {
                     this.$router.push({name: 'home'});
                 }, 2000);
-              }).catch((err) => {
+            })
+            .catch((err) => {
                 console.error(err);
                 this.alertType = 'alert-danger';
-                this.alert_msg = 'نام کاربری یا رمزعبور اشتباه است'
-              });
+                this.alert_msg = 'نام کاربری یا رمزعبور اشتباه است';
+            });
         }
     }
 }
