@@ -1,29 +1,5 @@
 <template>
 <nav class="navbar nav-bg navbar-static-top navbar-fixed-top">
-  <!-- <div class="container-fluid com-info">
-    <div class="row" dir="rtl">
-      <div class="col-md-4 text-center">
-        <address>
-          <strong><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span></strong><br>
-          <abbr title="Phone" dir="ltr">۰۲۱-۷۷۶۸۱۴۰۰-۱</abbr>
-          <abbr title="Phone" dir="ltr">۰۲۱-۷۵۸۵۴</abbr>
-        </address>
-      </div>
-      <div class="col-md-4 text-center">
-        <address>
-          <strong><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></strong><br>
-          <abbr title="Address">تهران, میدان امام حسین, خیابان مازندران, پلاک ۶۵, طبقه اول, واحد ۵</abbr>
-        </address>
-      </div>
-      <div class="col-md-4 text-center">
-        <image-loader :src="logo_small"
-                      width="80"
-                      height="80"
-                      class="img-responsive"
-                      :blur-preview="true"></image-loader>
-      </div>
-    </div>
-  </div> -->
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header navbar-right" dir="rtl">
@@ -38,11 +14,11 @@
 
     <div class="collapse navbar-collapse" id="bs-navbar-collapse-menu">
       <ul class="nav navbar-nav" dir="rtl">
-        <li v-if="user.getName() == ''"><router-link :to="{name: 'register'}" exact>ثبت نام<span class="sr-only">(current)</span></router-link></li>
-        <li v-if="user.getName() == ''"><router-link :to="{name: 'login'}" exact>ورود<span class="sr-only">(current)</span></router-link></li>
-        <li v-if="user.getName() != ''"><a>{{ user.getName() }}<span class="sr-only">(current)</span></a></li>
-        <li v-if="user.getName() != ''"><router-link :to="{name: 'logout'}" exact>خروج از حساب کاربری<span class="sr-only">(current)</span></router-link></li>
-      </ul>{{checkUser()}}
+        <li v-show="isUser"><router-link :to="{name: 'register'}" exact>ثبت نام<span class="sr-only">(current)</span></router-link></li>
+        <li v-show="isUser"><router-link :to="{name: 'login'}" exact>ورود<span class="sr-only">(current)</span></router-link></li>
+        <li v-show="!isUser"><a>{{ user.getName() }}<span class="sr-only">(current)</span></a></li>
+        <li v-show="!isUser"><router-link :to="{name: 'logout'}" exact>خروج از حساب کاربری<span class="sr-only">(current)</span></router-link></li>
+      </ul>
       <ul class="nav navbar-nav navbar-right" dir="rtl">
         <li><router-link :to="{name: 'about'}" exact>درباره ما<span class="sr-only">(current)</span></router-link></li>
         <li><router-link :to="{name: 'contact'}" exact>تماس با ما<span class="sr-only">(current)</span></router-link></li>
@@ -84,26 +60,27 @@ export default {
     data() {
       return {
         logo_small: ASSETS_PATH + '/favicon.png',
-        user: {...User}
+        user: {...User},
+        user_: false
       };
     },
 
-    components: {
-      'image-loader': VueImageLoader
-    },
-
-    methods: {
-      checkUser() {
-        if (User.getName) {
-          setTimeout(() => {
-            this.$forceUpdate();
-          }, 2000);
+    computed: {
+      isUser: function() {
+        this.$forceUpdate();
+        setInterval(() => {
+          this.user_ = this.$ls.get('access_token', false);
+        },)
+        if (this.user_) {
+          return false;
+        } else {
+          return true;
         }
       }
     },
 
-    mounted() {
-      this.checkUser();
+    components: {
+      'image-loader': VueImageLoader
     }
 }
 </script>
@@ -118,11 +95,13 @@ address {
   padding-top: 1em;
   padding-bottom: 0px;
 }
+
 /* #2d4a4e -> medium-dark 
  * #1e3235 -> dark
  * #1c8a9b -> meduim
  * #00dsff -> low
 */
+
 .nav-bg {
   background-color: #0e0b16 !important;
   color: #e7dfdd !important;
