@@ -1,6 +1,6 @@
 <template>
         <div>
-            <div v-if="alert_msg" class="alert alert-danger text-center" role="alert">
+            <div v-if="alert_msg" class="alert text-center" :class="alertType" role="alert">
                 {{ alert_msg }}
             </div>
         <div class="row centered-form">
@@ -63,7 +63,8 @@ export default {
                 username: '',
                 password: ''
             },
-            alert_msg: ''
+            alert_msg: '',
+            alertType: ''
         };
     },
 
@@ -88,9 +89,15 @@ export default {
                     resp.body.token,
                     resp.body.user_email
                 );
-                this.$router.push({name: 'home'});
+                this.$ls.set('access_token', resp.body.token);
+                this.alertType = 'alert-success';
+                this.alert_msg = 'با موفقیت وارد شدید.';
+                setTimeout(() => {
+                    this.$router.push({name: 'home'});
+                }, 2000);
               }).catch((err) => {
-                /* console.error(err); */
+                console.error(err);
+                this.alertType = 'alert-danger';
                 this.alert_msg = 'نام کاربری یا رمزعبور اشتباه است'
               });
         }
