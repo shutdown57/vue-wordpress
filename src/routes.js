@@ -1,6 +1,8 @@
 /**
  * Import Components here
 */
+import User from './mixins/user';
+
 import HomeComponent from './components/homeComponent.vue';
 import AboutComponent from './components/aboutComponent.vue';
 import ContactComponent from './components/contactComponent.vue';
@@ -39,8 +41,15 @@ export default [
     { path: '/about', component: AboutComponent, name: 'about' },
     { path: '/contact', component: ContactComponent, name: 'contact' },
 
-    { path: '/register', component: RegisterComponent, name: 'register'},
-    { path: '/login', component: LoginComponent, name:'login' },
+    { path: '/register', component: RegisterComponent, name: 'register' },
+    { path: '/login', component: LoginComponent, name:'login'
+        // beforeEnter: (to, from, next) => {
+        //     if (User.getName()) {
+        //         next('/');
+        //     }
+        //     next('/login');
+        // } 
+    },
     { path: '/logout', component: LogoutComponent, name: 'logout' },
 
     { path: '/categories/:cid', component: CategorySingleComponent, name: 'categorySingle' },
