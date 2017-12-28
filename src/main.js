@@ -27,11 +27,21 @@ router.beforeEach((to, from , next) => {
   if (!to.matched.length) {
     next('/404');
   }
-  console.log(from.path);
-  if (from.path === '/login' || from.path === '/logout') {
-    location.reload();
-  }
+  
   next();
+});
+
+router.afterEach((to, from) => {
+  if (from.path === '/login' && Vue.ls.get('access_token', false) ) {
+    router.push({name: 'home'});
+    window.location.reload(true);
+    console.log(from.path);
+  }
+
+  if (from.path === '/logout') {
+    window.location.reload(true);
+    console.log(from.paht);
+  }
 });
 
 new Vue({
