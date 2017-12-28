@@ -65,7 +65,7 @@ export default {
         //     this.mapLoaded = true;
         // }, rej => { console.log(rej); });
         this.$refs.map.$mapCreated.then(res => {
-            console.log(this.$refs.map);
+            // console.log(this.$refs.map);
             this.mapLoaded = true;
             // google.maps.event.addListenerOnce(this.$refs.map, 'idle', function(){
             //     google.maps.event.trigger(this.$refs.map, 'resize');
