@@ -2,13 +2,14 @@
     <div>
         <ul class="nav nav-tabs nav-justified" role="tablist">
             <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">توضیحات</a></li>
-            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">فرم تماس با ما</a></li>
+            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">تصاویر</a></li>
             <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">شبکه‌های اجتماعی</a></li>
             <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
         </ul>
 
         <!-- Tab panes -->
         <div class="tab-content" dir="rtl">
+            <!-- Info tab -->
             <div role="tabpanel" class="tab-pane active" id="home">
                 <br>
                 <h3>نشانی شرکت</h3>
@@ -24,13 +25,36 @@
                     <abbr title="Phone" dir="ltr">۰۲۱-۷۷۶۸۱۴۰۰-۱</abbr>
                 </address>
                 <google-map></google-map>
-            </div>
+            </div><!-- Info tab -->
+
+            <!-- Video tab -->
             <div role="tabpanel" class="tab-pane" id="profile">
-                <div class="embed-responsive embed-responsive-16by9 h_iframe-aparat_embed_frame">
-                    <span style="video-embed"></span><iframe class="embed-responsive-item" src="https://www.aparat.com/video/video/embed/videohash/MhCaN/vt/frame" allowFullScreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+                <br>
+                <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="embed-responsive embed-responsive-16by9 h_iframe-aparat_embed_frame">
+                            <span style="video-embed"></span><iframe class="embed-responsive-item" src="https://www.aparat.com/video/video/embed/videohash/MhCaN/vt/frame" allowFullScreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="embed-responsive embed-responsive-16by9 h_iframe-aparat_embed_frame">
+                            <span style="video-embed"></span><iframe class="embed-responsive-item" src="https://www.aparat.com/video/video/embed/videohash/ukpGP/vt/frame" allowFullScreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" ></iframe>
+                        </div>
+                    </div>
                 </div>
+                <br>
+                <div class="row">
+                    <div class="col-sm-12 col-md-offset-3">
+                        <div class="embed-responsive embed-responsive-16by9 h_iframe-aparat_embed_frame">
+                            <span style="video-embed"></span><iframe class="embed-responsive-item" src="https://www.aparat.com/video/video/embed/videohash/1OXhe/vt/frame" allowFullScreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" ></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- Video tab -->
+
+            <div role="tabpanel" class="tab-pane" id="messages">
+
             </div>
-            <div role="tabpanel" class="tab-pane" id="messages">...</div>
             <div role="tabpanel" class="tab-pane" id="settings">...</div>
         </div>
     </div>
