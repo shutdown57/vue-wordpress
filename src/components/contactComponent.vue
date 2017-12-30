@@ -53,7 +53,46 @@
             </div><!-- Video tab -->
 
             <div role="tabpanel" class="tab-pane" id="messages">
-
+                <br>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h3>ما را در شبکه‌های اجتماعی دنبال کنید</h3>
+                        <p>در زیر شبکه‌های اجتماعی که شرکت <strong>ایرانیان مگنت</strong> در آنها عضو است موجود میباشد.</p>
+                        <p>از بین شبکه‌های زیر اینستاگرام و تلگرام به دلیل فعالیت بیشتر ایرانیان بیشتر پیشنهاد میشود.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3 col-md-1 col-xs-offset-1">
+                        <img :src="socials.svg.instagram" :onerror="socials.png.instagram">
+                    </div>
+                    <div class="col-sm-3 col-md-1">
+                        <img :src="socials.svg.facebook" :onerror="socials.png.facebook">
+                    </div>
+                    <div class="col-sm-3 col-md-1">
+                        <img :src="socials.svg.googlePluse" :onerror="socials.png.googlePluse">
+                    </div>
+                    <div class="col-sm-3 col-md-1">
+                        <img :src="socials.svg.linkedin" :onerror="socials.png.linkedin">
+                    </div>
+                    <div class="col-sm-3 col-md-1">
+                        <img :src="socials.svg.pinterest" :onerror="socials.png.pinterest">
+                    </div>
+                    <div class="col-sm-3 col-md-1">
+                        <img :src="socials.svg.skype" :onerror="socials.png.skype">
+                    </div>
+                    <div class="col-sm-3 col-md-1">
+                        <img :src="socials.svg.telegram" :onerror="socials.png.telegram">
+                    </div>
+                    <div class="col-sm-3 col-md-1">
+                        <img :src="socials.svg.twitter" :onerror="socials.png.twitter">
+                    </div>
+                    <div class="col-sm-3 col-md-1">
+                        <img :src="socials.svg.whatsapp" :onerror="socials.png.whatsapp">
+                    </div>
+                    <div class="col-sm-3 col-md-1">
+                        <img :src="socials.svg.youtube">
+                    </div>
+                </div>
             </div>
             <div role="tabpanel" class="tab-pane" id="settings">...</div>
         </div>
@@ -65,6 +104,7 @@
  * @component: Contact
 */
 import GoogleMaps from './layouts/googleMapsComponent.vue';
+import {ASSETS_PATH} from '../config';
 
 export default {
     name: 'contact',
@@ -73,7 +113,32 @@ export default {
     },
     data() {
         return {
-            msg: 'Contact'
+            msg: 'Contact',
+            socials: {
+                svg: {
+                    instagram: ASSETS_PATH + '/social networks/instagram.svg',
+                    facebook: ASSETS_PATH + '/social networks/facebook.svg',
+                    googlePluse: ASSETS_PATH + '/social networks/google-plus.svg',
+                    linkedin: ASSETS_PATH + '/social networks/linkedin.svg',
+                    pinterest: ASSETS_PATH + '/social networks/pinterest.svg',
+                    skype: ASSETS_PATH + '/social networks/skype.svg',
+                    telegram: ASSETS_PATH + '/social networks/telegram.svg',
+                    twitter: ASSETS_PATH + '/social networks/twitter.svg',
+                    whatsapp: ASSETS_PATH + '/social networks/whatsapp.svg',
+                    youtube: ASSETS_PATH + '/social networks/youtube.svg'
+                },
+                png: {
+                    instagram: ASSETS_PATH + '/social networks/instagram.png',
+                    facebook: ASSETS_PATH + '/social networks/facebook.png',
+                    googlePluse: ASSETS_PATH + '/social networks/google-plus.png',
+                    linkedin: ASSETS_PATH + '/social networks/linkedin.png',
+                    pinterest: ASSETS_PATH + '/social networks/pinterest.png',
+                    skype: ASSETS_PATH + '/social networks/skype.png',
+                    telegram: ASSETS_PATH + '/social networks/telegram.png',
+                    twitter: ASSETS_PATH + '/social networks/twitter.png',
+                    whatsapp: ASSETS_PATH + '/social networks/whatsapp.png'
+                }
+            }
         };
     },
     created() {
