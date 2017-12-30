@@ -43,13 +43,13 @@
                     </div>
                 </div>
                 <br>
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-sm-12 col-md-offset-3">
                         <div class="embed-responsive embed-responsive-16by9 h_iframe-aparat_embed_frame">
                             <span style="video-embed"></span><iframe class="embed-responsive-item" src="https://www.aparat.com/video/video/embed/videohash/1OXhe/vt/frame" allowFullScreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" ></iframe>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div><!-- Video tab -->
 
             <div role="tabpanel" class="tab-pane" id="messages">
