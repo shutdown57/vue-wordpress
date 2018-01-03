@@ -4,7 +4,7 @@
             <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">توضیحات</a></li>
             <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">تصاویر</a></li>
             <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">شبکه‌های اجتماعی</a></li>
-            <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+            <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">فرم درخواست</a></li>
         </ul>
 
         <!-- Tab panes -->
@@ -24,6 +24,7 @@
                     <abbr title="Phone" dir="ltr">۰۲۱-۷۵۸۵۴</abbr><br>
                     <abbr title="Phone" dir="ltr">۰۲۱-۷۷۶۸۱۴۰۰-۱</abbr>
                 </address>
+                <hr>
                 <google-map></google-map>
             </div><!-- Info tab -->
 
@@ -43,13 +44,6 @@
                     </div>
                 </div>
                 <br>
-                <!-- <div class="row">
-                    <div class="col-sm-12 col-md-offset-3">
-                        <div class="embed-responsive embed-responsive-16by9 h_iframe-aparat_embed_frame">
-                            <span style="video-embed"></span><iframe class="embed-responsive-item" src="https://www.aparat.com/video/video/embed/videohash/1OXhe/vt/frame" allowFullScreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" ></iframe>
-                        </div>
-                    </div>
-                </div> -->
             </div><!-- Video tab -->
 
             <div role="tabpanel" class="tab-pane" id="messages">
@@ -94,7 +88,61 @@
                     </div>
                 </div>
             </div>
-            <div role="tabpanel" class="tab-pane" id="settings">...</div>
+            <div role="tabpanel" class="tab-pane" id="settings">
+                <div>
+                    <div v-if="alert_msg" class="alert alert-danger text-center" role="alert">
+                        {{ alert_msg }}
+                    </div>
+                    <div class="row centered-form">
+                        <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+                            <div class="panel panel-default">
+                                <div class="panel-heading" dir="rtl">
+                                    <h3 class="panel-title text-center">فرم درخواست</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <form dir="rtl" action="#">
+                                        <!-- Email -->
+                                        <div class="col-xs-12">
+                                            <div class="form-group">
+                                                <input v-validate="{required: true, regex: validation.EMAIL}" :class="{'input': true, 'is-danger': errors.has('email')}"
+                                                        dir="ltr" type="email" id="email" class="form-control" name="email" placeholder="ایمیل"
+                                                        data-vv-delay="500" v-model="askForm.email">
+                                                <br>
+                                                <div v-show="errors.has('email')" class="alert alert-danger" role="alert">{{ "لطفا آدرس ایمیل خود را به درستی وارد کنید" }}</div>
+                                            </div>
+                                        </div><!-- Email -->
+                                        <!-- Title -->
+                                        <div class="col-xs-12">
+                                            <div class="form-group">
+                                                <input v-validate="{required: true, regex: validation.NAME}" :class="{'input': true, 'is-danger': errors.has('title')}"
+                                                        dir="rtl" type="text" id="title" class="form-control" name="title" placeholder="موضوع"
+                                                        data-vv-delay="500" v-model="askForm.title">
+                                                <br>
+                                                <div v-show="errors.has('title')" class="alert alert-danger" role="alert">{{ "موضوع باید به زبان فارسی باشد." }}</div>
+                                            </div>
+                                        </div><!-- Title -->
+                                        <!-- Content -->
+                                        <div class="col-xs-12">
+                                            <div class="form-group">
+                                                <textarea cols="30" rows="5" v-validate="{required: true, regex: validation.NAME}"
+                                                        :class="{'input': true, 'is-danger': errors.has('content')}"
+                                                        dir="rtl" type="text" id="content" class="form-control" name="content" placeholder="پرسش"
+                                                        data-vv-delay="500" v-model="askForm.content"></textarea>
+                                                <br>
+                                                <div v-show="errors.has('content')" class="alert alert-danger" role="alert">{{ "متن باید به زبان فارسی باشد." }}</div>
+                                            </div>
+                                        </div><!-- Content -->
+                                        <br>
+                                        <!-- Submit button -->
+                                        <button type="button" @click="getData(askForm)" class="btn btn-success btn-block">ارسال</button>
+                                        <!-- Submit button -->
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -105,15 +153,26 @@
 */
 import GoogleMaps from './layouts/googleMapsComponent.vue';
 import {ASSETS_PATH} from '../config';
+import {VALIDATIONS} from '../config';
+import {Base64} from '../mixins/utils';
+import {NONCE} from '../config';
 
 export default {
     name: 'contact',
+    
     components: {
         'google-map': GoogleMaps
     },
+
     data() {
         return {
             msg: 'Contact',
+            validation: {...VALIDATIONS},
+            askForm: {
+                email: '',
+                title: '',
+                content: ''
+            },
             socials: {
                 svg: {
                     instagram: ASSETS_PATH + '/social networks/instagram.svg',
@@ -141,8 +200,31 @@ export default {
             }
         };
     },
+
     created() {
         window.document.title = "تماس با ما";
+    },
+
+    methods: {
+        getData(form) {
+            this.$http.get('http://wordpress.app/wp-json/forms/v1/ask-question',
+                {
+                    params: {
+                        email: form.email,
+                        title: form.title,
+                        content: form.content
+                    },
+                    before: (request) => {
+                        request.headers.set('X-WP-Nonce', NONCE);
+                        request.headers.set('Content-Type', 'application/x-www-form-urlencoded');
+                    }
+                }
+            ).then((resp) => {
+                console.log(resp.body);
+            }).catch((err) => {
+                // console.log(err);
+            });
+        }
     }
 }
 </script>
