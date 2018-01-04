@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Theme Functions
 */
@@ -98,6 +99,12 @@ add_action( 'rest_api_init', function () {
         'methods' => 'GET',
         'callback' => 'ask_question_form'
     ) );
+
+    register_rest_route( 'hook/v1', '/token',
+        array(
+            'methods' => 'GET',
+            'callback' => 'telegram_webhook'
+        ));
 } );
 function ask_question_form( WP_REST_Request $request ) {
     
@@ -111,15 +118,26 @@ function ask_question_form( WP_REST_Request $request ) {
         wp_die();
     }
 
-    $from = 'info@iranianmagnet.com';
+//    $from = 'info@iranianmagnet.com';
     $comp_email = 'iranian.group@yahoo.com';
 
     $to = array($user_email, $comp_email);
 
-    wp_mail( $to, $title, $content, $headers );
+    wp_mail( $to, $title, $content );
     $response = json_encode(array('data' => true, 'email' => $to, 'title' => $title, 'content' => $content));
     echo $response;
     wp_die();
+}
+
+/**
+ * Handling telegram webhook
+ */
+function telegram_webhook( WP_REST_Request $request ) {
+    $BOT_TOKEN = '';
+    $BOT_ID = '';
+    $API_URL = '';
+    $URL = '';
+
 }
 
 //add_action( 'wp_ajax_form_sign_up', 'form_sign_up' ); // ajax for logged in users
