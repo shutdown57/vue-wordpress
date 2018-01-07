@@ -121,6 +121,16 @@
                                                 <div v-show="errors.has('title')" class="alert alert-danger" role="alert">{{ "موضوع باید به زبان فارسی باشد." }}</div>
                                             </div>
                                         </div><!-- Title -->
+                                        <!-- Mobile -->
+                                        <div class="col-xs-12">
+                                            <div class="form-group">
+                                                <input v-validate="{required: true, regex: validation.MOBILE}" :class="{'input': true, 'is-danger': errors.has('mobile')}"
+                                                        dir="rtl" type="text" id="mobile" class="form-control" name="mobile" placeholder="شماره موبایل"
+                                                        data-vv-delay="500" v-model="askForm.mobile">
+                                                <br>
+                                                <div v-show="errors.has('mobile')" class="alert alert-danger" role="alert">{{ "شماره موبایل باید به زبان انگلیسی باشد." }}</div>
+                                            </div>
+                                        </div><!-- Mobile -->
                                         <!-- Content -->
                                         <div class="col-xs-12">
                                             <div class="form-group">
@@ -169,6 +179,7 @@ export default {
             msg: 'Contact',
             validation: {...VALIDATIONS},
             askForm: {
+                mobile: '',
                 email: '',
                 title: '',
                 content: ''
@@ -207,11 +218,32 @@ export default {
 
     methods: {
         getData(form) {
+            // Send email to iranian.group@yahoo.com
             this.$http.get('http://wordpress.app/wp-json/forms/v1/ask-question',
                 {
                     params: {
                         email: form.email,
                         title: form.title,
+                        content: form.content
+                    },
+                    before: (request) => {
+                        request.headers.set('X-WP-Nonce', NONCE);
+                        request.headers.set('Content-Type', 'application/x-www-form-urlencoded');
+                    }
+                }
+            ).then((resp) => {
+                console.log(resp.body);
+            }).catch((err) => {
+                // console.log(err);
+            });
+
+            // Send message to IranianMagnetMessage
+            this.$http.get('http://wordpress.app/wp-json/hook/v1/message',
+                {
+                    params: {
+                        email: form.email,
+                        title: form.title,
+                        mobile: form.mobile,
                         content: form.content
                     },
                     before: (request) => {
