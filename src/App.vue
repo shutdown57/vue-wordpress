@@ -1,7 +1,7 @@
 <template>
   <div class="bg-main">
     <app-nav></app-nav>
-    <div class="container">
+    <div class="container push-to-bottom">
       <router-view id="main-content"></router-view>
     </div>
     <app-footer></app-footer>
@@ -132,4 +132,5 @@ export default {
   background-color: #e7dfdd;
 }
 body { padding-top: 50px; }
+.push-to-bottom { min-height: calc(100vh); }
 </style>
