@@ -147,11 +147,17 @@ function telegram_webhook( WP_REST_Request $request ) {
     $API_URL = 'https://api.telegram.org/bot' . $BOT_TOKEN . '/sendMessage?chat_id=' . $CHAT_ID;
 
     $API_URL = $API_URL . '&text=' . urlencode( 
-        'ایمیل: ' . $user_email
+        'ایمیل: ' . $user_email . '    ' .
+        'شماره تلفن موبایل: ' . $mobile . '    ' .
+        'موضوع: ' . $title . '    ' .
+        'متن پیام: ' . $content
      );
-
     wp_remote_get( $API_URL );
-    return WP_REST_Response( array( 'status' => 'اطلاعات دریافت شد.' ), 200 );
+    return wp_json_encode( array(
+        'status' => 'success',
+        'data' => 'اطلاعات دریافت شد.',
+        'ok' => true
+    ) );
 }
 
 //add_action( 'wp_ajax_form_sign_up', 'form_sign_up' ); // ajax for logged in users
