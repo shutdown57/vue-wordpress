@@ -1,5 +1,6 @@
 <template>
     <div>
+        <br><br>
         <ul class="nav nav-tabs nav-justified" role="tablist">
             <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">توضیحات</a></li>
             <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">تصاویر</a></li>
@@ -176,7 +177,7 @@ export default {
 
     data() {
         return {
-            msg: 'Contact',
+            msg: '',
             validation: {...VALIDATIONS},
             askForm: {
                 mobile: '',
@@ -232,7 +233,7 @@ export default {
                     }
                 }
             ).then((resp) => {
-                console.log(resp.body);
+                // console.log(resp.body);
             }).catch((err) => {
                 // console.log(err);
             });
@@ -252,7 +253,7 @@ export default {
                     }
                 }
             ).then((resp) => {
-                console.log(resp.body);
+                // console.log(resp.body);
             }).catch((err) => {
                 // console.log(err);
             });
