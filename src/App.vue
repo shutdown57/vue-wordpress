@@ -38,11 +38,11 @@ export default {
     // To use endpoints => wp/v2/posts?categories=1&id=1
     site_info() {
       // console.log();
-      this.$http.get('http://wordpress.app/wp-json/forms/v1')
+      this.$http.get('http://wordpress.app/wp-json/hook/v1/message')
         .then((resp) => {
           console.log(resp);
         }).catch((err) => {
-          console.error(err);
+          // console.error(err);
         });
 
       // Edit user
