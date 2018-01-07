@@ -100,7 +100,7 @@ add_action( 'rest_api_init', function () {
         'callback' => 'ask_question_form'
     ) );
 
-    register_rest_route( 'hook/v1', '/token',
+    register_rest_route( 'hook/v1', '/message',
         array(
             'methods' => 'GET',
             'callback' => 'telegram_webhook'
@@ -109,35 +109,49 @@ add_action( 'rest_api_init', function () {
 function ask_question_form( WP_REST_Request $request ) {
     
     $user_email = esc_attr( $request->get_param( 'email' ) );
+    $mobile = esc_attr( $request->get_param( 'mobile' ) );
     $title = esc_attr( $request->get_param('title') );
     $content = esc_attr( $request->get_param('content') );
 
-    if ( !$user_email || !$title || !$content ) {
-        $response = json_encode( array('data' => 'some filed is empty.') );
-        echo $response;
-        wp_die();
+    if ( !$user_email || !$title || !$content || !$mobile ) {
+        return WP_REST_Response( array('status' => 'مشکل در دریافت اطلاعات.') );
     }
 
-//    $from = 'info@iranianmagnet.com';
     $comp_email = 'iranian.group@yahoo.com';
 
     $to = array($user_email, $comp_email);
 
     wp_mail( $to, $title, $content );
-    $response = json_encode(array('data' => true, 'email' => $to, 'title' => $title, 'content' => $content));
-    echo $response;
-    wp_die();
+
+    return WP_REST_Response( array('status' => 'اطلاعات به درستی دریافت شد.'), 200 );
 }
 
 /**
  * Handling telegram webhook
  */
 function telegram_webhook( WP_REST_Request $request ) {
-    $BOT_TOKEN = '';
-    $BOT_ID = '';
-    $API_URL = '';
-    $URL = '';
 
+    $user_email = esc_attr( $request->get_param( 'email' ) );
+    $mobile = esc_attr( $request->get_param( 'mobile' ) );
+    $title = esc_attr( $request->get_param('title') );
+    $content = esc_attr( $request->get_param('content') );
+
+    if ( !$request->get_param('email') ) {
+        return WP_REST_Response( array('status' => 'مشکل در دریافت اطلاعات.') );
+    }
+
+    $BOT_TOKEN = '518028163:AAEXiscPjLh6RE7GAi-J5ujf-TLk_5dSoMU';
+    $BOT_ID = '@Iranianmagnetbot';
+    $CHAT_ID = '-300909047';
+    $URL = 'http://wordpress.app/wp-json/hook/v1/message';
+    $API_URL = 'https://api.telegram.org/bot' . $BOT_TOKEN . '/sendMessage?chat_id=' . $CHAT_ID;
+
+    $API_URL = $API_URL . '&text=' . urlencode( 
+        'ایمیل: ' . $user_email
+     );
+
+    wp_remote_get( $API_URL );
+    return WP_REST_Response( array( 'status' => 'اطلاعات دریافت شد.' ), 200 );
 }
 
 //add_action( 'wp_ajax_form_sign_up', 'form_sign_up' ); // ajax for logged in users
