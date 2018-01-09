@@ -106,6 +106,9 @@ add_action( 'rest_api_init', function () {
             'callback' => 'telegram_webhook'
         ));
 } );
+/**
+ * Handling send mail
+ */
 function ask_question_form( WP_REST_Request $request ) {
     
     $user_email = esc_attr( $request->get_param( 'email' ) );
