@@ -3,6 +3,17 @@
         <div class="row">
             <div class="col-sm-12 text-center">
                 <h1>شرکت ایرانیان مگنت</h1>
+                <div class="row">
+                    <div class="col-xs-12  thumbnail-bg">
+                        <h4 class="text-center">برخی از مشتریان ما</h4>
+                        <carousel-3d :autoplay="true" :autoplay-timeout="3000" :display="3"
+                                :width="300" :height="200">
+                            <slide class="slides" v-for="(brand, index) in brands" :index="index">
+                                <img :src="brand">
+                            </slide>
+                        </carousel-3d>
+                    </div>
+                </div>
                 <image-loader :src="path"
                             width="600"
                             height="800"
@@ -21,12 +32,8 @@
                     </div> 
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xs-12">
-                    <multi-slider></multi-slider>
-                </div>
-            </div>
         </div>
+        
     </div>
 </template>
 
@@ -36,15 +43,13 @@
 */
 import VueImageLoader from 'vue-img-loader';
 
-import MultiSlider from './layouts/multiSliderComponent.vue';
 import {ASSETS_PATH} from '../config';
 
 export default {
     name: 'home',
 
     components: {
-        'image-loader': VueImageLoader,
-        'multi-slider': MultiSlider
+        'image-loader': VueImageLoader
     },
 
     data() {
@@ -119,4 +124,6 @@ export default {
 
 <style scoped>
 img { width: 100% !important; height: 100%; }
+.slides { background-color: aliceblue; }
+.thumbnail-bg { background-color: black; color: azure; }
 </style>
