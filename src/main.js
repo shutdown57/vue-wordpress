@@ -5,6 +5,7 @@ import * as VueGoogleMaps from 'vue2-google-maps';
 import SocialSharing from 'vue-social-sharing';
 import VeeValidate from 'vee-validate';
 import VueLocalStorage from 'vue-ls';
+import Carousel3d from 'vue-carousel-3d';
 
 import App from './App.vue';
 import Routes from './routes';
@@ -17,6 +18,7 @@ Vue.use(VueGoogleMaps, GMAPS_OPT);
 Vue.use(SocialSharing);
 Vue.use(VeeValidate, veeConfig);
 Vue.use(VueLocalStorage, LOCALSTORAGE_OPT);
+Vue.use(Carousel3d);
 
 const router = new VueRouter({
   routes: Routes,
