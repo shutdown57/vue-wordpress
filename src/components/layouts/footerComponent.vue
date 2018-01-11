@@ -106,46 +106,7 @@ export default {
 
   data () {
     return {
-      msg: "Footer",
-      
-      shareIcons: {
-        telegram: {
-          path: ASSETS_PATH + '/share-icons/telegram-50.png',
-          name: 'telegram'
-        },
-        twitter: {
-          path: ASSETS_PATH + '/share-icons/twitter-50.png',
-          name: 'twitter'
-        },
-        email: {
-          path: ASSETS_PATH + '/share-icons/email-50.png',
-          name: 'email'
-        },
-        facebook: {
-          path: ASSETS_PATH + '/share-icons/facebook-50.png',
-          name: 'facebook'
-        },
-        googleplus: {
-          path: ASSETS_PATH + '/share-icons/google-plus-50.png',
-          name: 'googleplus'
-        },
-        linkedin: {
-          path: ASSETS_PATH + '/share-icons/linkedin-50.png',
-          name: 'linkedin'
-        },
-        pinterest: {
-          path: ASSETS_PATH + '/share-icons/pinterest-50.png',
-          name: 'pinterest'
-        },
-        reddit: {
-          path: ASSETS_PATH + '/share-icons/reddit-50.png',
-          name: 'reddit'
-        },
-        skype: {
-          path: ASSETS_PATH + '/share-icons/skype-50.png',
-          name: 'skype'
-        }
-      }
+      msg: "Footer"
     }
   }
 }
