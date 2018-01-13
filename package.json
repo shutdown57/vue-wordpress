@@ -10,6 +10,7 @@
     "build": "cross-env NODE_ENV=production browserify -g envify src/main.js | uglifyjs -c warnings=false -m > dist/build.js"
   },
   "dependencies": {
+    "sweet-modal-vue": "^2.0.0",
     "universal-cookie": "^2.1.0",
     "vee-validate": "^2.0.0-rc.27",
     "vue": "^2.0.1",
