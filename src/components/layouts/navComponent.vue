@@ -55,7 +55,7 @@ import {ASSETS_PATH} from '../../config';
 import User from '../../mixins/user';
 
 export default {
-    name: 'nav',
+    name: 'app-nav',
 
     data() {
       return {
