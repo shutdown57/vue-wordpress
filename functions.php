@@ -33,8 +33,6 @@ add_filter( 'rest_pre_dispatch', 'prefix_return_current_user' );
 function prefix_return_current_user( $result ) {
     $result = wp_get_current_user();
     $user_id = get_current_user_id();
-    // var_dump(wp_set_current_user( $user_id ));
-    // return $result;
 }
 
 function vue_iranian_init() {
