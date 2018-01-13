@@ -98,7 +98,7 @@ import VueImageLoader from 'vue-img-loader';
 import {ASSETS_PATH} from '../../config';
 
 export default {
-  name: 'footer',
+  name: 'app-footer',
 
   components: {
     'image-loader': VueImageLoader
