@@ -1,7 +1,7 @@
 <template>
   <div class="bg-main">
     <app-nav></app-nav>
-    <div class="container push-to-bottom">
+    <div class="push-to-bottom">
       <router-view id="main-content"></router-view>
     </div>
     <app-footer></app-footer>
