@@ -1,7 +1,7 @@
 <template>
     <div>
         <div v-if="alert_msg.msg" class="alert alert-danger text-center" role="alert">
-            <sweet-modal icon="">{{ alert_msg.msg }}</sweet-modal>
+            <sweet-modal :icon="alert_msg.success">{{ alert_msg.msg }}</sweet-modal>
         </div>
         <div class="row centered-form">
             <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
