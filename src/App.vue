@@ -45,6 +45,13 @@ export default {
       //     // console.error(err);
       //   });
 
+      this.$http.get('http://wordpress.app/wp-json/wp/v2/tags')
+        .then((resp) => {
+          console.log(resp);
+        }).catch((err) => {
+          // console.error(err);
+        });
+
       // Edit user
       // this.$http.patch('http://wordpress.app/wp-json/wp/v2/users/me', { }, {
       //   method: 'PATCH',
