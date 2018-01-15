@@ -79,7 +79,14 @@
             </social-sharing>
           </div>
           <div class="col-sm-12 col-md-4 text-center">
-            <h2>Enamad</h2>
+            <h3>تلفن‌های تماس</h3>
+            <div class="row">
+              <div class="col-xs-12">
+                <h2>۰۲۱-۷۴۸۴۵</h2>
+                <h3>۰۲۱-۷۷۶۸۱۴۰۰</h3>
+                <h3>۰۲۱-۷۷۶۸۱۴۰۱</h3>
+              </div>
+            </div>
           </div>
         </div>
         <br>
