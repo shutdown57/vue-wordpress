@@ -38,15 +38,16 @@
                 </div>
                 <div class="col-sm-12 text-center">
                     <div class="row">
-                        <h2 class="text-center head-3">برخی از انواع نمونه‌های کاری ما</h2>
+                        <h2 class="text-center head-3">برخی از نمونه‌ کارها</h2>
                         <br>
                         <div v-for="thumbnail in thumbnails" class="col-xs-6 col-md-3">
-                            <image-loader :src="thumbnail"
-                                    width="200"
-                                    height="300"
-                                    class="img-rounded img-responsive"
-                                    >
-                            </image-loader>
+                            <router-link :to="thumbnail.linkObject">
+                                <image-loader :src="thumbnail.path"
+                                        width="200"
+                                        height="300"
+                                        class="img-rounded img-responsive">
+                                </image-loader>
+                            </router-link>
                         </div> 
                     </div>
                 </div>
@@ -73,16 +74,56 @@ export default {
     data() {
         return {
             path: ASSETS_PATH + '/logo.png',
-            thumbnails: [
-                ASSETS_PATH + '/home-page/برنامه درسی.png',
-                ASSETS_PATH + '/home-page/تقویم.png',
-                ASSETS_PATH + '/home-page/روی خودرو.png',
-                ASSETS_PATH + '/home-page/قاب عکس.png',
-                ASSETS_PATH + '/home-page/کارت اشتراک.png',
-                ASSETS_PATH + '/home-page/ماژیک.png',
-                ASSETS_PATH + '/home-page/مذهبی.png',
-                ASSETS_PATH + '/home-page/وایت برد.png',
-            ],
+            thumbnails: {
+                curriculum: {
+                    path: ASSETS_PATH + '/home-page/برنامه درسی.png',
+                    linkObject: {
+                        name: 'curriculum'
+                    }
+                },
+                calendar: {
+                    path: ASSETS_PATH + '/home-page/تقویم.png',
+                    linkObject: {
+                        name: 'calendar'
+                    }
+                },
+                onCar: {
+                    path: ASSETS_PATH + '/home-page/روی خودرو.png',
+                    linkObject: {
+                        name: 'onCar'
+                    }
+                },
+                pictureFrame: {
+                    path: ASSETS_PATH + '/home-page/قاب عکس.png',
+                    linkObject: {
+                        name: 'pictureFrame'
+                    }
+                },
+                subscribeCard: {
+                    path: ASSETS_PATH + '/home-page/کارت اشتراک.png',
+                    linkObject: {
+                        name: 'subscribCard'
+                    }
+                },
+                marker: {
+                    path: ASSETS_PATH + '/home-page/ماژیک.png',
+                    linkObject: {
+                        name: 'marker'
+                    }
+                },
+                religion: {
+                    path: ASSETS_PATH + '/home-page/مذهبی.png',
+                    linkObject: {
+                        name: 'religion'
+                    }
+                },
+                whiteBoard: {
+                    path: ASSETS_PATH + '/home-page/وایت برد.png',
+                    linkObject: {
+                        name: 'whiteBoard'
+                    }
+                }
+            },
             
             msg: 'Home',
 
