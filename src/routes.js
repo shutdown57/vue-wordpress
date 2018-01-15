@@ -18,8 +18,6 @@ import CategorySingleComponent from './components/sundries/categorySingleCompone
 import TagsComponent from './components/sundries/tagsComponent.vue';
 import TagSingleComponent from './components/sundries/tagSingleComponent.vue';
 
-import TableComponent from './components/layouts/tableComponent.vue';
-
 import ProductsComponent from './components/productsComponent.vue';
 import ProductSingleComponent from './components/magnet/productSingleComponent.vue';
 import ProductsCurriculumComponent from './components/magnet/curriculumComponent.vue';
@@ -44,17 +42,8 @@ export default [
     { path: '/contact', component: ContactComponent, name: 'contact' },
 
     { path: '/register', component: RegisterComponent, name: 'register' },
-    { path: '/login', component: LoginComponent, name:'login'
-        // beforeEnter: (to, from, next) => {
-        //     if (User.getName()) {
-        //         next('/');
-        //     }
-        //     next('/login');
-        // } 
-    },
+    { path: '/login', component: LoginComponent, name:'login' },
     { path: '/logout', component: LogoutComponent, name: 'logout' },
-
-    { path: '/table', component: TableComponent, name: 'app-tabel' },
 
     { path: '/categories/:cid', component: CategorySingleComponent, name: 'categorySingle' },
     { path: '/categories', component: CategoriesComponent, name: 'categories' },
