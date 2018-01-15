@@ -55,7 +55,7 @@ import api from '../../api';
 import {PRODUCT_WHITEBOURD} from '../../store/staticsCategories';
 
 export default {
-    name: 'whiteBoard',
+    name: 'onCar',
 
     components: {
         InfiniteLoading
