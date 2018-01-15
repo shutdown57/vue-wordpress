@@ -32,7 +32,6 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <button type="button" class="btn btn-primary" v-on:click="openModal()"><i class="glyphicon glyphicon-plus"></i></button>
                             </div>
                             <div class="notifications">
                                 <p class="alert bg-success" v-if="notification"></p>
@@ -50,7 +49,6 @@
                                 <th v-on:click="sortByOld = !sortByOld">Old <i class="pull-right glyphicon" :class="[sortByOld?'glyphicon-sort-by-alphabet-alt':'glyphicon-sort-by-alphabet']"></i></th>
                                 <th v-on:click="sortByEmail = !sortByEmail">Email <i class="pull-right glyphicon" :class="[sortByEmail?'glyphicon-sort-by-alphabet-alt':'glyphicon-sort-by-alphabet']"></i></th>
                                 <th v-on:click="sortByStatus = !sortByStatus">Status <i class="pull-right glyphicon" :class="[sortByStatus?'glyphicon-sort-by-alphabet-alt':'glyphicon-sort-by-alphabet']"></i></th>
-                                <th width="105" class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -63,100 +61,12 @@
                                 <td v-text="item.old"></td>
                                 <td v-text="item.email"></td>
                                 <td v-text="item.status"></td>
-                                <td>
-                                    <button type="button" class="btn btn-warning" v-on:click="openModal(item)"><i class="glyphicon glyphicon-edit"></i></button>
-                                    <button type="button" class="btn btn-danger" v-on:click="deleting(index)"><i class="glyphicon glyphicon-trash"></i></button>
-                                </td>
                             </tr>
                         </tbody>
                     </table>
-                    <modal v-if="showModal" v-on:close="showModal = false">
-                        <h3 slot="title">{{ modalType==1?'Add':'Edit' }} Item</h3>
-                        <div slot="body" :class="{ 'has-error':isFormValid }">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group" :class="{ 'has-success':item.id!=null && isFormValid }">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-ban-circle"></i>
-                                            </span>
-                                            <input type="text" class="form-control" readonly disabled v-model="item.id">
-                                        </div>
-                                        <span class="help-block" v-if="item.id == null && isFormValid">Id is invalid!</span>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group" :class="{ 'has-success':item.status && isFormValid }">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-ban-circle"></i>
-                                            </span>
-                                            <select class="form-control" v-model="item.status">
-                                                <option value="created">Created</option>
-                                                <option value="actived">Actived</option>
-                                                <option value="deactived">Deactived</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group" :class="{ 'has-success':item.name!=null && isFormValid }">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="glyphicon glyphicon-user"></i>
-                                    </span>
-                                    <input type="text" class="form-control" placeholder="Fullname" v-model="item.name">
-                                </div>
-                                <span class="help-block" v-if="item.name == null && isFormValid">Name is empty!</span>
-                            </div>
-                            <div class="form-group" :class="{ 'has-success':item.old!=null && isFormValid }">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="glyphicon glyphicon-time"></i>
-                                    </span>
-                                    <input type="text" class="form-control" placeholder="Old" v-model="item.old">
-                                </div>
-                                <span class="help-block" v-if="item.old == null && isFormValid">Old is empty!</span>
-                            </div>
-                            <div class="form-group" :class="{ 'has-success':item.old!=null && isFormValid && checkEmailValid(item.email) }">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="glyphicon glyphicon-envelope"></i>
-                                    </span>
-                                    <input type="text" class="form-control" placeholder="Email Address" v-model="item.email">
-                                </div>
-                                <span class="help-block" v-if="item.email == null && isFormValid">Email is empty!</span>
-                                <span class="help-block" v-else-if="!checkEmailValid(item.email) && isFormValid">Email is invalid!</span>
-                            </div>
-                            <button type="button" class="btn btn-primary" v-on:click="submit(item)">Submit</button>
-                        </div>
-                        <!-- <div slot="footer" class="text-center"></div> -->
-                    </modal>
                 </div>
             </div>
         </main>
-
-        <!-- template for the modal component -->
-        <script type="text/x-template" id="modal-template">
-            <transition name="modal">
-                <div class="modal-mask">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header bg-primary">
-                                <button type="button" class="close" v-on:click="$emit('close')"><span aria-hidden="true">&times;</span></button>
-                                <slot name="title">Modal Title</slot>
-                            </div>
-                            <div class="modal-body">
-                                <slot name="body"></slot>
-                            </div>
-                            <div class="modal-footer">
-                                <slot name="footer"></slot>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </transition>
-        </script>
     </div>
 </template>
 
@@ -229,12 +139,8 @@ var list = [
 	}
 ];
 
-Vue.component('modal', {
-	template: '#modal-template'
-});
-
 export default {
-    name: 'table',
+    name: 'app-table',
 
     data() {
         return {
@@ -397,13 +303,9 @@ export default {
 		}
 	}
 }
-
-new Vue({
-	el: '#ssfcrud',
-});
 </script>
 
-<style>
+<style scoped>
 /* global */
 *,
 *:before,
@@ -468,10 +370,6 @@ img {
 .modal-leave-active {
   opacity: 0;
 }
-
-/* #header {}
-#main {}
-#footer {} */
 
 .multiple-action {
 	margin-left: 15px;
