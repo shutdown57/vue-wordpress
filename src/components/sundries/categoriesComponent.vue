@@ -60,24 +60,6 @@
  */
 import api from '../../api';
 
-// export default {
-//     name: 'categories',
-
-//     data() {
-//         return {
-//             categories: []
-//         };
-//     },
-    
-//     created() {
-//         window.document.title = 'دسته‌بندی‌ها';
-//         api.getCategoriesAll()
-//             .then(res => {
-//                 this.categories = res.body;
-//                 // console.log(res);
-//             }, rej => { console.error(rej); });
-//     }
-// }
 export default {
     name: 'categories',
 
