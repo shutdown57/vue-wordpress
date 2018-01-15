@@ -55,7 +55,7 @@ import api from '../../api';
 import {PRODUCT_CARD_SUBSCRIBE} from '../../store/staticsCategories';
 
 export default {
-    name: 'whiteBoard',
+    name: 'subscribCard',
 
     components: {
         InfiniteLoadnig
