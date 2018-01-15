@@ -42,11 +42,13 @@
                         <br>
                         <div v-for="thumbnail in thumbnails" class="col-xs-6 col-md-3">
                             <router-link :to="thumbnail.linkObject">
-                                <image-loader :src="thumbnail.path"
-                                        width="200"
-                                        height="300"
-                                        class="img-rounded img-responsive">
-                                </image-loader>
+                                <div class="thumbnail gold">
+                                    <image-loader :src="thumbnail.path"
+                                            width="200"
+                                            height="300"
+                                            class="img-rounded img-responsive">
+                                    </image-loader>
+                                </div>
                             </router-link>
                         </div> 
                     </div>
@@ -199,6 +201,12 @@ export default {
         }
     },
 
+    computed: {
+        fillGold() {
+
+        }
+    },
+
     created() {
         window.document.title = "ایرانیان مگنت";
     }
@@ -206,6 +214,7 @@ export default {
 </script>
 
 <style scoped>
+.gold { background-color: #f5f11d3b; }
 img { width: 100% !important; height: 100%; }
 .slides { background-color: aliceblue; }
 .slider-bg { background-color: #e0cf55; }
