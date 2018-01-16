@@ -11,9 +11,14 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="description" content="<?php bloginfo( 'description' ); ?>">
+    
+    <title>Vue</title>
+    
     <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
     <link rel="shortcut icon" type="image/png" href="<?php print get_template_directory_uri() . '/img/favicon.png'?>">
-    <title>Vue</title>
+    
+    <!-- Google recaptcha -->
+    <script src="https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit" async defer></script>
     
     <!-- Script to get nonce and root url from server -->
     <script type="text/javascript">
