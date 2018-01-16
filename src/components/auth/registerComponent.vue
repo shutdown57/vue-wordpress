@@ -108,7 +108,9 @@
                             </div><!-- Mobile -->
                             <br>
                             <!-- Submit button -->
-                            <button type="button" @click="getData(user)" class="btn btn-success btn-block">ثبت نام</button>
+                            <vue-recaptcha sitekey="6Ld88UAUAAAAAA8jM-GSJcN0wHPpmZNqKUdTOP-V">
+                                <button type="button" @click="getData(user)" class="btn btn-success btn-block">ثبت نام</button>
+                            </vue-recaptcha>
                             <!-- Submit button -->
                         </form>
                     </div>
@@ -123,12 +125,16 @@
  * @component: Register
 */
 import fa from 'vee-validate/dist/locale/fa';
-import {VALIDATIONS} from '../../config';
+import VueRecaptcha from 'vue-recaptcha';
+import {VALIDATIONS, NONCE} from '../../config';
 import User from '../../mixins/user';
-import {NONCE} from '../../config';
 
 export default {
     name: 'register',
+
+    components: {
+        VueRecaptcha
+    },
 
     data() {
         return {
