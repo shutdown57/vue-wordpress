@@ -80,17 +80,15 @@ export default {
                 params: {
                     categories: PRODUCT_WHITEBOURD,
                     categories_exclude: CATEGORIES_OUT,
-                    page: this.productDifferent.length / 10 + 1,
+                    page: this.productDifferent.length / 6 + 1,
                     per_page: 6
                 }
             }).then(res => {
                 if (res.body.length) {
-                    // Handling Thumbnail
                     res.body.map((cur_img, i_img, arr_img) => {
                         cur_img.img_info = [];
                         api.getMediaId(cur_img.featured_media)
                             .then(resolve => {
-                                // console.log(resolve);
                                 cur_img.img_info.push({
                                     title: resolve.body.title.rendered,
                                     url: resolve.body.source_url
@@ -100,14 +98,13 @@ export default {
                     this.productDifferent = this.productDifferent.concat(res.body);
                     console.log(this.productDifferent);
                     $state.loaded();
-                    if (this.productDifferent.length % 10 === 0) {
+                    if (this.productDifferent.length % 6 == 10) {
                         $state.complete();
                     }
                 } else {
                     $state.complete();
                 }
             }, rej => {
-                // console.log(rej);
                 $state.complete();
             });
         }
