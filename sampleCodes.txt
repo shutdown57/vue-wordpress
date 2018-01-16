@@ -127,3 +127,18 @@ productSingleComponent.vue {
         //         });
         //     }, rej => { /*console.error(rej);*/ });
 }
+
+resources.js {
+    Vue.http.interceptors.push((request, next) => {
+
+        // modify method
+        request.method = 'POST';
+
+        // modify headers
+        // request.headers.set('X-WP-Nonce', nonce);
+        request.headers.set('content-type', 'application/x-www-form-urlencoded');
+
+        // continue to next interceptor
+        next();
+    });
+}
