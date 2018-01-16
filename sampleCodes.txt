@@ -98,3 +98,32 @@ route.js {
          } 
     },
 }
+
+productSingleComponent.vue {
+    // let id = this.initParam();
+        // // Convert id to number and push it to an array
+        // id = addArray(parseInt(id));
+        // let allCategories = [...PRODUCT_CATEGORIES_IN, ...[1, 2, 17]];
+        // // Remove id from allCategories array
+        // removeArray(allCategories, id[0]);
+        // // console.log(allCategories);
+        // // console.log(id);
+        // api.getPostsAll(id, allCategories)
+        //     .then(res => {
+        //         // console.log(res);
+                
+        //         // Handling Thumbnail
+        //         res.body.map((cur_post, i_post, arr_post) => {
+        //             cur_post.img_info = [];
+        //             api.getMediaId(cur_post.featured_media)
+        //                 .then(resolve => {
+        //                     cur_post.img_info.push({
+        //                         url: resolve.body.source_url,
+        //                         title: resolve.body.title.rendered
+        //                     });
+        //                 }, reject => { /*console.log(reject);*/ });
+        //         this.products = res.body;
+        //         this.msg = {...this.products[0]};
+        //         });
+        //     }, rej => { /*console.error(rej);*/ });
+}
