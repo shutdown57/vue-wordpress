@@ -4,7 +4,7 @@
         <br>
         <div class="row">
           <div class="col-sm-12 col-md-4 text-center">
-            <h2>Last post and archive</h2>
+            <h2>برچسب‌ها و آرشیو مطالب</h2>
             <div>
               <span>
                 <router-link class="btn btn-link" :to="{name: 'tags'}" exact>برچسب‌ها</router-link>
