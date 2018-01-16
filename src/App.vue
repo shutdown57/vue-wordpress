@@ -15,10 +15,6 @@
 */
 import navComponent from './components/layouts/navComponent.vue';
 import footerComponent from './components/layouts/footerComponent.vue';
-import {Base64} from './mixins/utils';
-
-import {mapState, mapActions} from 'vuex';
-import {NONCE} from './config';
 
 export default {
   name: 'app',
