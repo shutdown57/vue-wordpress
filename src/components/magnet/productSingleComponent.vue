@@ -76,59 +76,30 @@ export default {
             msg: {}
         };
     },
-// TODO: Conver created to a function like infiniteHandler
+
     created() {
-        let id = this.initParam();
-        // Convert id to number and push it to an array
-        id = addArray(parseInt(id));
-        let allCategories = [...PRODUCT_CATEGORIES_IN, ...[1, 2, 17]];
-        // Remove id from allCategories array
-        removeArray(allCategories, id[0]);
-        // console.log(allCategories);
-        // console.log(id);
-        api.getPostsAll(id, allCategories)
-            .then(res => {
-                // console.log(res);
-                
-                // Handling Thumbnail
-                res.body.map((cur_post, i_post, arr_post) => {
-                    cur_post.img_info = [];
-                    api.getMediaId(cur_post.featured_media)
-                        .then(resolve => {
-                            cur_post.img_info.push({
-                                url: resolve.body.source_url,
-                                title: resolve.body.title.rendered
-                            });
-                        }, reject => { /*console.log(reject);*/ });
-                this.products = res.body;
-                this.msg = {...this.products[0]};
-                });
-            }, rej => { /*console.error(rej);*/ });
+        window.document.title = 'محصول ایرانیان مگنت';
     },
 
     methods: {
         infiniteHandler($state) {
             let id = this.initParam();
-            // Convert id to number and push it to an array
             id = addArray(parseInt(id));
             let allCategories = [...PRODUCT_CATEGORIES_IN, ...[1, 2, 17]];
-            // Remove id from allCategories array
             removeArray(allCategories, id[0]);
             this.$http.get("http://wordpress.app/wp-json/wp/v2/posts", {
                 params: {
                     categories: id,
                     categories_exclude: allCategories,
-                    page: this.products.length / 10 + 1,
+                    page: this.products.length / 6 + 1,
                     per_page: 6
                 }
             }).then(res => {
                 if (res.body.length) {
-                    // Handling Thumbnail
                     res.body.map((cur_img, i_img, arr_img) => {
                         cur_img.img_info = [];
                         api.getMediaId(cur_img.featured_media)
                             .then(resolve => {
-                                // console.log(resolve);
                                 cur_img.img_info.push({
                                     title: resolve.body.title.rendered,
                                     url: resolve.body.source_url
@@ -138,14 +109,13 @@ export default {
                     this.products = this.products.concat(res.body);
                     console.log(this.products);
                     $state.loaded();
-                    if (this.products.length % 10 === 0) {
+                    if (this.products.length % 6 == 10) {
                         $state.complete();
                     }
                 } else {
                     $state.complete();
                 }
             }, rej => {
-                // console.log(rej);
                 $state.complete();
             });
         }
