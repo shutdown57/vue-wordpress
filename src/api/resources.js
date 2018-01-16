@@ -9,19 +9,6 @@ Vue.http.options.crossOrigin = true;
 Vue.http.options.credentials = true;
 Vue.http.options.emulateHTTP = true;
 
-// Vue.http.interceptors.push((request, next) => {
-
-//     // modify method
-//     request.method = 'POST';
-
-//     // modify headers
-//     // request.headers.set('X-WP-Nonce', nonce);
-//     request.headers.set('content-type', 'application/x-www-form-urlencoded');
-
-//     // continue to next interceptor
-//     next();
-// });
-
 // TODO Fix this file to be like "../components/blog/blogAllComponent.vue" for request to categories
 export const CategoriesAllResource = Vue.resource(API_ROUTES + 'categories');
 export const CategoriesIdResource = Vue.resource(API_ROUTES + 'categories/{id}');
