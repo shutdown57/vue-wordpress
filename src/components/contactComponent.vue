@@ -58,34 +58,54 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-3 col-md-1 col-xs-offset-1">
-                        <img :src="socials.svg.instagram" :onerror="socials.png.instagram">
+                        <a href="#" target="_blank">
+                            <img :src="socials.svg.instagram" :onerror="socials.png.instagram">
+                        </a>
                     </div>
                     <div class="col-sm-3 col-md-1">
-                        <img :src="socials.svg.facebook" :onerror="socials.png.facebook">
+                        <a href="#" target="_blank">
+                            <img :src="socials.svg.facebook" :onerror="socials.png.facebook">
+                        </a>
                     </div>
                     <div class="col-sm-3 col-md-1">
-                        <img :src="socials.svg.googlePluse" :onerror="socials.png.googlePluse">
+                        <a href="#" target="_blank">
+                            <img :src="socials.svg.googlePluse" :onerror="socials.png.googlePluse">
+                        </a>
                     </div>
                     <div class="col-sm-3 col-md-1">
-                        <img :src="socials.svg.linkedin" :onerror="socials.png.linkedin">
+                        <a href="#" target="_blank">
+                            <img :src="socials.svg.linkedin" :onerror="socials.png.linkedin">
+                        </a>
                     </div>
                     <div class="col-sm-3 col-md-1">
-                        <img :src="socials.svg.pinterest" :onerror="socials.png.pinterest">
+                        <a href="#" target="_blank">
+                            <img :src="socials.svg.pinterest" :onerror="socials.png.pinterest">
+                        </a>
                     </div>
                     <div class="col-sm-3 col-md-1">
-                        <img :src="socials.svg.skype" :onerror="socials.png.skype">
+                        <a href="#" target="_blank">
+                            <img :src="socials.svg.skype" :onerror="socials.png.skype">
+                        </a>
                     </div>
                     <div class="col-sm-3 col-md-1">
-                        <img :src="socials.svg.telegram" :onerror="socials.png.telegram">
+                        <a href="#" target="_blank">
+                            <img :src="socials.svg.telegram" :onerror="socials.png.telegram">
+                        </a>
                     </div>
                     <div class="col-sm-3 col-md-1">
-                        <img :src="socials.svg.twitter" :onerror="socials.png.twitter">
+                        <a href="#" target="_blank">
+                            <img :src="socials.svg.twitter" :onerror="socials.png.twitter">
+                        </a>
                     </div>
                     <div class="col-sm-3 col-md-1">
-                        <img :src="socials.svg.whatsapp" :onerror="socials.png.whatsapp">
+                        <a href="#" target="_blank">
+                            <img :src="socials.svg.whatsapp" :onerror="socials.png.whatsapp">
+                        </a>
                     </div>
                     <div class="col-sm-3 col-md-1">
-                        <img :src="socials.svg.youtube">
+                        <a href="#" target="_blank">
+                            <img :src="socials.svg.youtube">
+                        </a>
                     </div>
                 </div>
             </div>
@@ -163,10 +183,12 @@
  * @component: Contact
 */
 import GoogleMaps from './layouts/googleMapsComponent.vue';
-import {ASSETS_PATH} from '../config';
-import {VALIDATIONS} from '../config';
+import {
+    ASSETS_PATH,
+    VALIDATIONS,
+    NONCE
+} from '../config';
 import {Base64} from '../mixins/utils';
-import {NONCE} from '../config';
 
 export default {
     name: 'contact',
