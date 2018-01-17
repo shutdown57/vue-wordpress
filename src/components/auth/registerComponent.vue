@@ -1,7 +1,7 @@
 <template>
     <div>
         <div v-if="alert_msg.msg" class="alert alert-danger text-center" role="alert">
-            <sweet-modal :icon="alert_msg.success">{{ alert_msg.msg }}</sweet-modal>
+            {{ alert_msg.msg }}
         </div>
         <div class="row centered-form">
             <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
@@ -108,9 +108,9 @@
                             </div><!-- Mobile -->
                             <br>
                             <!-- Submit button -->
-                            <vue-recaptcha sitekey="6Ld88UAUAAAAAA8jM-GSJcN0wHPpmZNqKUdTOP-V">
+                            <!-- <vue-recaptcha sitekey="6Ld88UAUAAAAAA8jM-GSJcN0wHPpmZNqKUdTOP-V"> -->
                                 <button type="button" @click="getData(user)" class="btn btn-success btn-block">ثبت نام</button>
-                            </vue-recaptcha>
+                            <!-- </vue-recaptcha> -->
                             <!-- Submit button -->
                         </form>
                     </div>
