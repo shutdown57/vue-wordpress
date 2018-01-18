@@ -57,7 +57,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-3 col-md-1 col-xs-offset-1">
+                    <div class="col-sm-3 col-md-1 col-xs-offset-2">
                         <a href="#" target="_blank">
                             <img :src="socials.svg.instagram" :onerror="socials.png.instagram">
                         </a>
@@ -84,27 +84,12 @@
                     </div>
                     <div class="col-sm-3 col-md-1">
                         <a href="#" target="_blank">
-                            <img :src="socials.svg.skype" :onerror="socials.png.skype">
-                        </a>
-                    </div>
-                    <div class="col-sm-3 col-md-1">
-                        <a href="#" target="_blank">
                             <img :src="socials.svg.telegram" :onerror="socials.png.telegram">
                         </a>
                     </div>
                     <div class="col-sm-3 col-md-1">
                         <a href="#" target="_blank">
                             <img :src="socials.svg.twitter" :onerror="socials.png.twitter">
-                        </a>
-                    </div>
-                    <div class="col-sm-3 col-md-1">
-                        <a href="#" target="_blank">
-                            <img :src="socials.svg.whatsapp" :onerror="socials.png.whatsapp">
-                        </a>
-                    </div>
-                    <div class="col-sm-3 col-md-1">
-                        <a href="#" target="_blank">
-                            <img :src="socials.svg.youtube">
                         </a>
                     </div>
                 </div>
@@ -214,11 +199,8 @@ export default {
                     googlePluse: ASSETS_PATH + '/social networks/google-plus.svg',
                     linkedin: ASSETS_PATH + '/social networks/linkedin.svg',
                     pinterest: ASSETS_PATH + '/social networks/pinterest.svg',
-                    skype: ASSETS_PATH + '/social networks/skype.svg',
                     telegram: ASSETS_PATH + '/social networks/telegram.svg',
-                    twitter: ASSETS_PATH + '/social networks/twitter.svg',
-                    whatsapp: ASSETS_PATH + '/social networks/whatsapp.svg',
-                    youtube: ASSETS_PATH + '/social networks/youtube.svg'
+                    twitter: ASSETS_PATH + '/social networks/twitter.svg'
                 },
                 png: {
                     instagram: ASSETS_PATH + '/social networks/instagram.png',
@@ -226,10 +208,17 @@ export default {
                     googlePluse: ASSETS_PATH + '/social networks/google-plus.png',
                     linkedin: ASSETS_PATH + '/social networks/linkedin.png',
                     pinterest: ASSETS_PATH + '/social networks/pinterest.png',
-                    skype: ASSETS_PATH + '/social networks/skype.png',
                     telegram: ASSETS_PATH + '/social networks/telegram.png',
-                    twitter: ASSETS_PATH + '/social networks/twitter.png',
-                    whatsapp: ASSETS_PATH + '/social networks/whatsapp.png'
+                    twitter: ASSETS_PATH + '/social networks/twitter.png'
+                },
+                path: {
+                    pinterest: 'https://www.pinterest.com/iranianmagnet/',
+                    facebook: 'https://www.facebook.com/iranianmagnet',
+                    twitter: 'https://twitter.com/iranianmagnet',
+                    telegram: 'https://t.me/iranianmagnet96',
+                    linkedin: 'https://ir.linkedin.com/in/iranianmagnet',
+                    googlePluse: 'https://plus.google.com/collection/EzoQWE',
+                    instagram: 'https://www.instagram.com/iranian_magnet/'
                 }
             }
         };
