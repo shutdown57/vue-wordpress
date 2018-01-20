@@ -15,14 +15,6 @@ export const lastMagnets = [
         alt: 'نمونه کار تقویم مگنتی'
     },
     {
-        path: ASSETS_PATH + '/samples/calendar-4.png',
-        alt: 'نمونه کار تقویم مگنتی'
-    },
-    {
-        path: ASSETS_PATH + '/samples/calendar-5.png',
-        alt: 'نمونه کار تقویم مگنتی'
-    },
-    {
         path: ASSETS_PATH + '/samples/card-1.png',
         alt: 'نمونه کار کارت اشتراک و یا کارت کارت ویزیت مگنتی'
     },
