@@ -12,6 +12,10 @@ import RegisterComponent from './components/auth/registerComponent.vue';
 import LoginComponent from './components/auth/loginComponent.vue';
 import LogoutComponent from './components/auth/logoutComponent.vue';
 
+import UserRequestComponent from './components/user/requestFormComponent.vue';
+import UserProfileComponent from './components/user/profileComponent.vue';
+import UserSentFormsComponent from './components/user/sentFormsComponent.vue';
+
 import CategoriesComponent from './components/sundries/categoriesComponent.vue';
 import CategorySingleComponent from './components/sundries/categorySingleComponent.vue';
 
@@ -44,6 +48,10 @@ export default [
     { path: '/register', component: RegisterComponent, name: 'register' },
     { path: '/login', component: LoginComponent, name:'login' },
     { path: '/logout', component: LogoutComponent, name: 'logout' },
+
+    { path: '/users/request', component: UserRequestComponent, name: 'requestForm' },
+    { path: '/users/profile', component: UserProfileComponent, name: 'profile' },
+    { path: '/users/sentForms', component: UserSentFormsComponent, name: 'sentForms' },
 
     { path: '/categories/:cid', component: CategorySingleComponent, name: 'categorySingle' },
     { path: '/categories', component: CategoriesComponent, name: 'categories' },
