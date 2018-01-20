@@ -35,14 +35,18 @@ router.beforeEach((to, from , next) => {
 
 router.afterEach((to, from) => {
   if (from.path === '/login' && Vue.ls.get('access_token', false) ) {
-    router.push({name: 'home'});
+    router.push({name: 'profile'});
     window.location.reload(true);
-    console.log(from.path);
   }
 
   if (from.path === '/logout') {
     window.location.reload(true);
-    console.log(from.paht);
+  }
+
+  if (to.path === '/users/request' || to.path === '/users/profile' || to.path === '/users/sentForms') {
+    if (!Vue.ls.get('access_token', false)) {
+      router.push({name: 'notFound'});
+    }
   }
 });
 
