@@ -7,7 +7,7 @@
             <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
                 <div class="panel panel-default">
                     <div class="panel-heading" dir="rtl">
-                        <h3 class="panel-title text-center">فرم درخواست سفارش</h3>
+                        <h3 class="panel-title text-center">فرم سفارش محصول</h3>
                     </div>
                     <div class="panel-body">
                         <form dir="rtl" action="#">
@@ -26,7 +26,8 @@
                             <!-- Description -->
                             <div class="col-xs-12">
                                 <div class="form-group">
-                                    <textarea v-validate="{required: true, regex: validation.NAME}" :class="{'input': true, 'is-danger': errors.has('description')}"
+                                    <label for="description">پر کردن این قسمت اختیاری میباشد</label>
+                                    <textarea v-validate="{regex: validation.NAME}" :class="{'input': true, 'is-danger': errors.has('description')}"
                                             dir="rtl" type="text" id="description" class="form-control" name="description" placeholder="توضیحات"
                                             data-vv-delay="500" v-model="order.description"></textarea>
                                     <br>
@@ -47,22 +48,37 @@
 
                             <!-- Bussiness -->
                             <div class="col-xs-12">
-                                <select class="form-control" v-model="order.product">
-                                    <option disabled value="">لطفا یک مورد را انتخاب کنید</option>
-                                    <option v-for="product in productTypes" :value="product.value">{{product.text}}</option>
-                                </select>
                                 <div class="form-group">
-                                    <input v-validate="{required: true, regex: validation.NAME}" :class="{'input': true, 'is-danger': errors.has('bussiness')}"
-                                            dir="rtl" type="text" id="bussiness" class="form-control" name="bussiness" placeholder="نام تجاری"
-                                            data-vv-delay="500" v-model="order.name">
-                                    <br>
-                                    <div class="alert alert-danger" role="alert" v-show="errors.has('bussiness')">{{ "نام تجاری باید به زبان فارسی باشد" }}</div>
+                                    <select class="form-control" v-model="order.product">
+                                        <option disabled value="">محصول مگنتی</option>
+                                        <option v-for="product in productTypes" :value="product.value">{{product.text}}</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select class="form-control" v-model="order.circulation">
+                                        <option disabled value="">تیراژ سفارش</option>
+                                        <option v-for="circ in circulation" :value="circ">{{circ}}</option>
+                                    </select>
                                 </div>
                             </div><!-- Bussiness -->
+
+                            <!-- X * Y -->
+                            <div class="col-xs-12">
+                                <div class="col-xs-6">
+                                    <div class="form-group">
+                                        <input type="text" name="X" id="X" v-validate="{regex: validation.XY}">
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="form-group">
+                                        <input type="text" name="Y" id="Y" v-validate="{regex: validation.XY}">
+                                    </div>
+                                </div>
+                            </div>
                             <br>
                             <!-- Submit button -->
                             <!-- <vue-recaptcha sitekey="6Ld88UAUAAAAAA8jM-GSJcN0wHPpmZNqKUdTOP-V"> -->
-                                <button type="button" @click="getData(order)" class="btn btn-success btn-block">ثبت نام</button>
+                                <button type="button" @click="sendRequest(order)" class="btn btn-success btn-block">ثبت نام</button>
                             <!-- </vue-recaptcha> -->
                             <!-- Submit button -->
                         </form>
@@ -84,7 +100,7 @@ export default {
 
     methods: {
         sendRequest(order) {
-            //
+            console.log(order);
         }
     },
 
