@@ -25,6 +25,10 @@ export default {
         }
     },
 
+    created() {
+        window.document.title = 'صفحه شخصی کاربر';
+    },
+
     mounted() {
         this.getUser();
     }
