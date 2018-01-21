@@ -16,8 +16,10 @@
       <ul class="nav navbar-nav" dir="rtl">
         <li v-show="isUser"><router-link :to="{name: 'register'}" exact>ثبت نام<span class="sr-only">(current)</span></router-link></li>
         <li v-show="isUser"><router-link :to="{name: 'login'}" exact>ورود<span class="sr-only">(current)</span></router-link></li>
-        <li v-show="!isUser"><a>{{ user.getName() }}<span class="sr-only">(current)</span></a></li>
         <li v-show="!isUser"><router-link :to="{name: 'logout'}" exact>خروج از حساب کاربری<span class="sr-only">(current)</span></router-link></li>
+        <li v-show="!isUser"><router-link :to="{name: 'profile'}" exact>{{ user.__name }}<span class="sr-only">(current)</span></router-link></li>
+        <li v-show="!isUser"><router-link :to="{name: 'requestForm'}" exact>ارسال درخواست<span class="sr-only">(current)</span></router-link></li>
+        <li v-show="!isUser"><router-link :to="{name: 'sentForms'}" exact>لیست درخواست‌ها<span class="sr-only">(current)</span></router-link></li>
       </ul>
       <ul class="nav navbar-nav navbar-right" dir="rtl">
         <li><router-link :to="{name: 'about'}" exact>درباره ما<span class="sr-only">(current)</span></router-link></li>
@@ -60,8 +62,8 @@ export default {
     data() {
       return {
         logo_small: ASSETS_PATH + '/favicon.png',
-        user: {...User},
-        user_: false
+        user: {},
+        token_: false
       };
     },
 
@@ -69,9 +71,10 @@ export default {
       isUser: function() {
         this.$forceUpdate();
         setInterval(() => {
-          this.user_ = this.$ls.get('access_token', false);
+          this.token_ = this.$ls.get('access_token', false);
         },)
-        if (this.user_) {
+        if (this.token_) {
+          this.user = {...this.$ls.get('info', false)};
           return false;
         } else {
           return true;
