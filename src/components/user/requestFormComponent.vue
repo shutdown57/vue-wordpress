@@ -44,6 +44,21 @@
                                     <div class="alert alert-danger" role="alert" v-show="errors.has('bussiness')">{{ "نام تجاری باید به زبان فارسی باشد" }}</div>
                                 </div>
                             </div><!-- Bussiness -->
+
+                            <!-- Bussiness -->
+                            <div class="col-xs-12">
+                                <select class="form-control" v-model="order.product">
+                                    <option disabled value="">لطفا یک مورد را انتخاب کنید</option>
+                                    <option v-for="product in productTypes" :value="product.value">{{product.text}}</option>
+                                </select>
+                                <div class="form-group">
+                                    <input v-validate="{required: true, regex: validation.NAME}" :class="{'input': true, 'is-danger': errors.has('bussiness')}"
+                                            dir="rtl" type="text" id="bussiness" class="form-control" name="bussiness" placeholder="نام تجاری"
+                                            data-vv-delay="500" v-model="order.name">
+                                    <br>
+                                    <div class="alert alert-danger" role="alert" v-show="errors.has('bussiness')">{{ "نام تجاری باید به زبان فارسی باشد" }}</div>
+                                </div>
+                            </div><!-- Bussiness -->
                             <br>
                             <!-- Submit button -->
                             <!-- <vue-recaptcha sitekey="6Ld88UAUAAAAAA8jM-GSJcN0wHPpmZNqKUdTOP-V"> -->
@@ -62,15 +77,45 @@
 /**
  * Request Form
  */
-import {} from '';
+import {VALIDATIONS, NONCE} from '../../config';
 
 export default {
     name: 'requestForm',
+
+    methods: {
+        sendRequest(order) {
+            //
+        }
+    },
     
     data() {
         return {
             order: {},
-            validation: ''
+            alert_msg: {},
+            validation: {...VALIDATIONS},
+            productTypes: [
+                {text: 'تقویم مگنتی', value: 'calendar'},
+                {text: 'وایت برد مگنتی', value: 'white-board'},
+                {text: 'مگنت مذهبی', value: 'religion'},
+                {text: 'برنامه درسی مگنتی', value: 'curriculum'},
+                {text: 'ماژیک مگنتی', value: 'marker'},
+                {text: 'قاب عکس مگنتی', value: 'picture-frame'},
+                {text: 'کارت اشتراک مگنتی', value: 'subscrib-card'},
+                {text: 'کارت ویزیت مگنتی', value: 'visit-card'},
+
+            ],
+            circulation: [
+                1000,
+                2000,
+                3000,
+                4000,
+                5000,
+                6000,
+                7000,
+                8000,
+                9000,
+                10000,
+            ]
         };
     }
 }
