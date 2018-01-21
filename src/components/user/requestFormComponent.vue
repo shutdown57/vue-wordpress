@@ -87,6 +87,10 @@ export default {
             //
         }
     },
+
+    created() {
+        window.document.title = 'فرم سفارش مگنت';
+    },
     
     data() {
         return {
