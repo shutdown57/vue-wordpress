@@ -93,10 +93,16 @@ function send_smtp_email($phpmailer) {
  */
 add_action( 'rest_api_init', function () {
     register_rest_route( 'forms/v1', '/ask-question',
-    array(
-        'methods' => 'GET',
-        'callback' => 'ask_question_form'
-    ) );
+        array(
+            'methods' => 'GET',
+            'callback' => 'ask_question_form'
+        ) );
+
+    register_rest_route( 'forms/v1', '/order', 
+        array(
+            'methods' => 'GET',
+            'callback' => 'order_form'
+        ));
 
     register_rest_route( 'hook/v1', '/message',
         array(
@@ -125,6 +131,45 @@ function ask_question_form( WP_REST_Request $request ) {
     wp_mail( $to, $title, $content );
 
     return WP_REST_Response( array('status' => 'اطلاعات به درستی دریافت شد.'), 200 );
+}
+
+/**
+ * Handling order form
+ */
+function order_form( WP_REST_Request $request ) {
+    $description = esc_attr( $request->get_param( 'description' ) );
+    $name = esc_attr( $request->get_param( 'name' ) );
+    $productType = esc_attr( $request->get_param( 'productType' ) );
+    $circulation = esc_attr( $request->get_param( 'circulation' ) );
+    $size_X = esc_attr( $request->get_param( 'X' ) );
+    $size_Y = esc_attr( $request->get_param( 'Y' ) );
+    if ( !$description || !$name ||
+         !$productType || !$circulation ||
+         !$size_X || !$size_Y )
+    {
+        return WP_REST_Response( array('status' => 'مشکل در دریافت اطلاعات') );
+    }
+    $BOT_TOKEN = '518028163:AAEXiscPjLh6RE7GAi-J5ujf-TLk_5dSoMU';
+    $BOT_ID = '@Iranianmagnetbot';
+    $CHAT_ID = '-300909047';
+    $URL = 'http://wordpress.app/wp-json/hook/v1/message';
+    $API_URL = 'https://api.telegram.org/bot' . $BOT_TOKEN . '/sendMessage?chat_id=' . $CHAT_ID;
+    
+    $message = $API_URL . '&text=' . urlencode( 
+        'توضیحات: ' . $description . '    ' .
+        'نام: ' . $name . '    ' .
+        'نوع محصول: ' . $productType . '    ' .
+        'تیراژ:‌ ' . $circulation . '    ' .
+        'اندازه: ' . $size_X . 'x' . $size_Y
+     );
+
+     wp_remote_get( $message );
+
+     return wp_json_encode( array(
+        'status' => 'success',
+        'data' => 'اطلاعات دریافت شد.',
+        'ok' => true
+     ) );
 }
 
 /**
