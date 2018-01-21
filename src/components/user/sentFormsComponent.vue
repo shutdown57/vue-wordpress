@@ -7,7 +7,11 @@
  * Sent Forms
  */
 export default {
-    name: 'sentForms'
+    name: 'sentForms',
+
+    created() {
+        window.document.title = 'لیست فرم‌های ارسال شده';
+    }
 }
 </script>
 
