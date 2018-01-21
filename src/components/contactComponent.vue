@@ -244,6 +244,7 @@ export default {
                     }
                 }
             ).then((resp) => {
+                // TODO: Make alert message to sent or lost
                 // console.log(resp.body);
             }).catch((err) => {
                 // console.log(err);
