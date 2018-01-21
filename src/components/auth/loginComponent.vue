@@ -68,6 +68,10 @@ export default {
         };
     },
 
+    created() {
+        window.document.title = 'فرم ورود';
+    },
+
     methods: {
         getData(user) {
             this.$http.post('http://wordpress.app/wp-json/jwt-auth/v1/token', {},
