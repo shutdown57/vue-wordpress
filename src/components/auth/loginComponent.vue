@@ -90,6 +90,7 @@ export default {
                     resp.body.user_email
                 );
                 this.$ls.set('access_token', resp.body.token);
+                this.$ls.set('info', User);
                 this.alertType = 'alert-success';
                 this.alert_msg = 'با موفقیت وارد شدید.';
                 setTimeout(() => {
