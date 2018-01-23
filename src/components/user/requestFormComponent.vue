@@ -11,7 +11,7 @@
                     </div>
                     <div class="panel-body">
                         <form dir="rtl" action="#">
-                            
+
                             <!-- Title -->
                             <div class="col-xs-12">
                                 <div class="form-group">
@@ -38,7 +38,7 @@
                             <!-- Bussiness -->
                             <div class="col-xs-12">
                                 <div class="form-group">
-                                    <input v-validate="{required: true, regex: validation.NAME}" :class="{'input': true, 'is-danger': errors.has('bussiness')}"
+                                    <input v-validate="{regex: validation.NAME}" :class="{'input': true, 'is-danger': errors.has('bussiness')}"
                                             dir="rtl" type="text" id="bussiness" class="form-control" name="bussiness" placeholder="نام تجاری"
                                             data-vv-delay="500" v-model="order.name">
                                     <br>
@@ -66,15 +66,21 @@
                             <div class="col-xs-12">
                                 <div class="col-xs-6">
                                     <div class="form-group">
-                                        <input type="text" name="X" id="X" v-validate="{regex: validation.XY}">
+                                        <label for="X">طول</label>
+                                        <input class="form-control" type="text" name="X" id="X" v-model="order.X"
+                                                 v-validate="{regex: validation.XY}" placeholder="طول"
+                                                 :class="{'input': true, 'is-danger': errors.has('X')}">
                                     </div>
                                 </div>
                                 <div class="col-xs-6">
                                     <div class="form-group">
-                                        <input type="text" name="Y" id="Y" v-validate="{regex: validation.XY}">
+                                        <label for="Y">عرض</label>
+                                        <input class="form-control" type="text" name="Y" id="Y" v-model="order.Y"
+                                                v-validate="{regex: validation.XY}" placeholder="عرض"
+                                                :class="{'input': true, 'is-danger': errors.has('Y')}">
                                     </div>
                                 </div>
-                            </div>
+                            </div> <!-- X * Y -->
                             <br>
                             <!-- Submit button -->
                             <!-- <vue-recaptcha sitekey="6Ld88UAUAAAAAA8jM-GSJcN0wHPpmZNqKUdTOP-V"> -->
@@ -100,7 +106,34 @@ export default {
 
     methods: {
         sendRequest(order) {
-            console.log(order);
+            let user = this.$ls.get('info', false);
+            if (!user) {
+                return false;
+            }
+            order.user_email = user.__email;
+            console.log(user.__token);
+            console.log(NONCE);
+            this.$http.get('http://wordpress.app/wp-json/forms/v1/order',
+                {
+                    params: {
+                        title: order.title,
+                        description: order.description,
+                        name: order.name,
+                        productType: order.product,
+                        circulation: order.circulation,
+                        size_X: order.X,
+                        size_Y: order.Y,
+                        user_email: order.user_email
+                    },
+                    before: (request) => {
+                        request.headers.set('X-WP-Nonce', NONCE);
+                        request.headers.set('Content-Type', 'application/x-www-form-urlencoded');
+                        request.headers.set('Authorization', 'Basic ' + user.__token);
+                    }
+                }
+                ).then((resp) => {
+                    console.log(resp);
+                }, (err) => { /*console.log(err)*/ });
         }
     },
 
