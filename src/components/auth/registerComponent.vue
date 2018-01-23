@@ -106,6 +106,17 @@
                                     <div class="alert alert-danger" role="alert" v-show="errors.has('mobile')">{{ "لطفا به صورت ۰۹۱۲۰۰۰۰۰۰۰ وارد کنید" }}</div>
                                 </div>
                             </div><!-- Mobile -->
+                            
+                            <!-- Address -->
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <textarea v-validate="{regex: validation.NAME}" :class="{'input': true, 'is-danger': errors.has('address')}"
+                                            dir="rtl" type="text" id="address" class="form-control" name="address" placeholder="آدرس"
+                                            data-vv-delay="500" v-model="user.address"></textarea>
+                                    <br>
+                                    <div class="alert alert-danger" role="alert" v-show="errors.has('mobile')">{{ "آدرس پستی محل کار را وارد کنید." }}</div>
+                                </div>
+                            </div><!-- Address -->
                             <br>
                             <!-- Submit button -->
                             <!-- <vue-recaptcha sitekey="6Ld88UAUAAAAAA8jM-GSJcN0wHPpmZNqKUdTOP-V"> -->
@@ -153,7 +164,8 @@ export default {
                 phone: '',
                 mobile: '',
                 username: '',
-                bussiness: ''
+                bussiness: '',
+                address: ''
             }
         };
     },
@@ -169,6 +181,11 @@ export default {
                 user.username, '', user.email
             );
 
+            // let info = {};
+            // info.phone = user.phone;
+            // info.mobile = user.mobile;
+            // info.bussiness = user.bussiness;
+
             if (user.password === user.password_c){
                 this.$http.post('http://wordpress.app/wp-json/wp/v2/users', { }, {
                 method: 'POST',
@@ -178,12 +195,7 @@ export default {
                     email: user.email,
                     description: '',
                     first_name: user.first_name,
-                    last_name: user.last_name,
-                    meta: {
-                        phone: user.phone,
-                        mobile: user.mobile,
-                        bussiness: user.bussiness
-                    }
+                    last_name: user.last_name
                 },
                 before: (request) => {
                     request.headers.set('X-WP-Nonce', NONCE);
@@ -192,6 +204,24 @@ export default {
                 }).then(res => {
                 console.log(res);
                 }, rej => { console.error(rej); });
+
+                this.$http.get('http://wordpress.app/wp-json/complete/v1/register', {
+                    method: 'GET',
+                    params: {
+                        email: user.email,
+                        phone: user.phone,
+                        mobile: user.mobile,
+                        address: user.address,
+                        bussiness: user.bussiness
+                    },
+                    before: (request) => {
+                        request.headers.set('X-WP-Nonce', NONCE);
+                        request.headers.set('Content-Type', 'application/x-www-form-urlencoded');
+                    }
+                }).then((resp) => {
+                    console.log(resp);
+                }, (err) => { /*console.log(err);*/ });
+
                 this.$router.push({name: 'login'});
             } else {
                 this.alert_msg.success = "warning";
