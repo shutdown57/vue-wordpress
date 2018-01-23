@@ -113,6 +113,7 @@ export default {
             order.user_email = user.__email;
             console.log(user.__token);
             console.log(NONCE);
+
             this.$http.get('http://wordpress.app/wp-json/forms/v1/order',
                 {
                     params: {
