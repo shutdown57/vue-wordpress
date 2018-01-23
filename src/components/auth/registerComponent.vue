@@ -192,8 +192,6 @@ export default {
                 }).then(res => {
                 console.log(res);
                 }, rej => { console.error(rej); });
-                // Redirect to main page or ...
-                //
                 this.$router.push({name: 'login'});
             } else {
                 this.alert_msg.success = "warning";
