@@ -91,6 +91,7 @@ function send_smtp_email($phpmailer) {
 /**
  * Ask form handling
  */
+// TODO: Make privilage for routes
 add_action( 'rest_api_init', function () {
     register_rest_route( 'forms/v1', '/ask-question',
         array(
@@ -115,6 +116,13 @@ add_action( 'rest_api_init', function () {
             'methods' => 'GET',
             'callback' => 'telegram_webhook'
         ));
+    
+    register_rest_route( 'info/v1', '/user_info',
+        array(
+            'methods' => 'GET',
+            'callback' => 'get_user_info'
+        )
+     );
 } );
 /**
  * Handling send mail
@@ -137,6 +145,19 @@ function ask_question_form( WP_REST_Request $request ) {
     wp_mail( $to, $title, $content );
 
     return array('status' => 'اطلاعات به درستی دریافت شد.');
+}
+
+function get_user_info( WP_REST_Request $request ) {
+    $email = esc_attr( $request->get_param('email') );
+
+    $user = get_user_by( 'email', $email );
+    
+    return new WP_REST_Response( array(
+        'status' => 'success',
+        'data' => array(
+            'user_info' => get_user_meta( $user->ID )
+        )
+    ) );
 }
 
 function complete_registeration( WP_REST_Request $request ) {
@@ -200,8 +221,7 @@ function order_form( WP_REST_Request $request ) {
      return new WP_REST_Response( array(
         'status' => 'success',
         'data' => array(
-            'message' => 'اطلاعات دریافت شد.',
-            'user' => get_user_meta( $user->ID )
+            'message' => 'اطلاعات دریافت شد.'
         ),
         'ok' => true
     ), 200 );
