@@ -3,32 +3,67 @@
         <h1 dir="rtl">اطلاعات شخصی</h1>
         <br>
         <div dir="rtl" class="row">
-            <div class="col-md-6 col-sd-12 col-md-push-6">
+            <div class="col-md-6 col-sm-12 col-md-push-6">
                 <div class="form-group">
-                    <label for="name">نام و نام خانوادگی</label>
+                    <label for="name">نام</label>
                     <input dir="rtl" class="form-control" type="text" 
-                        id="name" name="name" :value="user_.__name" :disabled="disable.name">
+                        id="name" name="name" :value="user_info.first_name" :disabled="disable.default">
                 </div>
             </div>
-            <div class="col-md-6 col-sd-12 col-md-pull-6">
+            <div class="col-md-6 col-sm-12 col-md-pull-6">
+                <div class="form-group">
+                    <label for="name">نام خانوادگی</label>
+                    <input dir="rtl" class="form-control" type="text" 
+                        id="name" name="name" :value="user_info.last_name" :disabled="disable.default">
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12 col-md-push-6">
                 <div class="form-group">
                     <label for="name">ایمیل</label>
                     <input dir="ltr" class="form-control" type="text" 
                         id="name" name="name" :value="user_.__email" :disabled="disable.email">
                 </div>
             </div>
-            <div class="col-md-6 col-sd-12 col-md-push-6">
+            <div class="col-md-6 col-sm-12 col-md-pull-6">
                 <div class="form-group">
                     <label for="name">نام کاربری</label>
                     <input dir="ltr" class="form-control" type="text" 
                         id="name" name="name" :value="user_.__username" :disabled="disable.username">
                 </div>
             </div>
-            <div class="col-md-6 col-sd-12 col-md-pull-6">
+            <div class="col-md-6 col-sm-12 col-md-push-6">
                 <div class="form-group">
-                    <label for="name">نام کاربری</label>
+                    <label for="name">نام تجاری</label>
                     <input dir="ltr" class="form-control" type="text" 
-                        id="name" name="name" :value="user_.__username" :disabled="disable.default">
+                        id="name" name="name" :value="user_info.bussiness" :disabled="disable.default">
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12 col-md-pull-6">
+                <div class="form-group">
+                    <label for="name">توضیحات درباره شرکت</label>
+                    <input dir="ltr" class="form-control" type="text" 
+                        id="name" name="name" :value="user_info.description" :disabled="disable.default">
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12 col-md-push-6">
+                <div class="form-group">
+                    <label for="name">تلفن ثابت</label>
+                    <input dir="ltr" class="form-control" type="text" 
+                        id="name" name="name" :value="user_info.phone" :disabled="disable.default">
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12 col-md-pull-6">
+                <div class="form-group">
+                    <label for="name">تلفن موبایل</label>
+                    <input dir="ltr" class="form-control" type="text" 
+                        id="name" name="name" :value="user_info.mobile" :disabled="disable.default">
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label for="name">آدرس</label>
+                    <input dir="ltr" class="form-control" type="text" 
+                        id="name" name="name" :value="user_info.address" :disabled="disable.default">
                 </div>
             </div>
         </div>
@@ -55,11 +90,11 @@ export default {
     data() {
         return {
             user_: {},
+            user_info: {},
             disable: {
                 default: true,
-                name: true,
-                email: true,
                 username: true,
+                email: true,
                 accept: true
             }
         };
@@ -86,7 +121,19 @@ export default {
             if (user) {
                 this.user_ = {...user};
             }
-            
+            this.$http.get('http://wordpress.app/wp-json/info/v1/user_info', 
+                {
+                    before: (request) => {
+                        request.headers.set('X-WP-Nonce', NONCE);
+                        request.headers.set('Content-Type', 'application/x-www-form-urlencoded');
+                        request.headers.set('Authorization', 'Basic ' + user.__token);
+                    }
+                }
+                ).then((resp) => {
+                    if (resp.status == 'success') {
+                        this.user_info = {...resp.data};
+                    }
+                }, (err) => { /*console.log(err);*/ });
         }
     },
 
