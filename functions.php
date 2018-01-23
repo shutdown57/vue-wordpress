@@ -97,6 +97,12 @@ add_action( 'rest_api_init', function () {
             'methods' => 'GET',
             'callback' => 'ask_question_form'
         ) );
+    
+    register_rest_route( 'complete/v1', '/register', 
+        array(
+            'methods' => 'GET',
+            'callback' => 'complete_registeration'
+        ) );
 
     register_rest_route( 'forms/v1', '/order', 
         array(
@@ -133,33 +139,52 @@ function ask_question_form( WP_REST_Request $request ) {
     return array('status' => 'اطلاعات به درستی دریافت شد.');
 }
 
+function complete_registeration( WP_REST_Request $request ) {
+    $email = esc_attr( $request-> get_param('email') );
+    $phone = esc_attr( $request->get_param('phone') );
+    $mobile = esc_attr( $request->get_param('mobile') );
+    $address = esc_attr( $request->get_param('address') );
+    $bussiness = esc_attr( $request->get_param('bussiness') );
+
+    $user = get_user_by( 'email', $email );
+
+    add_user_meta( $user->ID, 'phone', $phone );
+    add_user_meta( $user->ID, 'mobile', $mobile );
+    add_user_meta( $user->ID, 'address', $address );
+    add_user_meta( $user->ID, 'bussiness', $bussiness );
+
+    return new WP_REST_Response( array(
+        'status' => 'success',
+        'data' => array(
+            'message' => 'اطلاعات دریافت شد.'
+        )
+    ) );
+}
+
 /**
  * Handling order form
  */
 function order_form( WP_REST_Request $request ) {
-    // if ($request->header.get('Authorization')) {
-    //     var_dump($request);
-    // }
     $user_email = esc_attr( $request->get_param('user_email') );
     $title = esc_attr( $request->get_param('title') );
     $description = esc_attr( $request->get_param( 'description' ) );
     $name = esc_attr( $request->get_param( 'name' ) );
     $productType = esc_attr( $request->get_param( 'productType' ) );
     $circulation = esc_attr( $request->get_param( 'circulation' ) );
-    $size_X = esc_attr( $request->get_param( 'X' ) );
-    $size_Y = esc_attr( $request->get_param( 'Y' ) );
-    // if ( !$description || !$name ||
-    //      !$productType || !$circulation ||
-    //      !$size_X || !$size_Y )
-    // {
-    //     return array('status' => 'مشکل در دریافت اطلاعات');
-    // }
+    $size_X = esc_attr( $request->get_param( 'size_X' ) );
+    $size_Y = esc_attr( $request->get_param( 'size_Y' ) );
+    if ( !$description || !$name ||
+         !$productType || !$circulation ||
+         !$size_X || !$size_Y )
+    {
+        return array('status' => 'مشکل در دریافت اطلاعات');
+    }
     $BOT_TOKEN = '518028163:AAEXiscPjLh6RE7GAi-J5ujf-TLk_5dSoMU';
     $BOT_ID = '@Iranianmagnetbot';
     $CHAT_ID = '-300909047';
     $URL = 'http://wordpress.app/wp-json/hook/v1/message';
     $API_URL = 'https://api.telegram.org/bot' . $BOT_TOKEN . '/sendMessage?chat_id=' . $CHAT_ID;
-    
+
     $message = $API_URL . '&text=' . urlencode( 
         'توضیحات: ' . $description . '    ' .
         'نام: ' . $name . '    ' .
@@ -176,7 +201,7 @@ function order_form( WP_REST_Request $request ) {
         'status' => 'success',
         'data' => array(
             'message' => 'اطلاعات دریافت شد.',
-            'user' => $user->get('phone')
+            'user' => get_user_meta( $user->ID )
         ),
         'ok' => true
     ), 200 );
