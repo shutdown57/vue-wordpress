@@ -161,7 +161,7 @@ function get_user_info( WP_REST_Request $request ) {
 }
 
 function complete_registeration( WP_REST_Request $request ) {
-    $email = esc_attr( $request-> get_param('email') );
+    $email = esc_attr( $request->get_param('email') );
     $phone = esc_attr( $request->get_param('phone') );
     $mobile = esc_attr( $request->get_param('mobile') );
     $address = esc_attr( $request->get_param('address') );
