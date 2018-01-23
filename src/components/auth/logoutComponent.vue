@@ -40,6 +40,7 @@ export default {
     methods: {
         logout() {
             this.$ls.remove('access_token');
+            this.$ls.remove('info');
             this.isLogged = this.checkToken();
         },
 
