@@ -121,7 +121,7 @@ function ask_question_form( WP_REST_Request $request ) {
     $content = esc_attr( $request->get_param('content') );
 
     if ( !$user_email || !$title || !$content || !$mobile ) {
-        return WP_REST_Response( array('status' => 'مشکل در دریافت اطلاعات.') );
+        return array('status' => 'مشکل در دریافت اطلاعات.');
     }
 
     $comp_email = 'iranian.group@yahoo.com';
@@ -130,25 +130,30 @@ function ask_question_form( WP_REST_Request $request ) {
 
     wp_mail( $to, $title, $content );
 
-    return WP_REST_Response( array('status' => 'اطلاعات به درستی دریافت شد.'), 200 );
+    return array('status' => 'اطلاعات به درستی دریافت شد.');
 }
 
 /**
  * Handling order form
  */
 function order_form( WP_REST_Request $request ) {
+    // if ($request->header.get('Authorization')) {
+    //     var_dump($request);
+    // }
+    $user_email = esc_attr( $request->get_param('user_email') );
+    $title = esc_attr( $request->get_param('title') );
     $description = esc_attr( $request->get_param( 'description' ) );
     $name = esc_attr( $request->get_param( 'name' ) );
     $productType = esc_attr( $request->get_param( 'productType' ) );
     $circulation = esc_attr( $request->get_param( 'circulation' ) );
     $size_X = esc_attr( $request->get_param( 'X' ) );
     $size_Y = esc_attr( $request->get_param( 'Y' ) );
-    if ( !$description || !$name ||
-         !$productType || !$circulation ||
-         !$size_X || !$size_Y )
-    {
-        return WP_REST_Response( array('status' => 'مشکل در دریافت اطلاعات') );
-    }
+    // if ( !$description || !$name ||
+    //      !$productType || !$circulation ||
+    //      !$size_X || !$size_Y )
+    // {
+    //     return array('status' => 'مشکل در دریافت اطلاعات');
+    // }
     $BOT_TOKEN = '518028163:AAEXiscPjLh6RE7GAi-J5ujf-TLk_5dSoMU';
     $BOT_ID = '@Iranianmagnetbot';
     $CHAT_ID = '-300909047';
@@ -163,13 +168,18 @@ function order_form( WP_REST_Request $request ) {
         'اندازه: ' . $size_X . 'x' . $size_Y
      );
 
+     $user = get_user_by( 'email', $user_email );
+
      wp_remote_get( $message );
 
-     return wp_json_encode( array(
+     return new WP_REST_Response( array(
         'status' => 'success',
-        'data' => 'اطلاعات دریافت شد.',
+        'data' => array(
+            'message' => 'اطلاعات دریافت شد.',
+            'user' => $user->get('phone')
+        ),
         'ok' => true
-     ) );
+    ), 200 );
 }
 
 /**
