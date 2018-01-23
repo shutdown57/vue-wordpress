@@ -147,6 +147,9 @@ function ask_question_form( WP_REST_Request $request ) {
     return array('status' => 'اطلاعات به درستی دریافت شد.');
 }
 
+/**
+ * Send user information
+ */
 function get_user_info( WP_REST_Request $request ) {
     $email = esc_attr( $request->get_param('email') );
 
@@ -160,6 +163,9 @@ function get_user_info( WP_REST_Request $request ) {
     ) );
 }
 
+/**
+ * Complete registration user information
+ */
 function complete_registeration( WP_REST_Request $request ) {
     $email = esc_attr( $request->get_param('email') );
     $phone = esc_attr( $request->get_param('phone') );
