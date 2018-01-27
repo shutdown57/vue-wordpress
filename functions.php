@@ -1,5 +1,7 @@
 <?php
 
+require_once('jdf.php');
+
 /**
  * Theme Functions
 */
@@ -123,6 +125,13 @@ add_action( 'rest_api_init', function () {
             'callback' => 'get_user_info'
         )
      );
+    
+    register_rest_route( 'forms/v1', '/orders', 
+         array(
+             'methods' => 'GET',
+             'callback' => 'get_orders'
+         )
+      );
 } );
 /**
  * Handling send mail
