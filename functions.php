@@ -239,6 +239,22 @@ function order_form( WP_REST_Request $request ) {
         )ENGINE=MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci"
     );
 
+    $current_date = current_time( 'Y-m-d' );
+
+    $wpdb->insert('wp_orders',
+        array(
+            'user_id' => $user->ID,
+            'description' => $description,
+            'title' => $title,
+            'name' => $name,
+            'product_type' => $productType,
+            'circulation' => $circulation,
+            'size' => $size_X . 'x' . $size_Y,
+            'date' => $current_date
+        ),
+        array( '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s' )
+    );
+
      return new WP_REST_Response( array(
         'status' => 'success',
         'data' => array(
