@@ -201,6 +201,32 @@ function complete_registeration( WP_REST_Request $request ) {
 }
 
 /**
+ * Get orders by user
+ */
+function get_orders( WP_REST_Request $request ) {
+    $user_email = esc_attr( $request->get_param('user_email') );
+    $user = get_user_by( 'email', $user_email );
+
+    global $wpdb;
+
+    $orders = $wpdb->get_results("SELECT * FROM wp_orders WHERE user_id='" . $user->ID . "' ORDER BY date DESC");
+
+    for($i = 0; $i < count($orders); $i++) {
+        $gDate = explode('-', $orders[$i]->date);
+        $orders[$i]->date = gregorian_to_jalali((int)$gDate[0], (int)$gDate[1], (int)$gDate[2], '-');
+    }
+
+    return new WP_REST_Response(
+        array(
+            'status' => 'success',
+            'data' => array(
+                'orders' => $orders
+            )
+        )
+    );
+}
+
+/**
  * Handling order form
  */
 function order_form( WP_REST_Request $request ) {
