@@ -218,11 +218,26 @@ function order_form( WP_REST_Request $request ) {
         'نوع محصول: ' . $productType . '    ' .
         'تیراژ:‌ ' . $circulation . '    ' .
         'اندازه: ' . $size_X . 'x' . $size_Y
-     );
+    );
 
-     $user = get_user_by( 'email', $user_email );
+    $user = get_user_by( 'email', $user_email );
 
-     wp_remote_get( $message );
+    wp_remote_get( $message );
+
+    global $wpdb;
+
+    $wpdb->query("CREATE TABLE IF NOT EXISTS wp_orders(
+        id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+        user_id INT(6) UNSIGNED NOT NULL,
+        description TEXT,
+        title VARCHAR(50),
+        name VARCHAR(50),
+        product_type VARCHAR(50) NOT NULL,
+        circulation VARCHAR(10),
+        size VARCHAR(10),
+        date DATE
+        )ENGINE=MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci"
+    );
 
      return new WP_REST_Response( array(
         'status' => 'success',
