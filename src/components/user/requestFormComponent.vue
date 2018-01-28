@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-if="alert_msg.msg" class="alert alert-danger text-center" role="alert">
+        <div v-if="alert_msg.msg" class="alert text-center" :class="alert_msg.type" role="alert">
             {{ alert_msg.msg }}
         </div>
         <div class="row centered-form">
@@ -111,8 +111,6 @@ export default {
                 return false;
             }
             order.user_email = user.__email;
-            console.log(user.__token);
-            console.log(NONCE);
 
             this.$http.get('http://wordpress.app/wp-json/forms/v1/order',
                 {
@@ -133,8 +131,14 @@ export default {
                     }
                 }
                 ).then((resp) => {
-                    console.log(resp);
-                }, (err) => { /*console.log(err)*/ });
+                    this.alert_msg.have = true;
+                    this.alert_msg.msg = 'پیام با موفقیت ارسال شد';
+                    this.alert_msg.type = 'alert-success';
+                }, (err) => { 
+                    this.alert_msg.have = true;
+                    this.alert_msg.msg = 'مشکل در ارتباط با سرور';
+                    this.alert_msg.type = 'alert-danger';
+                 });
         }
     },
 
@@ -145,7 +149,11 @@ export default {
     data() {
         return {
             order: {},
-            alert_msg: {},
+            alert_msg: {
+                have: false,
+                msg: '',
+                type: ''
+            },
             validation: {...VALIDATIONS},
             productTypes: [
                 {text: 'تقویم مگنتی', value: 'calendar'},
