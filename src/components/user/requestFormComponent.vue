@@ -122,7 +122,7 @@ export default {
                         circulation: order.circulation,
                         size_X: order.X,
                         size_Y: order.Y,
-                        user_email: order.user_email
+                        user_email: user.__email
                     },
                     before: (request) => {
                         request.headers.set('X-WP-Nonce', NONCE);
@@ -156,14 +156,14 @@ export default {
             },
             validation: {...VALIDATIONS},
             productTypes: [
-                {text: 'تقویم مگنتی', value: 'calendar'},
-                {text: 'وایت برد مگنتی', value: 'white-board'},
-                {text: 'مگنت مذهبی', value: 'religion'},
-                {text: 'برنامه درسی مگنتی', value: 'curriculum'},
-                {text: 'ماژیک مگنتی', value: 'marker'},
-                {text: 'قاب عکس مگنتی', value: 'picture-frame'},
-                {text: 'کارت اشتراک مگنتی', value: 'subscrib-card'},
-                {text: 'کارت ویزیت مگنتی', value: 'visit-card'},
+                {text: 'تقویم مگنتی', value: 'تقویم مگنتی'},
+                {text: 'وایت برد مگنتی', value: 'وایت برد مگنتی'},
+                {text: 'مگنت مذهبی', value: 'مگنت مذهبی'},
+                {text: 'برنامه درسی مگنتی', value: 'برنامه درسی مگنتی'},
+                {text: 'ماژیک مگنتی', value: 'ماژیک'},
+                {text: 'قاب عکس مگنتی', value: 'قاب عکس مگنتی'},
+                {text: 'کارت اشتراک مگنتی', value: 'کارت اشتراک مگنتی'},
+                {text: 'کارت ویزیت مگنتی', value: 'کارت ویزیت مگنتی'},
 
             ],
             circulation: [
