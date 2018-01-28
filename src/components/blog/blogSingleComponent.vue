@@ -103,7 +103,7 @@ export default {
                     }, (reject) => {
                         this.alert_msg.have = true;
                         this.alert_msg.msg = 'مشکل در ارتباط با سرور';
-                        this.alert_msg.type = 'alert-danger'
+                        this.alert_msg.type = 'alert-danger';
                     });
 
                 // Handling Categories
@@ -117,7 +117,7 @@ export default {
                     }, reject => {
                         this.alert_msg.have = true;
                         this.alert_msg.msg = 'مشکل در ارتباط با سرور';
-                        this.alert_msg.type = 'alert-danger'
+                        this.alert_msg.type = 'alert-danger';
                 });
 
                 // Handling Tags
@@ -131,14 +131,14 @@ export default {
                     }, reject => {
                         this.alert_msg.have = true;
                         this.alert_msg.msg = 'مشکل در ارتباط با سرور';
-                        this.alert_msg.type = 'alert-danger'
+                        this.alert_msg.type = 'alert-danger';
                     });
                 });
                 this.postDetails = {...res.body};
             }, (rej) => {
                 this.alert_msg.have = true;
                 this.alert_msg.msg = 'مشکل در ارتباط با سرور';
-                this.alert_msg.type = 'alert-danger'
+                this.alert_msg.type = 'alert-danger';
             });
     },
 
