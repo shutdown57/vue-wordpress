@@ -1,8 +1,9 @@
 <template>
     <div>
-        <div v-if="alert_msg.msg" class="alert text-center" :class="alert_msg.type" role="alert">
+        <div v-if="alert_msg.have" class="alert text-center" :class="alert_msg.type" role="alert">
             {{ alert_msg.msg }}
         </div>
+        <br>
         <table class="table table-bordered table-hover table-striped table-xs-block">
             <tr class="head-bg">
                 <th>#</th>
@@ -15,7 +16,7 @@
                 <th>تاریخ سفارش</th>
             </tr>
             <tr v-for="(order, index) in orders">
-                <td>{{index}}</td>
+                <td>{{index + 1}}</td>
                 <td>{{order.name}}</td>
                 <td>{{order.title}}</td>
                 <td>{{order.description}}</td>
@@ -62,10 +63,6 @@ export default {
                     request.headers.set('Authorization', 'Basic ' + this.user.__token);
                 }
             }).then((resp) => {
-                this.alert_msg.have = true;
-                this.alert_msg.msg = 'پیام با موفقیت ارسال شد';
-                this.alert_msg.type = 'alert-success';
-                
                 this.orders = [...resp.body.data.orders];
             }, (err) => { 
                 this.alert_msg.have = true;
