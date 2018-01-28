@@ -1,5 +1,8 @@
 <template>
 <div class="direction-rtl">
+    <div v-if="alert_msg.have" class="alert text-center" :class="alert_msg.type" role="alert">
+        {{ alert_msg.msg }}
+    </div>
     <div class="panel panel-info">
         <div class="panel-heading">
             <h3 class="panel-title">{{msg}}</h3>
@@ -64,7 +67,12 @@ export default {
     data() {
         return {
             productDifferent: [],
-            msg: 'نمونه کار‌های مختلف'
+            msg: 'نمونه کار‌های مختلف',
+            alert_msg: {
+                have: false,
+                msg: '',
+                type: ''
+            }
         }
     },
 
@@ -92,10 +100,13 @@ export default {
                                     title: resolve.body.title.rendered,
                                     url: resolve.body.source_url
                                 });
-                            }, reject => { /*console.error(reject);*/ });
+                            }, reject => { 
+                                this.alert_msg.have = true;
+                                this.alert_msg.msg = 'مشکل در ارتباط با سرور';
+                                this.alert_msg.type = 'alert-danger';
+                             });
                     });
                     this.productDifferent = this.productDifferent.concat(res.body);
-                    console.log(this.productDifferent);
                     $state.loaded();
                     if (this.productDifferent.length % 6 == 10) {
                         $state.complete();
