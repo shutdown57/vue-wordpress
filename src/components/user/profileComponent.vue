@@ -1,5 +1,8 @@
 <template>
     <div class="container">
+        <div v-if="alert_msg.have" class="alert text-center" :class="alert_msg.type" role="alert">
+            {{ alert_msg.msg }}
+        </div>
         <h1 dir="rtl">اطلاعات شخصی</h1>
         <br>
         <div dir="rtl" class="row">
@@ -62,7 +65,7 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label for="name">آدرس</label>
-                    <input dir="ltr" class="form-control" type="text" 
+                    <input dir="rtl" class="form-control" type="text"
                         id="name" name="name" :value="user_info.address" :disabled="disable.default">
                 </div>
             </div>
@@ -93,6 +96,11 @@ export default {
         return {
             user_: {},
             user_info: {},
+            alert_msg: {
+                have: false,
+                msg: '',
+                type: ''
+            },
             disable: {
                 default: true,
                 username: true,
@@ -101,15 +109,6 @@ export default {
             }
         };
     },
-
-    // computed: {
-    //     editInfo: function () {
-    //         this.disable.name = !this.disable.name;
-    //         this.disable.email = !this.disable.email;
-    //         this.disable.username = !this.disable.username;
-    //         this.disable.accept = !this.disable.accept;
-    //     }
-    // },
 
     methods: {
         editInfo() {
@@ -122,8 +121,6 @@ export default {
             let user = this.$ls.get('info', false);
             if (user) {
                 this.user_ = {...user};
-                // console.log(user.__token);
-                // console.log(NONCE);
             }
             this.$http.get('http://wordpress.app/wp-json/info/v1/user_info', 
                 {
@@ -138,7 +135,11 @@ export default {
                 }
                 ).then((resp) => {
                     this.user_info = {...resp.body.data.user_info};
-                }, (err) => { /*console.error(err);*/ });
+                }, (err) => { 
+                    this.alert_msg.type = 'alert-danger';
+                    this.alert_msg.have = true;
+                    this.alert_msg.msg = 'مشکل در ارتباط با سرور';
+                });
         }
     },
 
