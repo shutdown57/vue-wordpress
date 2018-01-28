@@ -2,6 +2,9 @@
     <div>
         <main id="main">
             <div class="container">
+                <div v-if="alert_msg.have" class="alert text-center" :class="alert_msg.type" role="alert">
+                    {{ alert_msg.msg }}
+                </div>
                 <div id="ssfcrud" v-cloak>
                     <table class="table table-bordered table-hover table-striped table-xs-block">
                         <caption>
@@ -68,7 +71,11 @@ export default {
         api.getCategoriesAll()
             .then(res => {
                 this.list = res.body;
-            }, rej => { console.log(rej); });
+            }, rej => { 
+                this.alert_msg.have = true;
+                this.alert_msg.msg = 'مشکل در ارتباط با سرور';
+                this.alert_msg.type = 'alert-danger';
+             });
     },
 
     data() {
@@ -87,7 +94,12 @@ export default {
             notification: false,
             showModal: false,
             modalType: 0,
-            isFormValid: false
+            isFormValid: false,
+            alert_msg: {
+                have: false,
+                msg: '',
+                type: ''
+            }
         };
     },
 
