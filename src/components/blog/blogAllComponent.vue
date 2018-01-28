@@ -1,5 +1,8 @@
 <template>
     <div>
+        <div v-if="alert_msg.have" class="alert text-center" :class="alert_msg.type" role="alert">
+            {{ alert_msg.msg }}
+        </div>
         <h1 dir="rtl">{{ msg }}</h1>
         <div class="row">
             <div class="col-xs-12 col-md-6" v-for="article in list">
@@ -57,7 +60,12 @@ export default {
     data() {
         return {
             list: [],
-            msg: 'اخبار ایرانیان مگنت'
+            msg: 'اخبار ایرانیان مگنت',
+            alert_msg: {
+                have: false,
+                msg: '',
+                type: ''
+            }
         };
     },
 
@@ -81,13 +89,11 @@ export default {
                 }
             }).then(res => {
                 if (res.body.length){
-                    // console.log(res);
                     // Fetch image info from the server
                     res.body.map((cur_main, i_main, val_main) => {
                         // Thumbnail Handling
                         cur_main.img_info = [];
                         api.getMediaId(cur_main.featured_media).then(resolve =>{
-                            // console.log(res.body);
                             // Thumbnail url and title
                             cur_main.img_info.push({
                                 img_url: resolve.body.source_url,
@@ -104,9 +110,10 @@ export default {
                                 name: resolve.body.name,
                                 link: resolve.body.link
                             });
-                            // console.log(resolve);
                         }, (reject) => {
-                            // console.log(reject);
+                            this.alert_msg.have = true;
+                            this.alert_msg.msg = 'مشکل در ارتباط با سرور';
+                            this.alert_msg.type = 'alert-danger'
                         });
 
                         // Tags Handling
@@ -117,14 +124,14 @@ export default {
                                     name: resolve.body.name,
                                     link: resolve.body.link
                                 });
-                                // console.log(resolve);
                             }, (reject) => {
-                                // console.error(reject);
+                                this.alert_msg.have = true;
+                                this.alert_msg.msg = 'مشکل در ارتباط با سرور';
+                                this.alert_msg.type = 'alert-danger'
                             });
                         });
 
                     });
-                    // console.log(res.body);
                     this.list = this.list.concat(res.body);
                     $state.loaded();
                     if (!(this.list.length % 10 === 0)) {
@@ -134,7 +141,7 @@ export default {
                     $state.complete();
                 }
             }, rej => {
-                /*console.log(rej);*/
+                
                 $state.complete();
             });
         }
