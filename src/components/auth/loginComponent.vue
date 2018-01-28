@@ -1,7 +1,7 @@
 <template>
         <div>
-            <div v-if="alert_msg" class="alert text-center" :class="alertType" role="alert">
-                {{ alert_msg }}
+            <div v-if="alert_msg.have" class="alert text-center" :class="alert_msg.type" role="alert">
+                {{ alert_msg.msg }}
             </div>
         <div class="row centered-form">
             <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
@@ -63,8 +63,11 @@ export default {
                 username: '',
                 password: ''
             },
-            alert_msg: '',
-            alertType: ''
+            alert_msg: {
+                have: false,
+                msg: '',
+                type: ''
+            }
         };
     },
 
@@ -86,7 +89,6 @@ export default {
                     }
                 })
             .then((resp) => {
-                // console.log(resp.body);
                 User.setUserInfo(
                     resp.body.user_display_name,
                     resp.body.user_nicename,
@@ -95,16 +97,19 @@ export default {
                 );
                 this.$ls.set('access_token', resp.body.token);
                 this.$ls.set('info', User);
-                this.alertType = 'alert-success';
-                this.alert_msg = 'با موفقیت وارد شدید.';
+
+                this.alert_msg.have = true;
+                this.alert_msg.type = 'alert-success';
+                this.alert_msg.msg = 'با موفقیت وارد شدید.';
+                
                 setTimeout(() => {
                     this.$router.push({name: 'home'});
                 }, 2000);
             })
             .catch((err) => {
-                console.error(err);
-                this.alertType = 'alert-danger';
-                this.alert_msg = 'نام کاربری یا رمزعبور اشتباه است';
+                this.alert_msg.have = true;
+                this.alert_msg.type = 'alert-danger';
+                this.alert_msg.msg = 'نام کاربری یا رمزعبور اشتباه است';
             });
         }
     }
