@@ -1,5 +1,8 @@
 <template>
     <div>
+        <div v-if="alert_msg.have" class="alert text-center" :class="alert_msg.type" role="alert">
+            {{ alert_msg.msg }}
+        </div>
         <div class="panel panel-success">
             <div class="panel-heading">
                 <h3 class="panel-title text-center">نام برچسب <strong>{{tag.name}}</strong></h3>
@@ -69,7 +72,12 @@ export default {
     data() {
         return {
             posts: [],
-            tag: {}
+            tag: {},
+            alert_msg: {
+                have: false,
+                msg: '',
+                type: ''
+            }
         };
     },
 
@@ -90,31 +98,44 @@ export default {
                         resolve.body.map((cur_post, i_post, arr_post) => {
                             cur_post.cats = [];
                             cur_post.img_info = {};
-                            // console.log(cur_post);
 
                             // Handling Categories
                             api.getCategoriesId(cur_post.categories)
                                 .then(res_cat => {
-                                    // console.log(res_cat);
                                     cur_post.cats.push({
                                         name: res_cat.body.name,
                                         id: res_cat.body.id
                                     });
-                                }, rej_cat => { console.log(rej_cat); });
+                                }, rej_cat => { 
+                                    this.alert_msg.have = true;
+                                    this.alert_msg.msg = 'مشکل در ارتباط با سرور';
+                                    this.alert_msg.type = 'alert-danger';
+                                 });
                             
                             // Handling Thumbnail
                             api.getMediaId(cur_post.featured_media)
                                 .then(res_img => {
-                                    // console.log(res_img);
                                     cur_post.img_info.title = res_img.body.title.rendered;
                                     cur_post.img_info.url = res_img.body.source_url;
-                                }, rej_img => { console.log(res_img); });
+                                }, rej_img => { 
+                                    this.alert_msg.have = true;
+                                    this.alert_msg.msg = 'مشکل در ارتباط با سرور';
+                                    this.alert_msg.type = 'alert-danger';
+                                 });
                         });
 
                         this.posts = resolve.body;
-                        console.log(this.posts);
-                    }, reject => { console.log(reject); });
-            }, rej => { console.log(rej); });
+                        
+                    }, reject => { 
+                        this.alert_msg.have = true;
+                        this.alert_msg.msg = 'مشکل در ارتباط با سرور';
+                        this.alert_msg.type = 'alert-danger';
+                     });
+            }, rej => { 
+                this.alert_msg.have = true;
+                this.alert_msg.msg = 'مشکل در ارتباط با سرور';
+                this.alert_msg.type = 'alert-danger';
+             });
     }
 }
 </script>
