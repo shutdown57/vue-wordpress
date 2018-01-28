@@ -1,5 +1,8 @@
 <template>
     <div>
+        <div v-if="alert_msg.have" class="alert text-center" :class="alert_msg.type" role="alert">
+            {{ alert_msg.msg }}
+        </div>
         <div class="panel panel-success">
             <div class="panel-heading">
                 <h3 class="panel-title text-center">دسته‌بندی <strong>{{category.name}}</strong></h3>
@@ -69,7 +72,12 @@ export default {
     data() {
         return {
             posts: [],
-            category: {}
+            category: {},
+            alert_msg: {
+                have: false,
+                msg: '',
+                type: ''
+            }
         };
     },
 
@@ -78,13 +86,15 @@ export default {
         let id = this.initParam();
         api.getCategoriesId(id)
             .then(res => {
-                // console.log(res);
                 this.category = res.body;
                 window.document.title = 'دسته‌بندی' + ' ' + this.category.name;
-            }, rej => { console.error(rej); });
+            }, rej => { 
+                this.alert_msg.have = true;
+                this.alert_msg.msg = 'مشکل در ارتباط با سرور';
+                this.alert_msg.type = 'alert-danger';
+             });
         api.getPostsByCategory(id)
             .then(res => {
-                // console.log(res);
 
                 // Get information for every single post
                 res.body.map((cur_post, i_post, arr_post) => {
@@ -93,13 +103,20 @@ export default {
                     // Handling Thumbnail
                     api.getMediaId(cur_post.featured_media)
                         .then(resolve => {
-                            // console.log(resolve);
                             cur_post.img_info.title = resolve.body.title.rendered;
                             cur_post.img_info.url = resolve.body.source_url;
-                        }, reject => { console.error(reject); });
+                        }, reject => { 
+                            this.alert_msg.have = true;
+                            this.alert_msg.msg = 'مشکل در ارتباط با سرور';
+                            this.alert_msg.type = 'alert-danger';
+                         });
                 });
                 this.posts = res.body;
-            }, rej => { console.error(rej); });
+            }, rej => { 
+                this.alert_msg.have = true;
+                this.alert_msg.msg = 'مشکل در ارتباط با سرور';
+                this.alert_msg.type = 'alert-danger';
+             });
     }
 }
 </script>
