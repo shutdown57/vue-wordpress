@@ -1,5 +1,8 @@
 <template>
     <div>
+        <div v-if="alert_msg.msg" class="alert text-center" :class="alert_msg.type" role="alert">
+            {{ alert_msg.msg }}
+        </div>
         <br><br>
         <ul class="nav nav-tabs nav-justified" role="tablist">
             <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">توضیحات</a></li>
@@ -186,6 +189,11 @@ export default {
         return {
             msg: '',
             validation: {...VALIDATIONS},
+            alert_msg: {
+                have: false,
+                msg: '',
+                type: ''
+            },
             askForm: {
                 mobile: '',
                 email: '',
@@ -244,10 +252,13 @@ export default {
                     }
                 }
             ).then((resp) => {
-                // TODO: Make alert message to sent or lost
-                // console.log(resp.body);
+                this.alert_msg.have = true;
+                this.alert_msg.msg = 'پیام با موفقیت ارسال شد';
+                this.alert_msg.type = 'alert-success';
             }).catch((err) => {
-                // console.log(err);
+                this.alert_msg.have = true;
+                this.alert_msg.msg = 'مشکل در ارتباط با سرور';
+                this.alert_msg.type = 'alert-danger';
             });
 
             // Send message to IranianMagnetMessage
@@ -265,9 +276,13 @@ export default {
                     }
                 }
             ).then((resp) => {
-                // console.log(resp.body);
+                this.alert_msg.have = true;
+                this.alert_msg.msg = 'پیام با موفقیت ارسال شد';
+                this.alert_msg.type = 'alert-success';
             }).catch((err) => {
-                // console.log(err);
+                this.alert_msg.have = true;
+                this.alert_msg.msg = 'مشکل در ارتباط با سرور';
+                this.alert_msg.type = 'alert-danger';
             });
         }
     }
@@ -275,8 +290,8 @@ export default {
 </script>
 
 <style scoped>
-    .videio-embed {display: block; padding-top: 57%;}
-    .h_iframe-aparat_embed_frame{position:relative;} 
-    .h_iframe-aparat_embed_frame .ratio {display:block;width:100%;height:auto;} 
-    .h_iframe-aparat_embed_frame iframe {position:absolute;top:0;left:0;width:100%; height:100%;}
+.videio-embed {display: block; padding-top: 57%;}
+.h_iframe-aparat_embed_frame{position:relative;} 
+.h_iframe-aparat_embed_frame .ratio {display:block;width:100%;height:auto;} 
+.h_iframe-aparat_embed_frame iframe {position:absolute;top:0;left:0;width:100%; height:100%;}
 </style>
