@@ -19,6 +19,7 @@ add_action( 'set_logged_in_cookie', 'my_update_cookie' );
 function prefix_return_current_user( $result ) {
     $result = wp_get_current_user();
     $user_id = get_current_user_id();
+    
     if ( !is_user_logged_in() ) {
         return new WP_Error( 
             'not-logged-in', 
