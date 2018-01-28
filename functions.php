@@ -6,26 +6,6 @@
 require_once('jdf.php');
 
 /**
- * Theme Functions
-*/
-// add_action( 'wp_head', 'ajax_vue_routes' );
-// function ajax_vue_routes() {
-
-//     $base_url = esc_url_raw( home_url() );
-//     $base_path = rtrim( parse_url( $base_url, PHP_URL_PATH ), '/');
-    
-//     echo '<script type="text/javascript">
-//         var ajax_vue = {
-//             root: ' . esc_url_raw( rest_url() ) . ',
-//             base_url: "' . $base_url . '",
-//             base_path: "' . $base_path ? $base_path . '/' : '/' . '",
-//             nonce: "' . wp_create_nonce( 'wp_vue' ) . '",
-//             site_name: "' . get_bloginfo( 'name' ) . '"
-//         };
-//         </script>';
-// }
-
-/**
  * Set cooie in browser
  */
 function my_update_cookie( $logged_in_cookie ){
@@ -33,34 +13,14 @@ function my_update_cookie( $logged_in_cookie ){
 }
 add_action( 'set_logged_in_cookie', 'my_update_cookie' );
 
-add_filter( 'rest_pre_dispatch', 'prefix_return_current_user' );
-
+/**
+ * Get and set current user
+ */
 function prefix_return_current_user( $result ) {
     $result = wp_get_current_user();
     $user_id = get_current_user_id();
 }
-
-function vue_iranian_init() {
-
-    $base_url = esc_url_raw( home_url() );
-    $base_path = rtrim( parse_url( $base_url, PHP_URL_PATH ), '/');
-
-    // wp_enqueue_script( 'vue-iranian', get_template_directory_uri() . '/dist/build.js', array(), '1.0.0', true );
-
-    wp_register_script('ajax-main', plugins_url('/src/main.js', __FILE__));
-
-    wp_localize_script( 'vue-iranian', 'ajaxPaths', array(
-        'url' => admin_url( 'admin-ajax.php' ),
-        'root'       => esc_url_raw( rest_url() ),
-        'base_url'   => $base_url,
-        'base_path'  => $base_path ? $base_path . '/' : '/',
-        'nonce'      => wp_create_nonce( 'wp_vue' ), // Choose a good key for nonce
-        'site_name'  => get_bloginfo( 'name' )
-    ) );
-    wp_enqueue_script( 'ajax-main');
-}
-
-// add_action( 'wp_enqueue_scripts', 'vue_iranian_init' );
+add_filter( 'rest_pre_dispatch', 'prefix_return_current_user' );
 
 /**
  * Filters
@@ -96,7 +56,6 @@ function send_smtp_email($phpmailer) {
 /**
  * Ask form handling
  */
-// TODO: Make privilage for routes
 add_action( 'rest_api_init', function () {
     register_rest_route( 'forms/v1', '/ask-question',
         array(
@@ -136,6 +95,7 @@ add_action( 'rest_api_init', function () {
          )
       );
 } );
+
 /**
  * Handling send mail
  */
@@ -335,68 +295,3 @@ function telegram_webhook( WP_REST_Request $request ) {
         'ok' => true
     ) );
 }
-
-//add_action( 'wp_ajax_form_sign_up', 'form_sign_up' ); // ajax for logged in users
-//add_action( 'wp_ajax_nopriv_form_sign_up', 'form_sign_up' ); // ajax for not logged in users
-//function form_sign_up() {
-//    if (isset($_REQUEST) && wp_verify_nonce($_REQUEST["nonce"], "_user_nonce")) {
-//        $username = $_REQUEST["username"];
-//        $password = $_REQUEST["password"];
-//        $passconf = $_REQUEST["passconf"];
-//        $first_name = $_REQUEST["first_name"];
-//        $last_name = $_REQUEST["last_name"];
-//        $brand_name = $_REQUEST["brand_name"];
-//        $email = $_REQUEST["email"];
-//        $phone = $_REQUEST["phone"];
-//        $mobile = $_REQUEST["mobile"];
-//        $address = $_REQUEST["address"];
-//
-//        if (empty($username) || empty($password) || empty($passconf) ||
-//            empty($first_name) || empty($last_name) || empty($brand_name) ||
-//            empty($email) || empty($phone) || empty($mobile) ||
-//            ($password !== $passconf) || (empty($address))) {
-//            $result["data"] = "لطفا تمامی فیلدها را به درستی و کامل پر کنید";
-//            $result = json_encode($result);
-//            echo $result;
-//            wp_die();
-//        }
-//
-//        // Insert data into database by $wpdb
-//        global $wpdb;
-//
-//        $user = $wpdb->get_row(
-//            "SELECT * FROM wp_clients WHERE username='". $username ."'"
-//        );
-//
-//        if ($user){
-//            $result["message"] = "کاربر با این نام کاربری موجود است";
-//            $result["data"] = true;
-//            $result = json_encode($result);
-//            echo $result;
-//            wp_die();
-//        } else {
-//            $wpdb->insert('wp_clients',
-//                array(
-//                    'username' => $username,
-//                    'password' => wp_hash_password($password),
-//                    'firstname' => $first_name,
-//                    'lastname' => $last_name,
-//                    'email' => $email,
-//                    'brandname' => $brand_name,
-//                    'phone' => $phone,
-//                    'mobile' => $mobile,
-//                    'address' => $address
-//                ),
-//                array('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s'));
-//            $result["data"] = "به ایرانیان مگنت خوش آمدید";
-//            $result = json_encode($result);
-//            echo $result;
-//        }
-//
-//    } else {
-//        $result["data"] = "لطفا اطلاعات را به صورت کامل وارد نمایید";
-//        $result = json_encode($result);
-//        echo $result;
-//    }
-//    wp_die();
-//}
