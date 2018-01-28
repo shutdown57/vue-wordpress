@@ -39,6 +39,7 @@ add_theme_support(
 
 /**
  * PHPMAILER Configuration
+ * Main configuration in wp-config.php
  */
 add_action( 'phpmailer_init', 'send_smtp_email' );
 function send_smtp_email($phpmailer) {
@@ -116,7 +117,15 @@ function ask_question_form( WP_REST_Request $request ) {
 
     wp_mail( $to, $title, $content );
 
-    return array('status' => 'اطلاعات به درستی دریافت شد.');
+    return new WP_REST_Response(
+        array(
+            'status' => 'success',
+            'data' => array(
+                'message' => 'اطلاعات به درستی دریافت شد.'
+            ),
+            'ok' => true
+        ),
+        201 );
 }
 
 /**
@@ -127,12 +136,14 @@ function get_user_info( WP_REST_Request $request ) {
 
     $user = get_user_by( 'email', $email );
     
-    return new WP_REST_Response( array(
-        'status' => 'success',
-        'data' => array(
-            'user_info' => get_user_meta( $user->ID )
-        )
-    ) );
+    return new WP_REST_Response( 
+        array(
+            'status' => 'success',
+            'data' => array(
+                'user_info' => get_user_meta( $user->ID )
+            )
+        ),
+        200 );
 }
 
 /**
@@ -152,12 +163,14 @@ function complete_registeration( WP_REST_Request $request ) {
     add_user_meta( $user->ID, 'address', $address );
     add_user_meta( $user->ID, 'bussiness', $bussiness );
 
-    return new WP_REST_Response( array(
-        'status' => 'success',
-        'data' => array(
-            'message' => 'اطلاعات دریافت شد.'
-        )
-    ) );
+    return new WP_REST_Response( 
+        array(
+            'status' => 'success',
+            'data' => array(
+                'message' => 'اطلاعات دریافت شد.'
+            )
+        ), 
+        201 );
 }
 
 /**
@@ -182,8 +195,8 @@ function get_orders( WP_REST_Request $request ) {
             'data' => array(
                 'orders' => $orders
             )
-        )
-    );
+        ),
+        200 );
 }
 
 /**
@@ -253,13 +266,15 @@ function order_form( WP_REST_Request $request ) {
         array( '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s' )
     );
 
-     return new WP_REST_Response( array(
-        'status' => 'success',
-        'data' => array(
-            'message' => 'اطلاعات دریافت شد.'
-        ),
-        'ok' => true
-    ), 200 );
+     return new WP_REST_Response( 
+         array(
+            'status' => 'success',
+            'data' => array(
+                'message' => 'اطلاعات دریافت شد.'
+            ),
+            'ok' => true
+        ), 
+        201 );
 }
 
 /**
@@ -294,6 +309,6 @@ function telegram_webhook( WP_REST_Request $request ) {
             'status' => 'success',
             'data' => 'اطلاعات دریافت شد',
             'ok' => true
-        )
-    );
+        ),
+        200 );
 }
