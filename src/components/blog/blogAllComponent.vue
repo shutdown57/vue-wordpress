@@ -113,7 +113,7 @@ export default {
                         }, (reject) => {
                             this.alert_msg.have = true;
                             this.alert_msg.msg = 'مشکل در ارتباط با سرور';
-                            this.alert_msg.type = 'alert-danger'
+                            this.alert_msg.type = 'alert-danger';
                         });
 
                         // Tags Handling
@@ -127,7 +127,7 @@ export default {
                             }, (reject) => {
                                 this.alert_msg.have = true;
                                 this.alert_msg.msg = 'مشکل در ارتباط با سرور';
-                                this.alert_msg.type = 'alert-danger'
+                                this.alert_msg.type = 'alert-danger';
                             });
                         });
 
