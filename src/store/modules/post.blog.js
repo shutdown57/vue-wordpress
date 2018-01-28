@@ -18,18 +18,12 @@ const actions = {
             if ( !res.ok ) {
                 return commit(GET_ARTICLE_LIST_FAILURE);
             }
-            // console.log(res);
 
             // Fetch image info from the server
             res.body.map((cur_main, i_main, val_main) => {
                 // Thumbnail Handling
                 cur_main.img_info = [];
                 api.getMediaId(cur_main.featured_media).then(resolve =>{
-                    // Thumbnail url
-                    // cur_main.img_url = resolve.body.source_url;
-                    // Thumbnail title
-                    // cur_main.img_title = resolve.body.title.rendered;
-                    // console.log(res.body);
                     cur_main.img_info.push({
                         img_url: resolve.body.source_url,
                         img_title: resolve.body.title.rendered
@@ -45,7 +39,6 @@ const actions = {
                         name: resolve.body.name,
                         link: resolve.body.link
                     });
-                    // console.log(resolve);
                 }, (reject) => {
                     // console.log(rej);
                 });
@@ -58,16 +51,13 @@ const actions = {
                             name: resolve.body.name,
                             link: resolve.body.link
                         });
-                        // console.log(res);
                     }, (reject) => {
                         // console.error(rej);
                     });
                 });
 
             });
-            // console.log(res.body);
             const json = res.body;
-            // const isMore = !(json.data.length < );
             commit(ARTICLE_LIST, {
                 articleList: json,
                 isMore: false
