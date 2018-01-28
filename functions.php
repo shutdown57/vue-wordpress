@@ -232,7 +232,7 @@ function get_orders( WP_REST_Request $request ) {
  * Handling order form
  */
 function order_form( WP_REST_Request $request ) {
-    
+
     $user_email = esc_attr( $request->get_param('user_email') );
     $title = esc_attr( $request->get_param('title') );
     $description = esc_attr( $request->get_param( 'description' ) );
