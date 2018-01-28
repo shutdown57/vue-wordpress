@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-if="alert_msg.msg" class="alert alert-danger text-center" role="alert">
+        <div v-if="alert_msg.have" class="alert text-center" :class="alert_msg.success" role="alert">
             {{ alert_msg.msg }}
         </div>
         <div class="row centered-form">
@@ -152,7 +152,8 @@ export default {
             msg: 'ایجاد حساب کاربری',
             validation: {...VALIDATIONS},
             alert_msg: {
-                success: '',
+                have: false,
+                type: '',
                 msg: ''
             },
             user: {
@@ -181,11 +182,6 @@ export default {
                 user.username, '', user.email
             );
 
-            // let info = {};
-            // info.phone = user.phone;
-            // info.mobile = user.mobile;
-            // info.bussiness = user.bussiness;
-
             if (user.password === user.password_c){
                 this.$http.post('http://wordpress.app/wp-json/wp/v2/users', { }, {
                 method: 'POST',
@@ -202,8 +198,14 @@ export default {
                     request.headers.set('Content-Type', 'application/x-www-form-urlencoded');
                 }
                 }).then(res => {
-                console.log(res);
-                }, rej => { console.error(rej); });
+                    this.alert_msg.have = true;
+                    this.alert_msg.success = 'alert-success';
+                    this.alert_msg.msg = 'اطلاعات به درستی فرستاده شد';
+                }, rej => { 
+                    this.alert_msg.have = true;
+                    this.alert_msg.success = "alert-danger";
+                    this.alert_msg.msg = 'مشکل در ارتباط با سرور';
+                });
 
                 this.$http.get('http://wordpress.app/wp-json/complete/v1/register', {
                     method: 'GET',
@@ -219,12 +221,19 @@ export default {
                         request.headers.set('Content-Type', 'application/x-www-form-urlencoded');
                     }
                 }).then((resp) => {
-                    console.log(resp);
-                }, (err) => { /*console.log(err);*/ });
+                    this.alert_msg.have = true;
+                    this.alert_msg.success = "alert-succuss";
+                    this.alert_msg.msg = 'اطلاعات به درستی فرستاده شد';
+                }, (err) => { 
+                    this.alert_msg.have = true;
+                    this.alert_msg.success = "alert-danger";
+                    this.alert_msg.msg = 'مشکل در ارتباط با سرور';
+                });
 
                 this.$router.push({name: 'login'});
             } else {
-                this.alert_msg.success = "warning";
+                this.alert_msg.have = true;
+                this.alert_msg.success = "alert-danger";
                 this.alert_msg.msg = 'فیلد رمزعبور را باز بینی کنید.';
             }
         }
