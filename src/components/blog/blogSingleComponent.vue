@@ -1,5 +1,8 @@
 <template>
     <div class="direction-rtl well">
+        <div v-if="alert_msg.have" class="alert text-center" :class="alert_msg.type" role="alert">
+            {{ alert_msg.msg }}
+        </div>
         <h1>{{postDetails.title.rendered}}</h1>
         <div class="row">
             <div class="col-xs-4">
@@ -38,7 +41,6 @@
                 </div>
             </div>
         </div>
-        <!-- {{postDetails}} -->
     </div>
 </template>
 
@@ -51,14 +53,12 @@ import {API_ROUTES} from '../../config';
 import {mapActions, mapState} from 'vuex';
 
 
-// TODO use store module instead of this mess
 export default {
     name: 'blogSingle',
 
     computed: {
         ...mapState({
             pid: ({route}) => route.params.pid
-            // postDetails: ({postDetails}) => postDetails
         })
     },
 
@@ -72,14 +72,18 @@ export default {
         ]),
         initParam() {
             const pid = this.$route.params.pid;
-            // this.getPostDetails(pid);
             return pid;
         }
     },
 
     data() {
         return {
-            postDetails: {}
+            postDetails: {},
+            alert_msg: {
+                have: false,
+                msg: '',
+                type: ''
+            }
         };
     },
 
@@ -92,13 +96,14 @@ export default {
                 res.body.img_info = [];
                 api.getMediaId(res.body.featured_media)
                     .then((resolve) => {
-                        // console.log(resolve.body);
                         res.body.img_info.push({
                             url: resolve.body.source_url,
                             title: resolve.body.title.rendered
                         })
                     }, (reject) => {
-                        // console.log(reject.status);
+                        this.alert_msg.have = true;
+                        this.alert_msg.msg = 'مشکل در ارتباط با سرور';
+                        this.alert_msg.type = 'alert-danger'
                     });
 
                 // Handling Categories
@@ -110,7 +115,9 @@ export default {
                             link: resolve.body.link
                         });
                     }, reject => {
-                        //
+                        this.alert_msg.have = true;
+                        this.alert_msg.msg = 'مشکل در ارتباط با سرور';
+                        this.alert_msg.type = 'alert-danger'
                 });
 
                 // Handling Tags
@@ -122,12 +129,16 @@ export default {
                             link: resolve.body.link
                         });
                     }, reject => {
-                        //
+                        this.alert_msg.have = true;
+                        this.alert_msg.msg = 'مشکل در ارتباط با سرور';
+                        this.alert_msg.type = 'alert-danger'
                     });
                 });
                 this.postDetails = {...res.body};
             }, (rej) => {
-                console.log(rej.status);
+                this.alert_msg.have = true;
+                this.alert_msg.msg = 'مشکل در ارتباط با سرور';
+                this.alert_msg.type = 'alert-danger'
             });
     },
 
