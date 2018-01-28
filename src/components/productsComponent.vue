@@ -1,6 +1,9 @@
 <template>
     <div class="panel panel-primary direction-rtl">
-       <div class="panel-heading">
+        <div v-if="alert_msg.msg" class="alert text-center" :class="alert_msg.type" role="alert">
+            {{ alert_msg.msg }}
+        </div>
+        <div class="panel-heading">
            <h1 class="text-center">{{msg}}</h1>
         </div>
         <div class="panel-body">
@@ -49,7 +52,12 @@ export default {
     data() {
         return {
             productList: [],
-            msg: 'محصولات'
+            msg: 'محصولات',
+            alert_msg: {
+                have: false,
+                msg: '',
+                type: ''
+            }
         };
     },
 
@@ -73,12 +81,15 @@ export default {
                         cur_img.img_info = [];
                         api.getMediaId(cur_img.featured_media)
                             .then(resolve => {
-                                // console.log(resolve);
                                 cur_img.img_info.push({
                                     title: resolve.body.title.rendered,
                                     url: resolve.body.source_url
                                 });
-                            }, reject => { /*console.error(reject);*/ });
+                            }, reject => { 
+                                this.alert_msg.have = true;
+                                this.alert_msg.msg = 'مشکل در ارتباط با سرور';
+                                this.alert_msg.type = 'alert-danger';
+                             });
                     });
                     this.productList = this.productList.concat(res.body);
                     $state.loaded();
@@ -89,7 +100,6 @@ export default {
                     $state.complete();
                 }
             }, rej => {
-                // console.log(rej);
                 $state.complete();
             });
         }
