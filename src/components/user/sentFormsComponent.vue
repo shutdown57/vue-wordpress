@@ -1,5 +1,8 @@
 <template>
     <div>
+        <div v-if="alert_msg.msg" class="alert text-center" :class="alert_msg.type" role="alert">
+            {{ alert_msg.msg }}
+        </div>
         <table class="table table-bordered table-hover table-striped table-xs-block">
             <tr class="head-bg">
                 <th>#</th>
@@ -37,15 +40,18 @@ export default {
     data() {
         return {
             user: {},
-            orders: []
+            orders: [],
+            alert_msg: {
+                have: false,
+                msg: '',
+                type: ''
+            }
         };
     },
 
     methods: {
         getData() {
             this.user = this.$ls.get('info');
-            // console.log(user.__token);
-            // console.log(NONCE);
             this.$http.get('http://wordpress.app/wp-json/forms/v1/orders', {
                 params: {
                     user_email: this.user.__email
@@ -56,9 +62,16 @@ export default {
                     request.headers.set('Authorization', 'Basic ' + this.user.__token);
                 }
             }).then((resp) => {
-                console.log(resp);
+                this.alert_msg.have = true;
+                this.alert_msg.msg = 'پیام با موفقیت ارسال شد';
+                this.alert_msg.type = 'alert-success';
+                
                 this.orders = [...resp.body.data.orders];
-            }, (err) => { /*console.error(err);*/ });
+            }, (err) => { 
+                this.alert_msg.have = true;
+                this.alert_msg.msg = 'مشکل در ارتباط با سرور';
+                this.alert_msg.type = 'alert-danger';
+             });
         }
     },
 
