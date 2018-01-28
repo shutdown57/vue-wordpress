@@ -232,6 +232,7 @@ function get_orders( WP_REST_Request $request ) {
  * Handling order form
  */
 function order_form( WP_REST_Request $request ) {
+    
     $user_email = esc_attr( $request->get_param('user_email') );
     $title = esc_attr( $request->get_param('title') );
     $description = esc_attr( $request->get_param( 'description' ) );
@@ -278,8 +279,7 @@ function order_form( WP_REST_Request $request ) {
         circulation VARCHAR(10),
         size VARCHAR(10),
         date DATE
-        )ENGINE=MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci"
-    );
+        )ENGINE=MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci");
 
     $current_date = current_time( 'Y-m-d' );
 
@@ -297,8 +297,8 @@ function order_form( WP_REST_Request $request ) {
         array( '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s' )
     );
 
-     return new WP_REST_Response( 
-         array(
+    return new WP_REST_Response( 
+        array(
             'status' => 'success',
             'data' => array(
                 'message' => 'اطلاعات دریافت شد.'
