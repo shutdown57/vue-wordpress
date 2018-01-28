@@ -276,10 +276,10 @@ function telegram_webhook( WP_REST_Request $request ) {
         return WP_REST_Response( array('status' => 'مشکل در دریافت اطلاعات.') );
     }
 
-    $BOT_TOKEN = '518028163:AAEXiscPjLh6RE7GAi-J5ujf-TLk_5dSoMU';
-    $BOT_ID = '@Iranianmagnetbot';
-    $CHAT_ID = '-300909047';
-    $URL = 'http://wordpress.app/wp-json/hook/v1/message';
+    $BOT_TOKEN = '';
+    $BOT_ID = '';
+    $CHAT_ID = '';
+
     $API_URL = 'https://api.telegram.org/bot' . $BOT_TOKEN . '/sendMessage?chat_id=' . $CHAT_ID;
 
     $API_URL = $API_URL . '&text=' . urlencode( 
@@ -289,9 +289,11 @@ function telegram_webhook( WP_REST_Request $request ) {
         'متن پیام: ' . $content
      );
     wp_remote_get( $API_URL );
-    return wp_json_encode( array(
-        'status' => 'success',
-        'data' => 'اطلاعات دریافت شد.',
-        'ok' => true
-    ) );
+    return new WP_REST_Response(
+        array(
+            'status' => 'success',
+            'data' => 'اطلاعات دریافت شد',
+            'ok' => true
+        )
+    );
 }
