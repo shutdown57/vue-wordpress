@@ -110,7 +110,7 @@ function ask_question_form( WP_REST_Request $request ) {
         return array('status' => 'مشکل در دریافت اطلاعات.');
     }
 
-    $comp_email = 'iranian.group@yahoo.com';
+    $comp_email = ''; // company email address
 
     $to = array($user_email, $comp_email);
 
@@ -204,10 +204,10 @@ function order_form( WP_REST_Request $request ) {
     {
         return array('status' => 'مشکل در دریافت اطلاعات');
     }
-    $BOT_TOKEN = '518028163:AAEXiscPjLh6RE7GAi-J5ujf-TLk_5dSoMU';
-    $BOT_ID = '@Iranianmagnetbot';
-    $CHAT_ID = '-300909047';
-    $URL = 'http://wordpress.app/wp-json/hook/v1/message';
+    $BOT_TOKEN = ''; // Telegram bot api token
+    $BOT_ID = ''; // Telegram bot id
+    $CHAT_ID = ''; // Telegram chat id
+
     $API_URL = 'https://api.telegram.org/bot' . $BOT_TOKEN . '/sendMessage?chat_id=' . $CHAT_ID;
 
     $message = $API_URL . '&text=' . urlencode( 
