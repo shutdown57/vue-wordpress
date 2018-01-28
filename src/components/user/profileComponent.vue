@@ -84,6 +84,8 @@
 /**
  * Profile
  */
+import {NONCE} from '../../config';
+
 export default {
     name: 'profile',
 
@@ -120,9 +122,14 @@ export default {
             let user = this.$ls.get('info', false);
             if (user) {
                 this.user_ = {...user};
+                // console.log(user.__token);
+                // console.log(NONCE);
             }
             this.$http.get('http://wordpress.app/wp-json/info/v1/user_info', 
                 {
+                    params: {
+                        email: user.__email
+                    },
                     before: (request) => {
                         request.headers.set('X-WP-Nonce', NONCE);
                         request.headers.set('Content-Type', 'application/x-www-form-urlencoded');
@@ -130,10 +137,8 @@ export default {
                     }
                 }
                 ).then((resp) => {
-                    if (resp.status == 'success') {
-                        this.user_info = {...resp.data};
-                    }
-                }, (err) => { /*console.log(err);*/ });
+                    this.user_info = {...resp.body.data.user_info};
+                }, (err) => { /*console.error(err);*/ });
         }
     },
 
