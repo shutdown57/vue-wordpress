@@ -23,7 +23,7 @@ function prefix_return_current_user( $result ) {
 add_filter( 'rest_pre_dispatch', 'prefix_return_current_user' );
 
 /**
- * Filters
+ * Send cookie filter
  */
 apply_filters( 'send_auth_cookies', true );
 
