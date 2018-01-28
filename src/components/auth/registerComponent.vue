@@ -81,11 +81,6 @@
                                     <div class="alert alert-danger" role="alert" v-show="errors.has('bussiness')">{{ "نام تجاری باید به زبان فارسی باشد" }}</div>
                                 </div>
                             </div><!-- Bussiness -->
-
-                            <!-- Choose between phone and mobile -->
-
-                            <!-- Choose between phone and mobile -->
-
                             <!-- Phone -->
                             <div class="col-xs-12">
                                 <div class="form-group">
