@@ -19,6 +19,13 @@ add_action( 'set_logged_in_cookie', 'my_update_cookie' );
 function prefix_return_current_user( $result ) {
     $result = wp_get_current_user();
     $user_id = get_current_user_id();
+    if ( !is_user_logged_in() ) {
+        return new WP_Error( 
+            'not-logged-in', 
+            'این درخواست غیر مجاز میباشد', 
+            array( 'status' => 401 ) 
+        );
+    }
 }
 add_filter( 'rest_pre_dispatch', 'prefix_return_current_user' );
 
@@ -108,7 +115,11 @@ function ask_question_form( WP_REST_Request $request ) {
     $content = esc_attr( $request->get_param('content') );
 
     if ( !$user_email || !$title || !$content || !$mobile ) {
-        return array('status' => 'مشکل در دریافت اطلاعات.');
+        return new WP_Error(
+            'not-filled-fields',
+            'اطلاعات به درستی وارد نشده‌اند',
+            array( 'status' => 'faild' )
+        );
     }
 
     $comp_email = ''; // company email address
@@ -156,6 +167,14 @@ function complete_registeration( WP_REST_Request $request ) {
     $address = esc_attr( $request->get_param('address') );
     $bussiness = esc_attr( $request->get_param('bussiness') );
 
+    if ( !$email || !$phone || !$mobile || !$bussiness) {
+        return new WP_Error(
+            'not-filled-fields',
+            'اطلاعات به درستی وارد نشده‌اند',
+            array( 'status' => 'faild' )
+        );
+    }
+
     $user = get_user_by( 'email', $email );
 
     add_user_meta( $user->ID, 'phone', $phone );
@@ -178,6 +197,15 @@ function complete_registeration( WP_REST_Request $request ) {
  */
 function get_orders( WP_REST_Request $request ) {
     $user_email = esc_attr( $request->get_param('user_email') );
+
+    if ( !$user_email ) {
+        return new WP_Error(
+            'not-filled-fields',
+            'اطلاعات به درستی وارد نشده‌اند',
+            array( 'status' => 'faild' )
+        );
+    }
+
     $user = get_user_by( 'email', $user_email );
 
     global $wpdb;
@@ -211,11 +239,13 @@ function order_form( WP_REST_Request $request ) {
     $circulation = esc_attr( $request->get_param( 'circulation' ) );
     $size_X = esc_attr( $request->get_param( 'size_X' ) );
     $size_Y = esc_attr( $request->get_param( 'size_Y' ) );
-    if ( !$description || !$name ||
-         !$productType || !$circulation ||
-         !$size_X || !$size_Y )
-    {
-        return array('status' => 'مشکل در دریافت اطلاعات');
+
+    if ( !$description || !$name || !$productType || !$circulation || !$size_X || !$size_Y ) {
+        return new WP_Error(
+            'not-filled-fields',
+            'اطلاعات به درستی وارد نشده‌اند',
+            array( 'status' => 'faild' )
+        );
     }
     $BOT_TOKEN = ''; // Telegram bot api token
     $BOT_ID = ''; // Telegram bot id
@@ -288,7 +318,11 @@ function telegram_webhook( WP_REST_Request $request ) {
     $content = esc_attr( $request->get_param('content') );
 
     if ( !$request->get_param('email') ) {
-        return WP_REST_Response( array('status' => 'مشکل در دریافت اطلاعات.') );
+        return new WP_Error(
+            'not-filled-fields',
+            'اطلاعات به درستی وارد نشده‌اند',
+            array( 'status' => 'faild' )
+        );
     }
 
     $BOT_TOKEN = '';
