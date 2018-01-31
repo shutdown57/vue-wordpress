@@ -146,6 +146,14 @@ function ask_question_form( WP_REST_Request $request ) {
 function get_user_info( WP_REST_Request $request ) {
     $email = esc_attr( $request->get_param('email') );
 
+    if ( !$request->get_param('email') ){
+        return new WP_Error(
+            'not-filled-fields',
+            'اطلاعات به درستی وارد نشده‌اند',
+            array( 'status' => 'faild')
+        );
+    }
+
     $user = get_user_by( 'email', $email );
     
     return new WP_REST_Response( 
