@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-main">
+  <div class="bg-main fixed-bg">
     <app-nav></app-nav>
     <div class="push-to-bottom container">
       <router-view id="main-content"></router-view>
@@ -34,6 +34,16 @@ export default {
 .bg-main {
   background-color: #e7dfdd;
 }
+
+.fixed-bg {
+  background-image: url("http://wordpress.app/wp-content/themes/vue-new/src/assets/background.ai.svg");
+  min-height: 500px;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover; 
+}
+
 body {
   padding-top: 50px;
   font-family: 'Khodkar-Bold';
