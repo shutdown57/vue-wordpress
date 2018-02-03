@@ -2,7 +2,7 @@
     <div>
         <div>
             <h1 class="text-center">شرکت ایرانیان مگنت</h1>
-            <div class="row slider-bg">
+            <div class="row gold">
                 <div class="col-sm-12">
                     <carousel-3d :autoplay="true" :autoplay-timeout="2000" :display="5" :width="300" :height="200">
                         <slide class="slides" v-for="(item, index) in lastMagnets" :index="index">
@@ -53,7 +53,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row slider-bg">
+            <div class="row gold">
                 <div class="col-sm-12">
                     <carousel-3d :autoplay="true" :autoplay-timeout="3000" :display="5" :width="300" :height="200">
                         <slide class="slides" v-for="(brand, index) in brands" :index="index">
