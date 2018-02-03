@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-if="alert_msg.msg" class="alert text-center" :class="alert_msg.type" role="alert">
+        <div v-if="alert_msg.have" class="alert text-center" :class="alert_msg.type" role="alert">
             {{ alert_msg.msg }}
         </div>
         <br><br>
