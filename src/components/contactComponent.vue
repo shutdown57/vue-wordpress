@@ -4,7 +4,7 @@
             {{ alert_msg.msg }}
         </div>
         <br><br>
-        <ul class="nav nav-tabs nav-justified" role="tablist">
+        <ul class="nav nav-tabs nav-justified gold" role="tablist">
             <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">توضیحات</a></li>
             <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">تصاویر</a></li>
             <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">شبکه‌های اجتماعی</a></li>
@@ -14,11 +14,11 @@
         <!-- Tab panes -->
         <div class="tab-content" dir="rtl">
             <!-- Info tab -->
-            <div role="tabpanel" class="tab-pane active" id="home">
+            <div role="tabpanel" class="tab-pane active white" id="home">
                 <br>
                 <h3>نشانی شرکت</h3>
                 <address>
-                    <strong><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></strong><br>
+                    <strong><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></strong>
                     <abbr title="Address">تهران, میدان امام حسین, خیابان مازندران, پلاک ۶۵, طبقه اول, واحد ۵</abbr>
                 </address>
                 <hr>
@@ -52,7 +52,7 @@
 
             <div role="tabpanel" class="tab-pane" id="messages">
                 <br>
-                <div class="row">
+                <div class="row white">
                     <div class="col-xs-12">
                         <h3>ما را در شبکه‌های اجتماعی دنبال کنید</h3>
                         <p>در زیر شبکه‌های اجتماعی که شرکت <strong>ایرانیان مگنت</strong> در آنها عضو است موجود میباشد.</p>
@@ -99,8 +99,8 @@
             </div>
             <div role="tabpanel" class="tab-pane" id="settings">
                 <div>
-                    <div v-if="alert_msg" class="alert alert-danger text-center" role="alert">
-                        {{ alert_msg }}
+                    <div v-if="alert_msg.have" class="alert alert-danger text-center" role="alert">
+                        {{ alert_msg.msg }}
                     </div>
                     <div class="row centered-form">
                         <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
@@ -290,6 +290,14 @@ export default {
 </script>
 
 <style scoped>
+.gold { background-color: #f5f11d; }
+.white { 
+    background-color: aliceblue;
+    padding-right: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+}
 .videio-embed {display: block; padding-top: 57%;}
 .h_iframe-aparat_embed_frame{position:relative;} 
 .h_iframe-aparat_embed_frame .ratio {display:block;width:100%;height:auto;} 
