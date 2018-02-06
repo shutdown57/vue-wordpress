@@ -39,17 +39,25 @@
                     <div class="row">
                         <h2 class="text-center head-3">برخی از نمونه‌ کارها</h2>
                         <br>
-                        <div v-for="thumbnail in thumbnails" class="col-xs-6 col-md-3">
-                            <router-link :to="thumbnail.linkObject">
-                                <div class="thumbnail gold">
-                                    <image-loader :src="thumbnail.path"
-                                            width="200"
-                                            height="300"
-                                            class="img-rounded img-responsive">
-                                    </image-loader>
-                                </div>
-                            </router-link>
-                        </div> 
+                        <div class="row">
+                            <div v-for="thumbnail in thumbnails1" class="col-xs-6 col-md-3">
+                                <router-link :to="thumbnail.linkObject">
+                                    <div class="thumbnail gold">
+                                        <img :src="thumbnail.path" class="thumbs img-responsive">
+                                    </div>
+                                </router-link>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div v-for="thumbnail in thumbnails2" class="col-xs-6 col-md-3">
+                                <router-link :to="thumbnail.linkObject">
+                                    <div class="thumbnail gold">
+                                        <img :src="thumbnail.path" class="thumbs img-responsive">
+                                    </div>
+                                </router-link>
+                            </div> 
+                        </div>
                     </div>
                 </div>
             </div>
@@ -75,7 +83,8 @@ import VueImageLoader from 'vue-img-loader';
 import {ASSETS_PATH} from '../config';
 import {
     lastMagnets,
-    thumbnails,
+    thumbnails1,
+    thumbnails2,
     progress,
     brands
 } from '../store/localResources';
@@ -100,7 +109,9 @@ export default {
 
             path: ASSETS_PATH + '/logo.png',
 
-            thumbnails: {...thumbnails},
+            thumbnails1: {...thumbnails1},
+
+            thumbnails2: {...thumbnails2},
             
             msg: 'Home',
 
@@ -118,9 +129,13 @@ export default {
 
 <style scoped>
 .gold { background-color: #f5f11d3b; }
-img { width: 100% !important; height: 100%; }
+img { width: 100% !important; height: 100% !important; }
 .slides { background-color: aliceblue; }
 .slider-bg { background-color: #e0cf55; }
+.thumbs {
+    padding-right: 5px;
+    padding-left: 5px;
+}
 .head-3 {
     background-color: #e0cf55;
     padding-top: 12px;
