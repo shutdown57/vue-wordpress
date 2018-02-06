@@ -182,49 +182,49 @@ export const lastMagnets = [
 
 export const thumbnails = {
     curriculum: {
-        path: ASSETS_PATH + '/home-page/برنامه درسی.png',
+        path: ASSETS_PATH + '/image-theme/برنامه درسی.png',
         linkObject: {
             name: 'curriculum'
         }
     },
     calendar: {
-        path: ASSETS_PATH + '/home-page/تقویم.png',
+        path: ASSETS_PATH + '/image-theme/تقویم.png',
         linkObject: {
             name: 'calendar'
         }
     },
     onCar: {
-        path: ASSETS_PATH + '/home-page/روی خودرو.png',
+        path: ASSETS_PATH + '/image-theme/روی خودرو.png',
         linkObject: {
             name: 'onCar'
         }
     },
     pictureFrame: {
-        path: ASSETS_PATH + '/home-page/قاب عکس.png',
+        path: ASSETS_PATH + '/image-theme/قاب عکس.png',
         linkObject: {
             name: 'pictureFrame'
         }
     },
     subscribeCard: {
-        path: ASSETS_PATH + '/home-page/کارت اشتراک.png',
+        path: ASSETS_PATH + '/image-theme/کارت اشتراک.png',
         linkObject: {
             name: 'subscribCard'
         }
     },
     marker: {
-        path: ASSETS_PATH + '/home-page/ماژیک.png',
+        path: ASSETS_PATH + '/image-theme/ماژیک.png',
         linkObject: {
             name: 'marker'
         }
     },
     religion: {
-        path: ASSETS_PATH + '/home-page/مذهبی.png',
+        path: ASSETS_PATH + '/image-theme/مذهبی.png',
         linkObject: {
             name: 'religion'
         }
     },
     whiteBoard: {
-        path: ASSETS_PATH + '/home-page/وایت برد.png',
+        path: ASSETS_PATH + '/image-theme/وایت برد.png',
         linkObject: {
             name: 'whiteBoard'
         }
