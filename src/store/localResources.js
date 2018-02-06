@@ -180,7 +180,7 @@ export const lastMagnets = [
     },
 ];
 
-export const thumbnails = {
+export const thumbnails1 = {
     curriculum: {
         path: ASSETS_PATH + '/image-theme/برنامه درسی.png',
         linkObject: {
@@ -204,7 +204,10 @@ export const thumbnails = {
         linkObject: {
             name: 'pictureFrame'
         }
-    },
+    }
+};
+
+export const thumbnails2 = {
     subscribeCard: {
         path: ASSETS_PATH + '/image-theme/کارت اشتراک.png',
         linkObject: {
