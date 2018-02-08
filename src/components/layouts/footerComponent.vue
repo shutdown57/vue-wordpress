@@ -155,14 +155,12 @@ div > img.copyright {
   margin-right: auto;
 }
 footer {
-    /* position: absolute !important; */
     left: 0;
     color: #e7dfdd;
     bottom: 0;
     width: 100%;
 }
 .btn-link{
-  /* background-color: #a239ca !important; */
   background-color: #1c8a9b !important;
   color: #e7dfdd !important;
 }
@@ -176,8 +174,6 @@ footer {
   background-color: #0e0b16 !important;
 }
 .blacky {
-  /* background-color: #4717f6; */
-  /* background-color: #1e3235; */
   background-color: #e0cf55;
   color: black;
   text-align: center;
