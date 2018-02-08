@@ -9,14 +9,12 @@ Vue.http.options.crossOrigin = true;
 Vue.http.options.credentials = true;
 Vue.http.options.emulateHTTP = true;
 
-// TODO Fix this file to be like "../components/blog/blogAllComponent.vue" for request to categories
 export const CategoriesAllResource = Vue.resource(API_ROUTES + 'categories');
 export const CategoriesIdResource = Vue.resource(API_ROUTES + 'categories/{id}');
 
 export const CommentsAllResource = Vue.resource(API_ROUTES + 'comments{/post}');
 export const CommentsIdResource = Vue.resource(API_ROUTES + 'comments{/id}');
 
-// TODO MediaAllResource should get the media of post or page
 export const MediaAllResource = Vue.resource(API_ROUTES + 'media{/media_type}');
 export const MediaIdResource = Vue.resource(API_ROUTES + 'media/{id}');
 
