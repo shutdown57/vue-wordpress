@@ -98,22 +98,13 @@ address {
   padding-top: 1em;
   padding-bottom: 0px;
 }
-
-/* #2d4a4e -> medium-dark 
- * #1e3235 -> dark
- * #1c8a9b -> meduim
- * #00dsff -> low
-*/
-
 .nav-bg {
   background-color: #0e0b16 !important;
   color: #e7dfdd !important;
 }
-
 a {
   color: #e7dfdd !important;
 }
-
 a.dropdown-toggle:hover, a.dropdown-toggle:active, a.dropdown-toggle:focus {
   background-color: #000000 !important;
   color: #e7dfdd !important;
@@ -126,18 +117,15 @@ a.router-link-exact-active.router-link-active {
   background-color: #696969 !important;
   color: #e7dfdd !important;
 }
-
 .nav > li > a:focus, .nav > li > a:hover {
   background-color: #808080 !important;
   color: #e7dfdd !important;
 }
-
 .dropdown-menu > li > a.text-right:focus, .dropdown-menu > li > a.text-right:hover {
   background-color: #696969 !important;
   color: #e7dfdd !important;
   background-image: none !important;
 }
-
 .dropdown-style {
   background-color: #808080 !important;
 }
