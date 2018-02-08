@@ -70,16 +70,6 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="row">
-            <div class="col-md-2 col-md-offset-4">
-                <br>
-                <button class="btn btn-primary btn-block" @click="editInfo">ویرایش</button>
-            </div>
-            <div class="col-md-2">
-                <br>
-                <button class="btn btn-success btn-block" :disabled="disable.accept">تایید</button>
-            </div>
-        </div> -->
     </div>
 </template>
 
