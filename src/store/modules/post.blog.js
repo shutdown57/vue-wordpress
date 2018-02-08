@@ -40,7 +40,7 @@ const actions = {
                         link: resolve.body.link
                     });
                 }, (reject) => {
-                    // console.log(rej);
+                    // console.error(rej);
                 });
 
                 // Tags Handling
