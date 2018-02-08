@@ -1,5 +1,6 @@
 <template>
     <div class="direction-rtl">
+        <br><br>
         <h1>این صفحه وجود ندارد</h1>
     </div>
 </template>
