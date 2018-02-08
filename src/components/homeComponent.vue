@@ -63,7 +63,7 @@
             </div>
             <div class="row gold">
                 <div class="col-sm-12">
-                    <carousel-3d :autoplay="true" :autoplay-timeout="3000" :display="5" :width="300" :height="200">
+                    <carousel-3d :autoplay="true" :autoplay-timeout="2000" :display="5" :width="300" :height="200">
                         <slide class="slides" v-for="(brand, index) in brands" :index="index">
                             <img :src="brand">
                         </slide>
