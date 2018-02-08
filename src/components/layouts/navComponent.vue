@@ -89,6 +89,9 @@ export default {
 </script>
 
 <style scoped>
+div.navbar-header.navbar-right > button.navbar-toggle.collapsed {
+  background-color: #808080;
+}
 address {
   font-size: 1.5em;
 }
