@@ -4,14 +4,23 @@
         <br>
         <div class="row">
           <div class="col-sm-12 col-md-4 text-center">
-            <h2>برچسب‌ها و آرشیو مطالب</h2>
-            <div>
-              <span>
-                <router-link class="btn btn-link" :to="{name: 'tags'}" exact>برچسب‌ها</router-link>
-              </span>
-              <span>
-                <router-link class="btn btn-link" :to="{name: 'categories'}" exact>دسته‌بندی‌ها</router-link>
-              </span>
+            <div class="row">
+              <div class="col-sm-12">
+                <h2>برچسب‌ها و آرشیو مطالب</h2>
+              </div>
+              <div class="col-sm-12">
+                <br>
+                <span>
+                  <router-link class="btn btn-link" :to="{name: 'tags'}" exact>برچسب‌ها</router-link>
+                </span>
+                <span>
+                  <router-link class="btn btn-link" :to="{name: 'categories'}" exact>دسته‌بندی‌ها</router-link>
+                </span>
+              </div>
+              <div class="col-sm-12" dir="ltr">
+                <br>
+                <img class="copyright img-responsive" :src="copyright.src" :alt="copyright.alt">
+              </div>
             </div>
           </div>
           <div class="col-sm-12 col-md-4 text-center">
@@ -114,6 +123,10 @@ export default {
   data () {
     return {
       msg: "Footer",
+      copyright: {
+        src: ASSETS_PATH + '/copyright.png',
+        alt: 'تمامی مطالب محفوظ است.'
+      }
     }
   }
 }
@@ -127,6 +140,19 @@ export default {
   min-height: 16px;
   width: 16px;
   height: 16px;
+}
+.copyright {
+  max-width: 50px;
+  min-width: 50px;
+  max-height: 50px;
+  min-height: 50px;
+  width: 50px;
+  height: 50px;
+}
+div > img.copyright {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 footer {
     /* position: absolute !important; */
