@@ -17,7 +17,7 @@ const actions = {
                 if (!res.ok) {
                     return commit(GET_PRODUCT_LIST_FAILURE);
                 }
-                // console.log(res.body);
+                // console.error(res.body);
                 commit(PRODUCT_LIST, {
                     productList: res.body
                 });
