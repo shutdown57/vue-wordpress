@@ -297,3 +297,5 @@ export const brands = [
     ASSETS_PATH + '/brands/Sunstar(FA)Logo.png',
     ASSETS_PATH + '/brands/Taje.png'
 ];
+
+export const default_img = ASSETS_PATH + '/brand.png';
