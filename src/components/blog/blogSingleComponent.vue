@@ -5,7 +5,7 @@
         </div>
         <h1>{{postDetails.title.rendered}}</h1>
         <div class="row">
-            <div class="col-xs-4">
+            <div v-if="'img_info' in postDetails" class="col-xs-4">
                 <img class="img-responsive" :src="postDetails.img_info[0].url" :alt="postDetails.img_info[0].title">
             </div>
             <div class="col-xs-8">
@@ -56,20 +56,11 @@ import {mapActions, mapState} from 'vuex';
 export default {
     name: 'blogSingle',
 
-    computed: {
-        ...mapState({
-            pid: ({route}) => route.params.pid
-        })
-    },
-
     watch: {
         '$route': 'initParam'
     },
 
     methods: {
-        ...mapActions([
-            'getPostDetails'
-        ]),
         initParam() {
             const pid = this.$route.params.pid;
             return pid;
@@ -91,20 +82,21 @@ export default {
         let id = this.initParam();
         this.$http.get(API_ROUTES + 'posts/' + id)
             .then((res) => {
-
                 // Handling Thumbnail
-                res.body.img_info = [];
-                api.getMediaId(res.body.featured_media)
-                    .then((resolve) => {
-                        res.body.img_info.push({
-                            url: resolve.body.source_url,
-                            title: resolve.body.title.rendered
-                        })
-                    }, (reject) => {
-                        this.alert_msg.have = true;
-                        this.alert_msg.msg = 'مشکل در ارتباط با سرور';
-                        this.alert_msg.type = 'alert-danger';
-                    });
+                if (res.body.featured_media != 0) {
+                    res.body.img_info = [];
+                    api.getMediaId(res.body.featured_media)
+                        .then((resolve) => {
+                            res.body.img_info.push({
+                                url: resolve.body.source_url,
+                                title: resolve.body.title.rendered
+                            })
+                        }, (reject) => {
+                            this.alert_msg.have = true;
+                            this.alert_msg.msg = 'مشکل در ارتباط با سرور';
+                            this.alert_msg.type = 'alert-danger';
+                        });
+                }
 
                 // Handling Categories
                 res.body.cats = [];
@@ -118,7 +110,7 @@ export default {
                         this.alert_msg.have = true;
                         this.alert_msg.msg = 'مشکل در ارتباط با سرور';
                         this.alert_msg.type = 'alert-danger';
-                });
+                    });
 
                 // Handling Tags
                 res.body.post_tags = [];
