@@ -1,8 +1,10 @@
 <template>
 <div class="direction-rtl">
+    <div v-if="num < 1">{{infiniteHandler()}}</div>
     <div v-if="alert_msg.have" class="alert text-center" :class="alert_msg.type" role="alert">
         {{ alert_msg.msg }}
     </div>
+    {{page_list}}
     <div class="panel panel-info">
         <div class="panel-heading">
             <h3 class="panel-title">{{msg}}</h3>
@@ -11,7 +13,7 @@
             <div class="row">
                 <div v-for="product in productWhiteBoard" class="col-xs-6 col-md-3">
                     <a href="#" class="thumbnail" data-toggle="modal" data-target="#myModal">
-                    <img :src="product.img_info[0].url" :alt="product.img_info[0].title" v-model="img_info=product.img_info[0]">
+                    <img :src="product.img_info[0].url" alt="وایت برد مگنتی" v-model="img_info=product.img_info[0]">
                     </a>
                 </div>
             </div>
@@ -24,10 +26,10 @@
         <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" dir="rtl" id="myModalLabel">{{img_info.title}}</h4>
+            <h4 class="modal-title" dir="rtl" id="myModalLabel">{{"وایت برد مگنتی"}}</h4>
         </div>
         <div class="modal-body text-center">
-            <img class="img-responsive" :src="img_info.url" :alt="img_info.title">
+            <img class="img-responsive" :src="img_info.url" alt="وایت برد مگنتی">
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">بستن</button>
@@ -35,40 +37,56 @@
         </div>
     </div>
     </div>
+
+    <div v-if="page_list.length > 1">
+        <span v-for="item in page_list" class="text-center">
+            <button type="button" class="btn btn-primary" @click="loadPage(item)">{{ item }}</button>
+        </span>
+    </div>
     
     <!-- Infinite Loading -->
-    <infinite-loading @infinite="infiniteHandler">
-        <span slot="no-more">
-            <div class="alert alert-warning alert-dismissible" role="alert" dir="rtl">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <strong>توجه!</strong> پست دیگری وجود ندارد.
-            </div>
-        </span>
-    </infinite-loading>
+    <!-- <div infinite-wrapper>
+        <infinite-loading @infinite="infiniteHandler" force-use-infinite-wrapper="true">
+            <span slot="no-more">
+                <div class="alert alert-warning alert-dismissible" role="alert" dir="rtl">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <strong>توجه!</strong> پست دیگری وجود ندارد.
+                </div>
+            </span>
+        </infinite-loading>
+    </div> -->
+
 </div>
 </template>
 
 <script>
 /**
  * @component: White Board
+ * Category: 92
  */
 import InfiniteLoading from 'vue-infinite-loading';
-
+import {sleep, Base64} from '../../mixins/utils';
 import api from '../../api';
 import {PRODUCT_WHITEBOURD} from '../../store/staticsCategories';
+import { BASE_URL, NONCE } from '../../config';
 
 export default {
     name: 'whiteBoard',
 
-    components: {
-        InfiniteLoading
-    },
+    // components: {
+    //     InfiniteLoading
+    // },
     
     data() {
         return {
+            token: '',
+            counts: true,
             img_info: {},
+            num: 0,
             productWhiteBoard: [],
             msg: 'نمونه کار‌های وایت برد',
+            page_list: [],
+            current_page: 0,
             alert_msg: {
                 have: false,
                 msg: '',
@@ -82,41 +100,80 @@ export default {
     },
 
     methods: {
-        infiniteHandler($state) {
-            let CATEGORIES_OUT = [1, 2, 7, 5];
-            this.$http.get("http://wordpress.app/wp-json/wp/v2/posts", {
+        loadPage: function(page_number) {
+            page_number = parseInt(page_number);
+            let CATEGORIES_OUT = [83, 84, 85, 86, 87, 88, 89, 90, 91, 1, 61];
+            /*****************************************************************************************/
+            // Get Posts
+            this.$http.get(BASE_URL + "wp-json/wp/v2/posts", {
                 params: {
                     categories: PRODUCT_WHITEBOURD,
                     categories_exclude: CATEGORIES_OUT,
-                    page: this.productWhiteBoard.length / 6 + 1,
-                    per_page: 6
+                    page: page_number,
+                    per_page: 10
+                },
+                before: (request) => {
+                    // request.headers.set('X-WP-Nonce', NONCE);
+                    request.headers.set('Content-Type', 'application/x-www-form-urlencoded');
+                    request.headers.set('Authorization', 'Basic ' + Base64.encode( 'default:strongPassword1234' ));
                 }
             }).then(res => {
-                if (res.body.length) {
+                // if (res.body.length && this.productWhiteBoard.length < this.counts) {
                     res.body.map((cur_img, i_img, arr_img) => {
                         cur_img.img_info = [];
-                        api.getMediaId(cur_img.featured_media)
-                            .then(resolve => {
+                        /*****************************************************************************/
+                        // Get post image
+                        this.$http.get(BASE_URL + "wp-json/info/v1/post",
+                        {
+                            params: {
+                                post_id: cur_img.id
+                            },
+                            before: (request) => {
+                                // request.headers.set('X-WP-Nonce', NONCE);
+                                request.headers.set('Content-Type', 'application/x-www-form-urlencoded');
+                                request.headers.set('Authorization', 'Basic ' + Base64.encode( 'default:strongPassword1234'));
+                            }
+                        }).then(resp => {
                                 cur_img.img_info.push({
-                                    title: resolve.body.title.rendered,
-                                    url: resolve.body.source_url
+                                    url: resp.body.url
                                 });
-                            }, reject => { 
+                            }, reject => {
                                 this.alert_msg.have = true;
                                 this.alert_msg.msg = 'مشکل در ارتباط با سرور';
                                 this.alert_msg.type = 'alert-danger';
-                             });
+                            });
                     });
-                    this.productWhiteBoard = this.productWhiteBoard.concat(res.body);
-                    $state.loaded();
-                    if (this.productWhiteBoard.length % 6 == 10) {
-                        $state.complete();
-                    }
-                } else {
-                    $state.complete();
-                }
-            }, rej => {
-                $state.complete();
+
+                    this.productWhiteBoard = res.body.copyWithin();
+                    // $state.loaded();
+                    
+                    // if (this.productWhiteBoard.length % 6 == this.counts) {
+                    //     $state.complete();
+                    // }
+                // } else { $state.complete(); }
+            }, rej => { /* $state.complete(); */ });
+        },
+
+        infiniteHandler: function($state) {
+            this.num += 1;
+            sleep(2000).then(() => {
+                /*****************************************************************************************/
+                // Get number of posts
+                this.$http.get(BASE_URL + "wp-json/wp/v2/categories/" + PRODUCT_WHITEBOURD, {
+                            before: (request) => {
+                                // request.headers.set('X-WP-Nonce', NONCE);
+                                request.headers.set('Content-Type', 'application/x-www-form-urlencoded');
+                                request.headers.set('Authorization', 'Basic ' + Base64.encode( 'default:strongPassword1234' ));
+                            }
+                        }).then(resolve => {
+                            let total_page = parseInt(resolve.body.count / 10);
+                            if (resolve.body.count % 10 > 0) {
+                                total_page += 1;
+                            }
+                            for (let i = 1; i <= total_page; i++) {
+                                this.page_list.push(i);
+                            }
+                        }, reject => {});
             });
         }
     }
@@ -124,5 +181,6 @@ export default {
 </script>
 
 <style>
-
+.direction-rtl { direction: rtl; }
+img { width: 100% !important;}
 </style>
