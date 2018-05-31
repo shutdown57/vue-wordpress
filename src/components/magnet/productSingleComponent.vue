@@ -57,6 +57,7 @@ import InfinteLoading from 'vue-infinite-loading';
 import api from '../../api';
 import {PRODUCT_CATEGORIES_IN} from '../../store/staticsCategories';
 import {removeArray, addArray} from '../../mixins/utils';
+import { BASE_URL, NONCE } from '../../config';
 
 export default {
     name: 'productSingle',
@@ -93,9 +94,9 @@ export default {
         infiniteHandler($state) {
             let id = this.initParam();
             id = addArray(parseInt(id));
-            let allCategories = [...PRODUCT_CATEGORIES_IN, ...[1, 2, 17]];
+            let allCategories = [...PRODUCT_CATEGORIES_IN, ...[1, 61]];
             removeArray(allCategories, id[0]);
-            this.$http.get("http://wordpress.app/wp-json/wp/v2/posts", {
+            this.$http.get(BASE_URL + "wp-json/wp/v2/posts", {
                 params: {
                     categories: id,
                     categories_exclude: allCategories,
