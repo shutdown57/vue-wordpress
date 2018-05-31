@@ -1,7 +1,7 @@
 <template>
     <div>
         <div>
-            <h1 class="text-center">شرکت ایرانیان مگنت</h1>
+            <h1 class="text-center bigger-h1">شرکت ایرانیان مگنت</h1>
             <div class="row gold">
                 <div class="col-sm-12">
                     <carousel-3d :autoplay="true" :autoplay-timeout="2000" :display="5" :width="300" :height="200">
@@ -11,7 +11,15 @@
                     </carousel-3d>
                 </div>
             </div>
-            <div class="row">
+            <div class="row gold">
+                <div class="col-sm-12 text-center">
+                    <h3 class="text-center bigger-h2">
+                        تلفن‌ تماس
+                    </h3>
+                    <h2 class="text-center bigger-h2">
+                        ۰۲۱-۷۴۸۴۵
+                    </h2>
+                </div>
             </div>
             <div class="row">
                 <div class="col-sm-12 text-center">
@@ -135,6 +143,14 @@ img { width: 100% !important; height: 100% !important; }
 .thumbs {
     padding-right: 5px;
     padding-left: 5px;
+}
+.bigger-h2 {
+    font-size: 300%;
+    font-family: Yekan;
+    src: url("https://www.iranianmagnet.com/wp-content/themes/vue-new/src/assets/fonts/Yekan.ttf");
+}
+.bigger-h1 {
+    font-size: 300%;
 }
 .head-3 {
     background-color: #e0cf55;
