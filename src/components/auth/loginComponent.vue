@@ -47,7 +47,7 @@
 /**
  * component: Login
  */
-import {VALIDATIONS} from '../../config';
+import {VALIDATIONS, BASE_URL} from '../../config';
 import {Base64} from '../../mixins/utils';
 import User from '../../mixins/user';
 import {NONCE} from '../../config';
@@ -77,7 +77,7 @@ export default {
 
     methods: {
         getData(user) {
-            this.$http.post('http://wordpress.app/wp-json/jwt-auth/v1/token', {},
+            this.$http.post(BASE_URL + 'wp-json/jwt-auth/v1/token', {},
                 {
                     params: {
                         username: user.username,
@@ -101,7 +101,7 @@ export default {
                 this.alert_msg.have = true;
                 this.alert_msg.type = 'alert-success';
                 this.alert_msg.msg = 'با موفقیت وارد شدید.';
-                
+
                 setTimeout(() => {
                     this.$router.push({name: 'home'});
                 }, 2000);
