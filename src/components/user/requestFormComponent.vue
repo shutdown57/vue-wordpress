@@ -83,9 +83,7 @@
                             </div> <!-- X * Y -->
                             <br>
                             <!-- Submit button -->
-                            <!-- <vue-recaptcha sitekey="6Ld88UAUAAAAAA8jM-GSJcN0wHPpmZNqKUdTOP-V"> -->
-                                <button type="button" @click="sendRequest(order)" class="btn btn-success btn-block">ثبت نام</button>
-                            <!-- </vue-recaptcha> -->
+                            <button type="button" @click="sendRequest(order)" class="btn btn-success btn-block">ثبت نام</button>
                             <!-- Submit button -->
                         </form>
                     </div>
@@ -134,7 +132,7 @@ export default {
                     this.alert_msg.have = true;
                     this.alert_msg.msg = 'پیام با موفقیت ارسال شد';
                     this.alert_msg.type = 'alert-success';
-                }, (err) => { 
+                }, (err) => {
                     this.alert_msg.have = true;
                     this.alert_msg.msg = 'مشکل در ارتباط با سرور';
                     this.alert_msg.type = 'alert-danger';
@@ -145,7 +143,7 @@ export default {
     created() {
         window.document.title = 'فرم سفارش مگنت';
     },
-    
+
     data() {
         return {
             order: {},
