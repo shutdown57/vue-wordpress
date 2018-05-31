@@ -36,51 +36,51 @@
                 <div class="row">
                   <div class="col-xs-2 col-xs-offset-3">
                     <network network="telegram">
-                      <img class="img-responsive img-icon" :src="'http://wordpress.app' + '/wp-content/themes/vue-new/src/assets' + '/share-icons/telegram-50.png'">
+                      <img class="img-responsive img-icon" :src="'https://www.iranianmagnet.com' + '/wp-content/themes/vue-new/src/assets' + '/share-icons/telegram-50.png'">
                     </network>
                   </div>
                   <div class="col-xs-2">
                     <network network="twitter">
-                      <img class="img-responsive" :src="'http://wordpress.app' + '/wp-content/themes/vue-new/src/assets' + '/share-icons/twitter-50.png'">
+                      <img class="img-responsive" :src="'https://www.iranianmagnet.com' + '/wp-content/themes/vue-new/src/assets' + '/share-icons/twitter-50.png'">
                     </network>
                   </div>
                   <div class="col-xs-2">
                     <network network="reddit">
-                      <img class="img-responsive" :src="'http://wordpress.app' + '/wp-content/themes/vue-new/src/assets' + '/share-icons/reddit-50.png'">
+                      <img class="img-responsive" :src="'https://www.iranianmagnet.com' + '/wp-content/themes/vue-new/src/assets' + '/share-icons/reddit-50.png'">
                     </network>
                   </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-2 col-xs-offset-3">
                     <network network="facebook">
-                      <img class="img-responsive" :src="'http://wordpress.app' + '/wp-content/themes/vue-new/src/assets' + '/share-icons/facebook-50.png'">
+                      <img class="img-responsive" :src="'https://www.iranianmagnet.com' + '/wp-content/themes/vue-new/src/assets' + '/share-icons/facebook-50.png'">
                     </network>
                   </div>
                   <div class="col-xs-2">
                     <network network="googleplus">
-                      <img class="img-responsive" :src="'http://wordpress.app' + '/wp-content/themes/vue-new/src/assets' + '/share-icons/google-plus-50.png'">
+                      <img class="img-responsive" :src="'https://www.iranianmagnet.com' + '/wp-content/themes/vue-new/src/assets' + '/share-icons/google-plus-50.png'">
                     </network>
                   </div>
                   <div class="col-xs-2">
                     <network network="linkedin">
-                      <img class="img-responsive" :src="'http://wordpress.app' + '/wp-content/themes/vue-new/src/assets' + '/share-icons/linkedin-50.png'">
+                      <img class="img-responsive" :src="'https://www.iranianmagnet.com' + '/wp-content/themes/vue-new/src/assets' + '/share-icons/linkedin-50.png'">
                     </network>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-xs-2 col-xs-offset-3">
                     <network network="pinterest">
-                      <img class="img-responsive" :src="'http://wordpress.app' + '/wp-content/themes/vue-new/src/assets' + '/share-icons/pinterest-50.png'">
+                      <img class="img-responsive" :src="'https://www.iranianmagnet.com' + '/wp-content/themes/vue-new/src/assets' + '/share-icons/pinterest-50.png'">
                     </network>
                   </div>
                   <div class="col-xs-2">
                     <network network="email">
-                      <img class="img-responsive" :src="'http://wordpress.app' + '/wp-content/themes/vue-new/src/assets' + '/share-icons/email-50.png'">
+                      <img class="img-responsive" :src="'https://www.iranianmagnet.com' + '/wp-content/themes/vue-new/src/assets' + '/share-icons/email-50.png'">
                     </network>
                   </div>
                   <div class="col-xs-2">
                     <network network="skype">
-                      <img class="img-responsive" :src="'http://wordpress.app' + '/wp-content/themes/vue-new/src/assets' + '/share-icons/skype-50.png'">
+                      <img class="img-responsive" :src="'https://www.iranianmagnet.com' + '/wp-content/themes/vue-new/src/assets' + '/share-icons/skype-50.png'">
                     </network>
                   </div>
                 </div>
