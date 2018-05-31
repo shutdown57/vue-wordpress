@@ -1,18 +1,18 @@
 
 export const API_ROOT = root;
-export const BASE_URL = 'http://wordpress.app'; // Main url
-export const ASSETS_PATH = BASE_URL + '/wp-content/themes/vue-new/src/assets';
+export const BASE_URL = 'https://www.iranianmagnet.com/'; // Main url
+export const ASSETS_PATH = BASE_URL + 'wp-content/themes/vue-new/src/assets';
 export const NAMESPACE = 'wp/v2/';
 export const API_ROUTES = API_ROOT + NAMESPACE;
 export const NONCE = nonce;
-export const CookieDomain = 'wordpress.app';
+export const CookieDomain = 'www.iranianmagnet.com';
 
-export const APP_PASS = ''; // App password
+export const APP_PASS = 'Lnru goL1 8wTD Bgrd m6UB k25W'; // App password
 
 export const GMAPS_OPT = {
     load: {
-        key: '', // GOOGLE API KEY
-        v: '3.29'    // GOOGLE API VERSION
+        key: 'AIzaSyA7A9AFSDRwdFPj7OC_pImF7zpeOu3D6mw', // GOOGLE API KEY
+        // v: '3.29'    // GOOGLE API VERSION
     }
 };
 
@@ -32,4 +32,8 @@ export const VALIDATIONS = {
     MOBILE: /^09(\d){9}/,
     PHONE: /^[0](1[137]|2[134568]|3[1458]|4[145]|5[1468]|6[16]|7[1467]|8[13467])\d{8}/,
     XY: /^[0-9]/
+};
+
+export const VALID = {
+    sum: (x, y) => {return x+y;}
 };
