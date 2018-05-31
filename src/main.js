@@ -20,6 +20,8 @@ Vue.use(VeeValidate, veeConfig);
 Vue.use(VueLocalStorage, LOCALSTORAGE_OPT);
 Vue.use(Carousel3d);
 
+
+
 const router = new VueRouter({
   routes: Routes,
   mode: 'history'
