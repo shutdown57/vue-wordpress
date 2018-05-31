@@ -19,7 +19,7 @@ export const MediaAllResource = Vue.resource(API_ROUTES + 'media{/media_type}');
 export const MediaIdResource = Vue.resource(API_ROUTES + 'media/{id}');
 
 export const PagesAllResource = Vue.resource(API_ROUTES + 'pages');
-export const PagesIdResource = Vue.resource(API_ROUTES + 'pages{/id}');
+export const PagesIdResource = Vue.resource(API_ROUTES + 'pages/{id}');
 export const PagesRevisionsAllResource = Vue.resource(API_ROUTES + 'pages{/parent}/revisions');
 export const PagesRevisionsIdResource = Vue.resource(API_ROUTES + 'pages{/parent}/revisions{/id}');
 
