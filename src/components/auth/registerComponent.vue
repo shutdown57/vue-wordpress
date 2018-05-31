@@ -101,7 +101,7 @@
                                     <div class="alert alert-danger" role="alert" v-show="errors.has('mobile')">{{ "لطفا به صورت ۰۹۱۲۰۰۰۰۰۰۰ وارد کنید" }}</div>
                                 </div>
                             </div><!-- Mobile -->
-                            
+
                             <!-- Address -->
                             <div class="col-xs-12">
                                 <div class="form-group">
@@ -114,9 +114,7 @@
                             </div><!-- Address -->
                             <br>
                             <!-- Submit button -->
-                            <!-- <vue-recaptcha sitekey="6Ld88UAUAAAAAA8jM-GSJcN0wHPpmZNqKUdTOP-V"> -->
-                                <button type="button" @click="getData(user)" class="btn btn-success btn-block">ثبت نام</button>
-                            <!-- </vue-recaptcha> -->
+                            <button type="button" @click="getData(user)" class="btn btn-success btn-block">ثبت نام</button>
                             <!-- Submit button -->
                         </form>
                     </div>
@@ -132,7 +130,7 @@
 */
 import fa from 'vee-validate/dist/locale/fa';
 import VueRecaptcha from 'vue-recaptcha';
-import {VALIDATIONS, NONCE} from '../../config';
+import {VALIDATIONS, NONCE, BASE_URL} from '../../config';
 import User from '../../mixins/user';
 
 export default {
@@ -178,7 +176,7 @@ export default {
             );
 
             if (user.password === user.password_c){
-                this.$http.post('http://wordpress.app/wp-json/wp/v2/users', { }, {
+                this.$http.post(BASE_URL + 'wp-json/wp/v2/users', { }, {
                 method: 'POST',
                 params: {
                     username: user.username,
@@ -196,13 +194,13 @@ export default {
                     this.alert_msg.have = true;
                     this.alert_msg.success = 'alert-success';
                     this.alert_msg.msg = 'اطلاعات به درستی فرستاده شد';
-                }, rej => { 
+                }, rej => {
                     this.alert_msg.have = true;
                     this.alert_msg.success = "alert-danger";
                     this.alert_msg.msg = 'مشکل در ارتباط با سرور';
                 });
 
-                this.$http.get('http://wordpress.app/wp-json/complete/v1/register', {
+                this.$http.get(BASE_URL + 'wp-json/complete/v1/register', {
                     method: 'GET',
                     params: {
                         email: user.email,
@@ -219,7 +217,7 @@ export default {
                     this.alert_msg.have = true;
                     this.alert_msg.success = "alert-succuss";
                     this.alert_msg.msg = 'اطلاعات به درستی فرستاده شد';
-                }, (err) => { 
+                }, (err) => {
                     this.alert_msg.have = true;
                     this.alert_msg.success = "alert-danger";
                     this.alert_msg.msg = 'مشکل در ارتباط با سرور';
