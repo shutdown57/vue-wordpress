@@ -13,9 +13,8 @@ yarn-error.log
 .vscode
 .git
 
-# useless files
-./vue-new.zip
-./screeenshot.png
-./sample_result.json
-./functions.php
-./vue-new
+vue-new.zip
+screenshot.png
+sample_result.json
+functions.php
+vue-new
