@@ -13,6 +13,7 @@
  * @component: App
  * Root component
 */
+
 import navComponent from './components/layouts/navComponent.vue';
 import footerComponent from './components/layouts/footerComponent.vue';
 
@@ -29,14 +30,14 @@ export default {
 <style>
 @font-face {
   font-family: Khodkar-Bold;
-  src: url("http://wordpress.app/wp-content/themes/vue-new/src/assets/fonts/Khodkar-Bold.ttf");
+  src: url("https://www.iranianmagnet.com/wp-content/themes/vue-new/src/assets/fonts/Khodkar-Bold.ttf");
 }
 .bg-main {
   background-color: #e7dfdd;
 }
 
 .fixed-bg {
-  background-image: url("http://wordpress.app/wp-content/themes/vue-new/src/assets/background.ai.svg");
+  background-image: url("https://www.iranianmagnet.com/wp-content/themes/vue-new/src/assets/background.ai.png");
   min-height: 500px;
   background-attachment: fixed;
   background-position: center;
