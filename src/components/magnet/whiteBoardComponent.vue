@@ -1,10 +1,10 @@
 <template>
 <div class="direction-rtl">
-    <div v-if="num < 1">{{infiniteHandler()}}</div>
+    <div v-if="num < 1">{{infiniteHandler()}} {{loadPage(1)}}</div>
     <div v-if="alert_msg.have" class="alert text-center" :class="alert_msg.type" role="alert">
         {{ alert_msg.msg }}
     </div>
-    {{page_list}}
+
     <div class="panel panel-info">
         <div class="panel-heading">
             <h3 class="panel-title">{{msg}}</h3>
@@ -19,7 +19,7 @@
             </div>
         </div>
     </div>
-        
+
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" v-if="img_info">
     <div class="modal-dialog" role="document">
@@ -43,7 +43,7 @@
             <button type="button" class="btn btn-primary" @click="loadPage(item)">{{ item }}</button>
         </span>
     </div>
-    
+
     <!-- Infinite Loading -->
     <!-- <div infinite-wrapper>
         <infinite-loading @infinite="infiniteHandler" force-use-infinite-wrapper="true">
@@ -76,7 +76,7 @@ export default {
     // components: {
     //     InfiniteLoading
     // },
-    
+
     data() {
         return {
             token: '',
@@ -146,7 +146,7 @@ export default {
 
                     this.productWhiteBoard = res.body.copyWithin();
                     // $state.loaded();
-                    
+
                     // if (this.productWhiteBoard.length % 6 == this.counts) {
                     //     $state.complete();
                     // }
