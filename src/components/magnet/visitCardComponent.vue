@@ -52,11 +52,9 @@
  * @component: Visit Card
  * Category: 91
  */
-import InfiniteLoadnig from 'vue-infinite-loading';
 import {sleep, Base64} from '../../mixins/utils';
-import api from '../../api';
 import {PRODUCT_CARD_VISIT} from '../../store/staticsCategories';
-import { BASE_URL, NONCE } from '../../config';
+import { BASE_URL } from '../../config';
 
 export default {
     name: 'whiteBoard',
