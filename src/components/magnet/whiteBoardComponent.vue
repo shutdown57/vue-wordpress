@@ -99,31 +99,31 @@ export default {
                     request.headers.set('Authorization', 'Basic ' + Base64.encode( 'default:strongPassword1234' ));
                 }
             }).then(res => {
-                    res.body.map((cur_img, i_img, arr_img) => {
-                        cur_img.img_info = [];
-                        /*****************************************************************************/
-                        // Get post image
-                        this.$http.get(BASE_URL + "wp-json/info/v1/post",
-                        {
-                            params: {
-                                post_id: cur_img.id
-                            },
-                            before: (request) => {
-                                request.headers.set('Content-Type', 'application/x-www-form-urlencoded');
-                                request.headers.set('Authorization', 'Basic ' + Base64.encode( 'default:strongPassword1234'));
-                            }
-                        }).then(resp => {
-                            cur_img.img_info.push({
-                                url: resp.body.url
-                            });
-                        }, reject => {
-                            this.alert_msg.have = true;
-                            this.alert_msg.msg = 'مشکل در ارتباط با سرور';
-                            this.alert_msg.type = 'alert-danger';
+                res.body.map((cur_img, i_img, arr_img) => {
+                    cur_img.img_info = [];
+                    /*****************************************************************************/
+                    // Get post image
+                    this.$http.get(BASE_URL + "wp-json/info/v1/post",
+                    {
+                        params: {
+                            post_id: cur_img.id
+                        },
+                        before: (request) => {
+                            request.headers.set('Content-Type', 'application/x-www-form-urlencoded');
+                            request.headers.set('Authorization', 'Basic ' + Base64.encode( 'default:strongPassword1234'));
+                        }
+                    }).then(resp => {
+                        cur_img.img_info.push({
+                            url: resp.body.url
                         });
+                    }, reject => {
+                        this.alert_msg.have = true;
+                        this.alert_msg.msg = 'مشکل در ارتباط با سرور';
+                        this.alert_msg.type = 'alert-danger';
                     });
+                });
 
-                    this.productWhiteBoard = res.body.copyWithin();
+                this.productWhiteBoard = res.body.copyWithin();
             }, rej => { /* $state.complete(); */ });
         },
 
