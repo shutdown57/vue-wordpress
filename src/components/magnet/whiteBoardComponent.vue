@@ -53,11 +53,9 @@
  * @component: White Board
  * Category: 92
  */
-import InfiniteLoading from 'vue-infinite-loading';
 import {sleep, Base64} from '../../mixins/utils';
-import api from '../../api';
 import {PRODUCT_WHITEBOURD} from '../../store/staticsCategories';
-import { BASE_URL, NONCE } from '../../config';
+import { BASE_URL} from '../../config';
 
 export default {
     name: 'whiteBoard',
