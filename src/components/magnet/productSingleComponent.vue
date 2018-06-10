@@ -1,5 +1,6 @@
 <template>
 <div class="direction-rtl">
+    <div v-if="num < 1">{{infiniteHandler()}} {{loadPage(1)}}</div>
     <div v-if="alert_msg.have" class="alert text-center" :class="alert_msg.type" role="alert">
         {{ alert_msg.msg }}
     </div>
@@ -36,15 +37,13 @@
     </div>
     </div>
     
-    <!-- Infinite Loading -->
-    <infinite-loading @infinite="infiniteHandler">
-        <span slot="no-more">
-            <div class="alert alert-warning alert-dismissible" role="alert" dir="rtl">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <strong>توجه!</strong> پست دیگری وجود ندارد.
-            </div>
+    <!-- Paginate -->
+    <div v-if="page_list.length > 1">
+        <span v-for="item in page_list" class="text-center">
+            <button type="button" class="btn btn-primary" @click="loadPage(item)">{{ item }}</button>
         </span>
-    </infinite-loading>
+    </div>
+
 </div>
 </template>
 
@@ -67,31 +66,12 @@ export default {
     },
 
     methods: {
-        initParam() {
+        initParam: function () {
             const pid = this.$route.params.id;
             return pid;
-        }
-    },
-    
-    data() {
-        return {
-            img_info: {},
-            products: [],
-            msg: {},
-            alert_msg: {
-                have: false,
-                msg: '',
-                type: ''
-            }
-        };
-    },
+        },
 
-    created() {
-        window.document.title = 'محصول ایرانیان مگنت';
-    },
-
-    methods: {
-        infiniteHandler($state) {
+        infiniteHandler: function($state) {
             let id = this.initParam();
             id = addArray(parseInt(id));
             let allCategories = [...PRODUCT_CATEGORIES_IN, ...[1, 61]];
@@ -131,6 +111,23 @@ export default {
                 $state.complete();
             });
         }
+    },
+    
+    data() {
+        return {
+            img_info: {},
+            products: [],
+            msg: {},
+            alert_msg: {
+                have: false,
+                msg: '',
+                type: ''
+            }
+        };
+    },
+
+    created() {
+        window.document.title = 'محصول ایرانیان مگنت';
     }
 }
 </script>
