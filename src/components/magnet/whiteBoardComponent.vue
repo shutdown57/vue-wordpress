@@ -38,23 +38,12 @@
     </div>
     </div>
 
+    <!-- Paginate -->
     <div v-if="page_list.length > 1">
         <span v-for="item in page_list" class="text-center">
             <button type="button" class="btn btn-primary" @click="loadPage(item)">{{ item }}</button>
         </span>
     </div>
-
-    <!-- Infinite Loading -->
-    <!-- <div infinite-wrapper>
-        <infinite-loading @infinite="infiniteHandler" force-use-infinite-wrapper="true">
-            <span slot="no-more">
-                <div class="alert alert-warning alert-dismissible" role="alert" dir="rtl">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <strong>توجه!</strong> پست دیگری وجود ندارد.
-                </div>
-            </span>
-        </infinite-loading>
-    </div> -->
 
 </div>
 </template>
@@ -73,20 +62,13 @@ import { BASE_URL, NONCE } from '../../config';
 export default {
     name: 'whiteBoard',
 
-    // components: {
-    //     InfiniteLoading
-    // },
-
     data() {
         return {
-            token: '',
-            counts: true,
             img_info: {},
             num: 0,
             productWhiteBoard: [],
             msg: 'نمونه کار‌های وایت برد',
             page_list: [],
-            current_page: 0,
             alert_msg: {
                 have: false,
                 msg: '',
@@ -113,12 +95,10 @@ export default {
                     per_page: 10
                 },
                 before: (request) => {
-                    // request.headers.set('X-WP-Nonce', NONCE);
                     request.headers.set('Content-Type', 'application/x-www-form-urlencoded');
                     request.headers.set('Authorization', 'Basic ' + Base64.encode( 'default:strongPassword1234' ));
                 }
             }).then(res => {
-                // if (res.body.length && this.productWhiteBoard.length < this.counts) {
                     res.body.map((cur_img, i_img, arr_img) => {
                         cur_img.img_info = [];
                         /*****************************************************************************/
@@ -129,28 +109,21 @@ export default {
                                 post_id: cur_img.id
                             },
                             before: (request) => {
-                                // request.headers.set('X-WP-Nonce', NONCE);
                                 request.headers.set('Content-Type', 'application/x-www-form-urlencoded');
                                 request.headers.set('Authorization', 'Basic ' + Base64.encode( 'default:strongPassword1234'));
                             }
                         }).then(resp => {
-                                cur_img.img_info.push({
-                                    url: resp.body.url
-                                });
-                            }, reject => {
-                                this.alert_msg.have = true;
-                                this.alert_msg.msg = 'مشکل در ارتباط با سرور';
-                                this.alert_msg.type = 'alert-danger';
+                            cur_img.img_info.push({
+                                url: resp.body.url
                             });
+                        }, reject => {
+                            this.alert_msg.have = true;
+                            this.alert_msg.msg = 'مشکل در ارتباط با سرور';
+                            this.alert_msg.type = 'alert-danger';
+                        });
                     });
 
                     this.productWhiteBoard = res.body.copyWithin();
-                    // $state.loaded();
-
-                    // if (this.productWhiteBoard.length % 6 == this.counts) {
-                    //     $state.complete();
-                    // }
-                // } else { $state.complete(); }
             }, rej => { /* $state.complete(); */ });
         },
 
@@ -160,20 +133,19 @@ export default {
                 /*****************************************************************************************/
                 // Get number of posts
                 this.$http.get(BASE_URL + "wp-json/wp/v2/categories/" + PRODUCT_WHITEBOURD, {
-                            before: (request) => {
-                                // request.headers.set('X-WP-Nonce', NONCE);
-                                request.headers.set('Content-Type', 'application/x-www-form-urlencoded');
-                                request.headers.set('Authorization', 'Basic ' + Base64.encode( 'default:strongPassword1234' ));
-                            }
-                        }).then(resolve => {
-                            let total_page = parseInt(resolve.body.count / 10);
-                            if (resolve.body.count % 10 > 0) {
-                                total_page += 1;
-                            }
-                            for (let i = 1; i <= total_page; i++) {
-                                this.page_list.push(i);
-                            }
-                        }, reject => {});
+                    before: (request) => {
+                        request.headers.set('Content-Type', 'application/x-www-form-urlencoded');
+                        request.headers.set('Authorization', 'Basic ' + Base64.encode( 'default:strongPassword1234' ));
+                    }
+                }).then(resolve => {
+                    let total_page = parseInt(resolve.body.count / 10);
+                    if (resolve.body.count % 10 > 0) {
+                        total_page += 1;
+                    }
+                    for (let i = 1; i <= total_page; i++) {
+                        this.page_list.push(i);
+                    }
+                }, reject => {});
             });
         }
     }
