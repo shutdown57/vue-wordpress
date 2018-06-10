@@ -1,5 +1,6 @@
 <template>
 <div class="direction-rtl">
+    <div v-if="num < 1">{{infiniteHandler()}} {{loadPage(1)}}</div>
     <div v-if="alert_msg.have" class="alert text-center" :class="alert_msg.type" role="alert">
         {{ alert_msg.msg }}
     </div>
@@ -36,18 +37,13 @@
     </div>
     </div>
 
-    <!-- Infinite Loading -->
-    <!-- <div infinite-wrapper>
-        <infinite-loading @infinite="infiniteHandler" force-use-infinite-wrapper="true">
-            <span slot="no-more">
-                <div class="alert alert-warning alert-dismissible" role="alert" dir="rtl">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <strong>توجه!</strong> پست دیگری وجود ندارد.
-                </div>
-            </span>
-        </infinite-loading>
-    </div> -->
-    {{infiniteHandler()}}
+    <!-- Paginate -->
+    <div v-if="page_list.length > 1">
+        <span v-for="item in page_list" class="text-center">
+            <button type="button" class="btn btn-primary" @click="loadPage(item)">{{ item }}</button>
+        </span>
+    </div>
+
 </div>
 </template>
 
@@ -65,15 +61,11 @@ import { BASE_URL, NONCE } from '../../config';
 export default {
     name: 'pictureFrame',
 
-    components: {
-        InfiniteLoading
-    },
-
     data() {
         return {
+            num: 0,
+            page_list: [],
             img_info: {},
-            token: '',
-            counts: true,
             productPictureFrame: [],
             msg: 'نمونه کار‌های قاب عکس',
             alert_msg: {
@@ -89,73 +81,70 @@ export default {
     },
 
     methods: {
-        infiniteHandler($state) {
-            sleep(2000).then(() => {
-                let CATEGORIES_OUT = [83, 84, 85, 86, 87, 89, 90, 91, 92, 1, 61];
-                /*****************************************************************************************/
-                // Get number of posts
-                this.$http.get(BASE_URL + "wp-json/wp/v2/categories/" + PRODUCT_PICTURE_FRAME, {
+        loadPage: function(page_number) {
+            page_number = parseInt(page_number);
+            let CATEGORIES_OUT = [83, 84, 85, 86, 87, 89, 90, 91, 92, 1, 61];
+            /*****************************************************************************************/
+            // Get Posts
+            this.$http.get(BASE_URL + "wp-json/wp/v2/posts", {
+                params: {
+                    categories: PRODUCT_PICTURE_FRAME,
+                    categories_exclude: CATEGORIES_OUT,
+                    page: page_number,
+                    per_page: 10
+                },
+                before: (request) => {
+                    request.headers.set('Content-Type', 'application/x-www-form-urlencoded');
+                    request.headers.set('Authorization', 'Basic ' + Base64.encode( 'default:strongPassword1234' ));
+                }
+            }).then(res => {
+                    res.body.map((cur_img, i_img, arr_img) => {
+                        cur_img.img_info = [];
+                        /*****************************************************************************/
+                        // Get post image
+                        this.$http.get(BASE_URL + "wp-json/info/v1/post",
+                        {
+                            params: {
+                                post_id: cur_img.id
+                            },
                             before: (request) => {
-                                request.headers.set('X-WP-Nonce', NONCE);
                                 request.headers.set('Content-Type', 'application/x-www-form-urlencoded');
                                 request.headers.set('Authorization', 'Basic ' + Base64.encode( 'default:strongPassword1234'));
                             }
-                        }).then(resolve => {
-                            this.counts = resolve.body.count;
-                        }, reject => {});
-                /*****************************************************************************************/
-                // Get Posts
-                this.$http.get(BASE_URL + "wp-json/wp/v2/posts", {
-                    params: {
-                        categories: PRODUCT_PICTURE_FRAME,
-                        categories_exclude: CATEGORIES_OUT,
-                        page: parseInt(this.productPictureFrame.length / 6) + 1,
-                        per_page: 6
-                    },
-                    before: (request) => {
-                        request.headers.set('X-WP-Nonce', NONCE);
-                        request.headers.set('Content-Type', 'application/x-www-form-urlencoded');
-                        request.headers.set('Authorization', 'Basic ' + Base64.encode( 'default:strongPassword1234'));
-                    }
-                }).then(res => {
-                    if (res.body.length && this.productPictureFrame.length < this.counts) {
-                        res.body.map((cur_img, i_img, arr_img) => {
-                            cur_img.img_info = [];
-                            /*****************************************************************************/
-                            // Get post image
-                            this.$http.get(BASE_URL + "wp-json/info/v1/post",
-                            {
-                                params: {
-                                    post_id: cur_img.id
-                                },
-                                before: (request) => {
-                                    request.headers.set('X-WP-Nonce', NONCE);
-                                    request.headers.set('Content-Type', 'application/x-www-form-urlencoded');
-                                    request.headers.set('Authorization', 'Basic ' + Base64.encode( 'default:strongPassword1234'));
-                                }
-                            }).then(resp => {
-                                    cur_img.img_info.push({
-                                        url: resp.body.url
-                                    });
-                                }, reject => {
-                                    this.alert_msg.have = true;
-                                    this.alert_msg.msg = 'مشکل در ارتباط با سرور';
-                                    this.alert_msg.type = 'alert-danger';
-                                });
+                        }).then(resp => {
+                            cur_img.img_info.push({
+                                url: resp.body.url
+                            });
+                        }, reject => {
+                            this.alert_msg.have = true;
+                            this.alert_msg.msg = 'مشکل در ارتباط با سرور';
+                            this.alert_msg.type = 'alert-danger';
                         });
+                    });
 
-                        this.productPictureFrame = [...res.body];
-                        $state.loaded();
-                        
-                        if (this.productPictureFrame.length % 6 == this.counts) {
-                            $state.complete();
-                        }
-                    } else {
-                        $state.complete();
+                    this.productPictureFrame = res.body.copyWithin();
+            }, rej => { /* $state.complete(); */ });
+        },
+
+        infiniteHandler: function($state) {
+            this.num += 1;
+            sleep(2000).then(() => {
+                /*****************************************************************************************/
+                // Get number of posts
+                this.$http.get(BASE_URL + "wp-json/wp/v2/categories/" + PRODUCT_PICTURE_FRAME, {
+                    before: (request) => {
+                        request.headers.set('Content-Type', 'application/x-www-form-urlencoded');
+                        request.headers.set('Authorization', 'Basic ' + Base64.encode( 'default:strongPassword1234' ));
                     }
-                }, rej => {
-                    $state.complete();
-                });
+                }).then(resolve => {
+                    let total_page = parseInt(resolve.body.count / 10);
+                    if (resolve.body.count % 10 > 0) {
+                        total_page += 1;
+                    }
+                    for (let i = 1; i <= total_page; i++) {
+                        this.page_list.push(i);
+                    }
+                }, reject => {});
             });
         }
     }
