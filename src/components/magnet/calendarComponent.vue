@@ -52,11 +52,9 @@
  * @component: Calendar
  * Category: 83
  */
-import InfiniteLoading from 'vue-infinite-loading';
-import {sleep, Base64} from '../../mixins/utils';
-import api from '../../api';
-import {PRODUCT_CALENDAR} from '../../store/staticsCategories';
-import {BASE_URL, NONCE} from '../../config';
+import { sleep, Base64 } from '../../mixins/utils';
+import { PRODUCT_CALENDAR } from '../../store/staticsCategories';
+import { BASE_URL } from '../../config';
 
 export default {
     name: 'calendar',
