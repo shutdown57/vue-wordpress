@@ -55,7 +55,7 @@
  */
 import {sleep, Base64} from '../../mixins/utils';
 import {PRODUCT_WHITEBOURD} from '../../store/staticsCategories';
-import { BASE_URL} from '../../config';
+import { BASE_URL } from '../../config';
 
 export default {
     name: 'whiteBoard',
