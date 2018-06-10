@@ -51,6 +51,7 @@
 /**
  * @component: Product Single
  */
+// TODO: Check this component if work
 import InfinteLoading from 'vue-infinite-loading';
 
 import api from '../../api';
