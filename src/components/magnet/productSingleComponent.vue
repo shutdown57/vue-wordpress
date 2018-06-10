@@ -71,7 +71,7 @@ export default {
             return pid;
         },
 
-        infiniteHandler: function($state) {
+        infiniteHandler: function   ($state) {
             let id = this.initParam();
             id = addArray(parseInt(id));
             let allCategories = [...PRODUCT_CATEGORIES_IN, ...[1, 61]];
