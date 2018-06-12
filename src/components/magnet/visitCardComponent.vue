@@ -119,10 +119,10 @@ export default {
                     });
                 });
                 this.productVisitCard = res.body.copyWithin();
-            }, rej => {});
+            }, rej => { /* $state.complete(); */ });
         },
 
-        infiniteHandler: function ($state) { 
+        infiniteHandler: function($state) { 
             this.num += 1;
             sleep(2000).then(() => {
                 /*****************************************************************************************/
@@ -140,7 +140,7 @@ export default {
                     for (let i = 1; i <= total_page; i++) {
                         this.page_list.push(i);
                     }
-                }, reject => {});
+                }, reject => { /* $state.complete(); */ });
             });
         }
     }
