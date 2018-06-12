@@ -143,7 +143,7 @@ export default {
                     for (let i = 1; i <= total_page; i++) {
                         this.page_list.push(i);
                     }
-                }, reject => {});
+                }, reject => { /* $state.complete(); */ });
             });
         }
     }
