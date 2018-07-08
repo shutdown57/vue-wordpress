@@ -1,6 +1,5 @@
 <template>
 <div class="direction-rtl">
-    <div v-if="num < 1">{{infiniteHandler()}} {{loadPage(1)}}</div>
     <div v-if="alert_msg.have" class="alert text-center" :class="alert_msg.type" role="alert">
         {{ alert_msg.msg }}
     </div>
@@ -12,29 +11,11 @@
             <div class="row">
                 <div v-for="product in productCurriculum" class="col-xs-6 col-md-3">
                     <a href="#" class="thumbnail" data-toggle="modal" data-target="#myModal">
-                    <img :src="product.img_info[0].url" alt="برنامه درسی مگنتی" v-model="img_info=product.img_info[0]">
+                        <img :src="product" alt="وایت برد مگنتی">
                     </a>
                 </div>
             </div>
         </div>
-    </div>
-        
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" v-if="img_info">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" dir="rtl" id="myModalLabel">{{"برنامه درسی مگنتی"}}</h4>
-        </div>
-        <div class="modal-body text-center">
-            <img class="img-responsive" :src="img_info.url" alt="برنامه درسی مگنتی">
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">بستن</button>
-        </div>
-        </div>
-    </div>
     </div>
 
     <!-- Paginate -->
@@ -78,8 +59,13 @@ export default {
         window.document.title = 'برنامه درسی مگنتی';
     },
 
+    mounted() {
+        this.infiniteHandler();
+        this.loadPage();
+    },
+
     methods: {
-        loadPage: function(page_number) {
+        loadPage: function(page_number=1) {
             page_number = parseInt(page_number);
             let CATEGORIES_OUT = [83, 85, 86, 87, 88, 89, 90, 91, 92, 1, 61];
             /*****************************************************************************************/
@@ -90,60 +76,34 @@ export default {
                     categories_exclude: CATEGORIES_OUT,
                     page: page_number,
                     per_page: 10
-                },
-                before: (request) => {
-                    request.headers.set('Content-Type', 'application/x-www-form-urlencoded');
-                    request.headers.set('Authorization', 'Basic ' + Base64.encode( 'default:strongPassword1234' ));
                 }
             }).then(res => {
-                res.body.map((cur_img, i_img, arr_img) => {
-                    cur_img.img_info = [];
-                    /*****************************************************************************/
+                /*****************************************************************************/
                     // Get post image
-                    this.$http.get(BASE_URL + "wp-json/info/v1/post",
-                    {
-                        params: {
-                            post_id: cur_img.id
-                        },
-                        before: (request) => {
-                            request.headers.set('Content-Type', 'application/x-www-form-urlencoded');
-                            request.headers.set('Authorization', 'Basic ' + Base64.encode( 'default:strongPassword1234'));
-                        }
-                    }).then(resp => {
-                        cur_img.img_info.push({
-                            url: resp.body.url
-                        });
-                    }, reject => {
-                        this.alert_msg.have = true;
-                        this.alert_msg.msg = 'مشکل در ارتباط با سرور';
-                        this.alert_msg.type = 'alert-danger';
+                    res.body.map((cur_img, i_img, arr_img) => {
+                        this.productCurriculum.push(cur_img.better_featured_image.source_url);
                     });
-                });
-
-                this.productCurriculum = res.body.copyWithin();
             }, rej => { /* $state.complete(); */ });
         },
 
         infiniteHandler: function($state) {
             this.num += 1;
-            sleep(2000).then(() => {
-                /*****************************************************************************************/
-                // Get number of posts
-                this.$http.get(BASE_URL + "wp-json/wp/v2/categories/" + PRODUCT_CURRICULUM, {
-                    before: (request) => {
-                        request.headers.set('Content-Type', 'application/x-www-form-urlencoded');
-                        request.headers.set('Authorization', 'Basic ' + Base64.encode( 'default:strongPassword1234' ));
-                    }
-                }).then(resolve => {
-                    let total_page = parseInt(resolve.body.count / 10);
-                    if (resolve.body.count % 10 > 0) {
-                        total_page += 1;
-                    }
-                    for (let i = 1; i <= total_page; i++) {
-                        this.page_list.push(i);
-                    }
-                }, reject => {});
-            });
+            /*****************************************************************************************/
+            // Get number of posts
+            this.$http.get(BASE_URL + "wp-json/wp/v2/categories/" + PRODUCT_CURRICULUM, {
+                before: (request) => {
+                    request.headers.set('Content-Type', 'application/x-www-form-urlencoded');
+                    request.headers.set('Authorization', 'Basic ' + Base64.encode( 'default:strongPassword1234' ));
+                }
+            }).then(resolve => {
+                let total_page = parseInt(resolve.body.count / 10);
+                if (resolve.body.count % 10 > 0) {
+                    total_page += 1;
+                }
+                for (let i = 1; i <= total_page; i++) {
+                    this.page_list.push(i);
+                }
+            }, reject => {});
         }
     }
 }
