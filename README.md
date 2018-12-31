@@ -1,4 +1,6 @@
-# vue-new
+# IMPORTANT This project has abandoned and will not update anymore
+
+## vue-new
 
 > A Wordpress theme by Vuejs and Vuex
 
